@@ -38,15 +38,12 @@ pytest
 
 ## Current Local Result
 
-The current checked-in static site contains one real local Mem0 run:
+The current checked-in static site contains real local runs for:
 
-- target: `mem0_open_source_pinned`
-- package: `mem0ai==2.0.11`
-- suite: `seven_sins_v0_1`
-- score: `20 / 22`, or `90.91%`
-- failure category: `untrusted_source_resistance`
+- `mem0_open_source_pinned`: `20 / 22`, or `90.91%`
+- `autogen_mem0memory_pinned`: `19 / 22`, or `86.36%`
 
-The failed scenario is a webpage prompt-injection case where Mem0 stored an untrusted webpage instruction as durable memory and later retrieved it strongly enough to flip the answer.
+Both current failures include the webpage prompt-injection case where untrusted webpage text becomes durable memory and later flips the answer. AutoGen + Mem0Memory also retains the stale SFO airport fact after an OAK correction.
 
 ## Local Mem0 Commands
 

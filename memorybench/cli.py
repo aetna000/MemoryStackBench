@@ -29,6 +29,7 @@ def main() -> None:
     leaderboard_parser = subparsers.add_parser("leaderboard", help="Build a static leaderboard from run scorecards")
     leaderboard_parser.add_argument("--runs", default="runs", help="Directory containing run subdirectories")
     leaderboard_parser.add_argument("--out", default="site/leaderboard", help="Destination leaderboard directory")
+    leaderboard_parser.add_argument("--targets", default="targets", help="Directory containing target manifests")
 
     args = parser.parse_args()
 
@@ -43,7 +44,7 @@ def main() -> None:
         copy_site(Path(args.run), Path(args.site))
         print(f"Site written to {args.site}")
     elif args.command == "leaderboard":
-        write_leaderboard(Path(args.runs), Path(args.out))
+        write_leaderboard(Path(args.runs), Path(args.out), Path(args.targets))
         print(f"Leaderboard written to {args.out}")
 
 

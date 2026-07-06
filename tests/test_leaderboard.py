@@ -21,10 +21,17 @@ def test_write_leaderboard(tmp_path: Path) -> None:
     )
 
     out_dir = tmp_path / "site" / "leaderboard"
-    write_leaderboard(tmp_path / "runs", out_dir)
+    targets_dir = tmp_path / "targets"
+    targets_dir.mkdir()
+    (targets_dir / "mem0.yaml").write_text(
+        "id: mem0\nframework: mem0\nmode: white_box\nstatus: implemented\n",
+        encoding="utf-8",
+    )
+    write_leaderboard(tmp_path / "runs", out_dir, targets_dir)
 
     assert (out_dir / "index.html").exists()
     assert (out_dir / "leaderboard.json").exists()
+    assert (out_dir / "targets.json").exists()
 
 
 def test_leaderboard_excludes_toy_targets(tmp_path: Path) -> None:
@@ -44,7 +51,9 @@ def test_leaderboard_excludes_toy_targets(tmp_path: Path) -> None:
     )
 
     out_dir = tmp_path / "site" / "leaderboard"
-    write_leaderboard(tmp_path / "runs", out_dir)
+    targets_dir = tmp_path / "targets"
+    targets_dir.mkdir()
+    write_leaderboard(tmp_path / "runs", out_dir, targets_dir)
 
     leaderboard = json.loads((out_dir / "leaderboard.json").read_text(encoding="utf-8"))
     assert leaderboard == []

@@ -5,6 +5,8 @@ import json
 from pathlib import Path
 from typing import Any
 
+import yaml
+
 from memorybench.report import _write_site_index
 
 
@@ -27,17 +29,46 @@ def _is_publishable(scorecard: dict[str, Any]) -> bool:
     return framework != "toy" and mode not in {"reference_only", "white_box_reference"}
 
 
-def write_leaderboard(runs_dir: Path, out_dir: Path) -> None:
+def collect_targets(targets_dir: Path) -> list[dict[str, Any]]:
+    targets: list[dict[str, Any]] = []
+    for path in sorted(targets_dir.glob("*.yaml")):
+        with path.open("r", encoding="utf-8") as handle:
+            manifest = yaml.safe_load(handle)
+        if not isinstance(manifest, dict):
+            continue
+        if not _is_registry_target(manifest):
+            continue
+        manifest["_manifest"] = path.name
+        targets.append(manifest)
+    return targets
+
+
+def _is_registry_target(manifest: dict[str, Any]) -> bool:
+    framework = manifest.get("framework")
+    mode = manifest.get("mode")
+    return framework != "toy" and mode not in {"reference_only", "white_box_reference"}
+
+
+def write_leaderboard(
+    runs_dir: Path,
+    out_dir: Path,
+    targets_dir: Path = Path("targets"),
+) -> None:
     scorecards = collect_scorecards(runs_dir)
+    targets = collect_targets(targets_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
     (out_dir / "leaderboard.json").write_text(
         json.dumps(_summary(scorecards), indent=2, sort_keys=True) + "\n",
         encoding="utf-8",
     )
-    (out_dir / "index.html").write_text(_html(scorecards, run_prefix="../"), encoding="utf-8")
+    (out_dir / "targets.json").write_text(
+        json.dumps(_target_summary(targets, scorecards), indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    (out_dir / "index.html").write_text(_html(scorecards, targets, run_prefix="../"), encoding="utf-8")
     if out_dir.parent.name == "site":
         (out_dir.parent / "index.html").write_text(
-            _html(scorecards, run_prefix=""),
+            _html(scorecards, targets, run_prefix=""),
             encoding="utf-8",
         )
 
@@ -62,16 +93,48 @@ def _summary(scorecards: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return rows
 
 
-def _html(scorecards: list[dict[str, Any]], run_prefix: str) -> str:
+def _target_summary(
+    targets: list[dict[str, Any]],
+    scorecards: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    score_by_target = {
+        scorecard.get("target", {}).get("id"): scorecard
+        for scorecard in scorecards
+    }
+    rows = []
+    for target in targets:
+        scorecard = score_by_target.get(target.get("id"))
+        runtime = target.get("runtime") or {}
+        rows.append(
+            {
+                "target": target.get("id"),
+                "framework": target.get("framework"),
+                "status": target.get("status", "unknown"),
+                "manifest": target.get("_manifest"),
+                "runtime": runtime.get("type"),
+                "required_env": runtime.get("required_env", []),
+                "score": None if scorecard is None else scorecard.get("overall", {}).get("score"),
+                "run": None if scorecard is None else scorecard.get("_run_dir"),
+            }
+        )
+    return rows
+
+
+def _html(scorecards: list[dict[str, Any]], targets: list[dict[str, Any]], run_prefix: str) -> str:
     rows = _summary(scorecards)
     table_rows = "\n".join(
         _table_row(row, index + 1, run_prefix) for index, row in enumerate(rows)
     )
     cards = "\n".join(_target_card(row) for row in rows)
     chart = _overall_chart(rows)
+    status_rows = "\n".join(
+        _status_row(row, run_prefix) for row in _target_summary(targets, scorecards)
+    )
     if not rows:
         table_rows = "<tr><td colspan=\"7\">No scorecards found.</td></tr>"
         cards = "<p>No runs found yet.</p>"
+    if not status_rows:
+        status_rows = "<tr><td colspan=\"7\">No target manifests found.</td></tr>"
 
     return f"""<!doctype html>
 <html lang="en">
@@ -189,6 +252,17 @@ def _html(scorecards: list[dict[str, Any]], run_prefix: str) -> str:
       fill: var(--text);
       font-size: 12px;
     }}
+    .pill {{
+      display: inline-block;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 2px 8px;
+      background: #f0f2ec;
+      color: var(--muted);
+      font-size: .8rem;
+      white-space: nowrap;
+      margin: 1px 2px 1px 0;
+    }}
   </style>
 </head>
 <body>
@@ -211,6 +285,15 @@ def _html(scorecards: list[dict[str, Any]], run_prefix: str) -> str:
     <section>
       <h2>Category Breakdown</h2>
       <div class="cards">{cards}</div>
+    </section>
+    <section>
+      <h2>Target Coverage</h2>
+      <table>
+        <thead>
+          <tr><th>Target</th><th>Framework</th><th>Status</th><th>Runtime</th><th>Score</th><th>Run</th><th>Missing Credentials / Runtime</th></tr>
+        </thead>
+        <tbody>{status_rows}</tbody>
+      </table>
     </section>
   </main>
 </body>
@@ -250,6 +333,35 @@ def _target_card(row: dict[str, Any]) -> str:
       {category_rows}
     </article>
     """
+
+
+def _status_row(row: dict[str, Any], run_prefix: str) -> str:
+    run = row.get("run")
+    run_cell = ""
+    if run:
+        escaped = html.escape(str(run))
+        run_cell = f'<a href="{html.escape(run_prefix + str(run))}/">{escaped}</a>'
+
+    blockers = list(row.get("required_env") or [])
+    runtime = str(row.get("runtime") or "")
+    if "docker" in runtime:
+        blockers.append("Docker runtime")
+    if not blockers and not run:
+        blockers.append("adapter pending")
+    blockers_cell = " ".join(
+        f'<span class="pill">{html.escape(str(item))}</span>' for item in blockers
+    )
+    return (
+        "<tr>"
+        f"<td>{html.escape(str(row.get('target')))}</td>"
+        f"<td>{html.escape(str(row.get('framework')))}</td>"
+        f"<td>{html.escape(str(row.get('status')))}</td>"
+        f"<td>{html.escape(runtime)}</td>"
+        f"<td class=\"score\">{_pct(row.get('score'))}</td>"
+        f"<td>{run_cell}</td>"
+        f"<td>{blockers_cell}</td>"
+        "</tr>"
+    )
 
 
 def _overall_chart(rows: list[dict[str, Any]]) -> str:

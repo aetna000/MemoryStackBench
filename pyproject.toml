@@ -17,6 +17,13 @@ dev = [
 mem0 = [
   "mem0ai>=2.0.1",
 ]
+langgraph = [
+  "langgraph>=1.0.0",
+]
+autogen-mem0 = [
+  "autogen-agentchat>=0.7.0",
+  "autogen-ext[mem0]>=0.7.0",
+]
 
 [project.scripts]
 memorybench = "memorybench.cli:main"

@@ -1,0 +1,176 @@
+[
+  {
+    "framework": "agno_memory",
+    "manifest": "agno_memory.yaml",
+    "required_env": [],
+    "run": null,
+    "runtime": "local_python",
+    "score": null,
+    "status": "pending_adapter",
+    "target": "agno_memory_pinned"
+  },
+  {
+    "framework": "autogen_mem0memory",
+    "manifest": "autogen_mem0memory.yaml",
+    "required_env": [],
+    "run": "autogen-mem0-local",
+    "runtime": "local_python",
+    "score": 0.8636,
+    "status": "implemented",
+    "target": "autogen_mem0memory_pinned"
+  },
+  {
+    "framework": "aws_bedrock_agentcore_memory",
+    "manifest": "aws_bedrock_agentcore_memory.yaml",
+    "required_env": [
+      "AWS_REGION",
+      "AWS_ACCESS_KEY_ID",
+      "AWS_SECRET_ACCESS_KEY"
+    ],
+    "run": null,
+    "runtime": "external_service",
+    "score": null,
+    "status": "pending_adapter",
+    "target": "aws_bedrock_agentcore_memory_pinned"
+  },
+  {
+    "framework": "cognee",
+    "manifest": "cognee.yaml",
+    "required_env": [],
+    "run": null,
+    "runtime": "local_or_docker",
+    "score": null,
+    "status": "pending_adapter",
+    "target": "cognee_local_pinned"
+  },
+  {
+    "framework": "crewai_memory",
+    "manifest": "crewai_memory.yaml",
+    "required_env": [],
+    "run": null,
+    "runtime": "local_python",
+    "score": null,
+    "status": "pending_adapter",
+    "target": "crewai_memory_pinned"
+  },
+  {
+    "framework": "google_adk_memory_bank",
+    "manifest": "google_adk_memory_bank.yaml",
+    "required_env": [
+      "GOOGLE_CLOUD_PROJECT",
+      "GOOGLE_CLOUD_LOCATION",
+      "GOOGLE_APPLICATION_CREDENTIALS"
+    ],
+    "run": null,
+    "runtime": "external_service",
+    "score": null,
+    "status": "pending_adapter",
+    "target": "google_adk_memory_bank_pinned"
+  },
+  {
+    "framework": "graphiti",
+    "manifest": "graphiti.yaml",
+    "required_env": [],
+    "run": null,
+    "runtime": "docker_compose",
+    "score": null,
+    "status": "pending_adapter",
+    "target": "graphiti_neo4j_pinned"
+  },
+  {
+    "framework": "hindsight",
+    "manifest": "hindsight.yaml",
+    "required_env": [],
+    "run": null,
+    "runtime": "local_or_external_service",
+    "score": null,
+    "status": "pending_adapter",
+    "target": "hindsight_pinned"
+  },
+  {
+    "framework": "langgraph",
+    "manifest": "langgraph.yaml",
+    "required_env": [],
+    "run": null,
+    "runtime": "local_python",
+    "score": null,
+    "status": "pending_adapter",
+    "target": "langgraph_persistence_pinned"
+  },
+  {
+    "framework": "langmem",
+    "manifest": "langmem.yaml",
+    "required_env": [],
+    "run": null,
+    "runtime": "local_python",
+    "score": null,
+    "status": "pending_adapter",
+    "target": "langmem_pinned"
+  },
+  {
+    "framework": "letta",
+    "manifest": "letta.yaml",
+    "required_env": [],
+    "run": null,
+    "runtime": "docker_compose",
+    "score": null,
+    "status": "pending_adapter",
+    "target": "letta_self_hosted_pinned"
+  },
+  {
+    "framework": "llamaindex_memory",
+    "manifest": "llamaindex_memory.yaml",
+    "required_env": [],
+    "run": null,
+    "runtime": "local_python",
+    "score": null,
+    "status": "pending_adapter",
+    "target": "llamaindex_memory_pinned"
+  },
+  {
+    "framework": "mem0",
+    "manifest": "mem0.yaml",
+    "required_env": [],
+    "run": "mem0-local",
+    "runtime": "local_python",
+    "score": 0.9091,
+    "status": "implemented",
+    "target": "mem0_open_source_pinned"
+  },
+  {
+    "framework": "openai_agents_sdk_sessions",
+    "manifest": "openai_agents_sdk_sessions.yaml",
+    "required_env": [
+      "OPENAI_API_KEY"
+    ],
+    "run": null,
+    "runtime": "local_python",
+    "score": null,
+    "status": "pending_adapter",
+    "target": "openai_agents_sdk_sessions_pinned"
+  },
+  {
+    "framework": "supermemory",
+    "manifest": "supermemory.yaml",
+    "required_env": [
+      "SUPERMEMORY_API_KEY"
+    ],
+    "run": null,
+    "runtime": "external_service",
+    "score": null,
+    "status": "pending_adapter",
+    "target": "supermemory_api_pinned"
+  },
+  {
+    "framework": "zep",
+    "manifest": "zep.yaml",
+    "required_env": [
+      "ZEP_API_KEY"
+    ],
+    "run": null,
+    "runtime": "external_service",
+    "score": null,
+    "status": "pending_adapter",
+    "target": "zep_cloud_or_self_hosted_pinned"
+  }
+]

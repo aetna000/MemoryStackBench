@@ -50,6 +50,19 @@ def write_html_scorecard(scorecard: dict[str, Any], path: Path) -> None:
         failure_items = "<p>No failed checks.</p>"
 
     data = html.escape(json.dumps(scorecard, indent=2))
+    evidence_links = "\n".join(
+        f'<li><a href="{name}">{name}</a></li>'
+        for name in (
+            "transcript.jsonl",
+            "memory_snapshots.jsonl",
+            "retrieval_events.jsonl",
+            "checks.jsonl",
+            "run_manifest.json",
+            "target_manifest.yaml",
+            "failure_report.md",
+            "scorecard.json",
+        )
+    )
     document = f"""<!doctype html>
 <html lang="en">
 <head>
@@ -177,6 +190,11 @@ def write_html_scorecard(scorecard: dict[str, Any], path: Path) -> None:
     </section>
 
     <section>
+      <h2>Evidence Bundle</h2>
+      <ul>{evidence_links}</ul>
+    </section>
+
+    <section>
       <h2>Raw Scorecard</h2>
       <pre>{data}</pre>
     </section>
@@ -189,12 +207,23 @@ def write_html_scorecard(scorecard: dict[str, Any], path: Path) -> None:
 
 def copy_site(run_dir: Path, site_dir: Path) -> None:
     site_dir.mkdir(parents=True, exist_ok=True)
-    for name in ("scorecard.html", "scorecard.json", "failure_report.md"):
+    scorecard_path = run_dir / "scorecard.json"
+    if scorecard_path.exists():
+        scorecard = json.loads(scorecard_path.read_text(encoding="utf-8"))
+        write_html_scorecard(scorecard, site_dir / "index.html")
+    for name in (
+        "scorecard.json",
+        "failure_report.md",
+        "transcript.jsonl",
+        "memory_snapshots.jsonl",
+        "retrieval_events.jsonl",
+        "checks.jsonl",
+        "run_manifest.json",
+        "target_manifest.yaml",
+    ):
         source = run_dir / name
         if source.exists():
-            (site_dir / ("index.html" if name == "scorecard.html" else name)).write_bytes(
-                source.read_bytes()
-            )
+            (site_dir / name).write_bytes(source.read_bytes())
     if site_dir.parent.name == "site":
         _write_site_index(site_dir.parent)
 

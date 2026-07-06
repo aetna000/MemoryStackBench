@@ -20,7 +20,7 @@ Status meanings:
 | 8 | LlamaIndex Memory | `targets/llamaindex_memory.yaml` | pending_adapter | short-term queue and long-term memory blocks |
 | 9 | CrewAI Memory | `targets/crewai_memory.yaml` | pending_adapter | built-in crew memory and persistence path |
 | 10 | Agno Memory | `targets/agno_memory.yaml` | pending_adapter | automatic user memory with persistent DB |
-| 11 | AutoGen + Mem0Memory | `targets/autogen_mem0memory.yaml` | pending_adapter | `autogen_ext.memory.mem0.Mem0Memory` |
+| 11 | AutoGen + Mem0Memory | `targets/autogen_mem0memory.yaml` | implemented | `autogen_ext.memory.mem0.Mem0Memory` |
 | 12 | Google ADK + Memory Bank | `targets/google_adk_memory_bank.yaml` | pending_adapter | ADK memory service and Vertex/Agent Platform Memory Bank |
 | 13 | AWS Bedrock AgentCore Memory | `targets/aws_bedrock_agentcore_memory.yaml` | pending_adapter | short-term and long-term managed memories |
 | 14 | OpenAI Agents SDK Sessions | `targets/openai_agents_sdk_sessions.yaml` | pending_adapter | session persistence across agent runs |
@@ -36,12 +36,12 @@ Additional harness targets:
 
 The lowest-risk implementation order is:
 
-1. Mem0 local OSS: already wired enough for local validation.
-2. LangGraph: fully local and defines thread/store isolation clearly.
-3. LangMem: builds naturally on the LangGraph store path.
-4. LlamaIndex Memory: local Python target with inspectable memory classes.
-5. Agno Memory: local persistent DB path.
-6. AutoGen + Mem0Memory: reuses Mem0 knowledge but tests framework integration.
+1. Mem0 local OSS: implemented and scored.
+2. AutoGen + Mem0Memory: implemented and scored.
+3. LangGraph: fully local and defines thread/store isolation clearly.
+4. LangMem: builds naturally on the LangGraph store path.
+5. LlamaIndex Memory: local Python target with inspectable memory classes.
+6. Agno Memory: local persistent DB path.
 7. Graphiti: needs Neo4j and temporal graph assertions.
 8. Cognee: needs graph/vector backend setup.
 9. Letta: needs pinned self-hosted server and agent inspection.
@@ -71,4 +71,3 @@ The lowest-risk implementation order is:
 - OpenAI Agents SDK Sessions: https://openai.github.io/openai-agents-python/sessions/
 - Supermemory quickstart: https://supermemory.ai/docs/quickstart
 - Hindsight docs: https://hindsight.vectorize.io/
-

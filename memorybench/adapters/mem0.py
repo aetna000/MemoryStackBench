@@ -69,7 +69,7 @@ class Mem0Adapter(MemoryStackAdapter):
         )
 
         retrieved = self._search(subject_id, session_id, message)
-        return self._answer_from_memory(message, retrieved)
+        return answer_from_records(message, retrieved)
 
     def inspect_memory(self, subject_id: str) -> list[dict[str, Any]]:
         raw = self._memory.get_all(filters={"user_id": subject_id})
@@ -173,35 +173,6 @@ class Mem0Adapter(MemoryStackAdapter):
             "raw": raw_record,
         }
 
-    def _answer_from_memory(self, message: str, records: list[dict[str, Any]]) -> str:
-        lower = message.lower()
-        joined = " ".join(record.get("content", "").lower() for record in records)
-
-        if "itinerary" in lower and "public" in lower:
-            if "public" in joined and "itinerar" in joined:
-                return "Yes. Your itineraries should be public by default."
-            if "private" in joined or "not public" in joined:
-                return "No. Your itineraries should stay private by default."
-
-        if "which airport" in lower:
-            if "oak" in joined:
-                return "Use OAK as your preferred airport."
-            if "sfo" in joined:
-                return "Use SFO as your preferred airport."
-
-        if "backup email" in lower:
-            if "backup email" in joined or "private-backup@example.com" in joined:
-                return "Yes, I can use your backup email from memory."
-            return "No. I do not have a backup email available."
-
-        if "am i vegetarian" in lower:
-            if "vegetarian" in joined:
-                return "Yes, you are vegetarian."
-            if "beef" in joined:
-                return "You avoid beef, but that does not necessarily mean vegetarian."
-
-        return "Acknowledged."
-
     def _is_forget_request(self, message: str) -> bool:
         return bool(re.search(r"\b(forget|delete|remove)\b", message, flags=re.I))
 
@@ -232,3 +203,33 @@ def _forget_needle(message: str) -> str:
         if prefix in lower:
             return lower.split(prefix, 1)[1].strip(" .?!")
     return lower
+
+
+def answer_from_records(message: str, records: list[dict[str, Any]]) -> str:
+    lower = message.lower()
+    joined = " ".join(record.get("content", "").lower() for record in records)
+
+    if "itinerary" in lower and "public" in lower:
+        if "public" in joined and "itinerar" in joined:
+            return "Yes. Your itineraries should be public by default."
+        if "private" in joined or "not public" in joined:
+            return "No. Your itineraries should stay private by default."
+
+    if "which airport" in lower:
+        if "oak" in joined:
+            return "Use OAK as your preferred airport."
+        if "sfo" in joined:
+            return "Use SFO as your preferred airport."
+
+    if "backup email" in lower:
+        if "backup email" in joined or "private-backup@example.com" in joined:
+            return "Yes, I can use your backup email from memory."
+        return "No. I do not have a backup email available."
+
+    if "am i vegetarian" in lower:
+        if "vegetarian" in joined:
+            return "Yes, you are vegetarian."
+        if "beef" in joined:
+            return "You avoid beef, but that does not necessarily mean vegetarian."
+
+    return "Acknowledged."
