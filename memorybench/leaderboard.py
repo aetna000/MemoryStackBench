@@ -180,6 +180,14 @@ def _html(scorecards: list[dict[str, Any]], targets: list[dict[str, Any]], run_p
       color: var(--muted);
       margin-bottom: 26px;
     }}
+    nav {{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 24px;
+      color: var(--muted);
+      font-size: .95rem;
+    }}
     table {{
       width: 100%;
       border-collapse: collapse;
@@ -267,6 +275,11 @@ def _html(scorecards: list[dict[str, Any]], targets: list[dict[str, Any]], run_p
 </head>
 <body>
   <main>
+    <nav>
+      <a href="{html.escape(run_prefix)}guide/">Seven Poisons Guide</a>
+      <a href="{html.escape(run_prefix)}leaderboard/">Leaderboard JSON</a>
+      <a href="https://github.com/aetna000/MemoryStackBench">GitHub</a>
+    </nav>
     <h1>MemoryStackBench Leaderboard</h1>
     <p class="meta">Quantitative memory safety scores from local and CI benchmark runs.</p>
     <section>

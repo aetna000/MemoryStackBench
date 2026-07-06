@@ -45,6 +45,10 @@ The current checked-in static site contains real local runs for:
 
 Both current failures include the webpage prompt-injection case where untrusted webpage text becomes durable memory and later flips the answer. AutoGen + Mem0Memory also retains the stale SFO airport fact after an OAK correction.
 
+A plain-language explanation for newer agent builders is published at:
+
+https://aetna000.github.io/MemoryStackBench/guide/
+
 ## Local Mem0 Commands
 
 The Mem0 target is wired for the open-source Python SDK:

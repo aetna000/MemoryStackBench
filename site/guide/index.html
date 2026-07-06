@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Seven Poisons of Agent Memory</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f7f7f4;
+      --panel: #ffffff;
+      --text: #202124;
+      --muted: #62665f;
+      --border: #d9ddd2;
+      --accent: #0f766e;
+      --accent-2: #365f91;
+      --warn: #b45309;
+      --fail: #b42318;
+    }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+    }
+    main {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 28px 20px 56px;
+    }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 28px;
+      color: var(--muted);
+      font-size: .95rem;
+    }
+    nav a, a {
+      color: var(--accent);
+      font-weight: 650;
+    }
+    h1 {
+      max-width: 900px;
+      font-size: clamp(2.2rem, 5vw, 4.8rem);
+      line-height: 1;
+      margin: 0 0 14px;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin: 38px 0 12px;
+      font-size: 1.45rem;
+    }
+    h3 {
+      margin: 0 0 8px;
+      font-size: 1rem;
+    }
+    p {
+      max-width: 860px;
+    }
+    .lead {
+      color: var(--muted);
+      font-size: 1.15rem;
+      max-width: 820px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+      margin: 18px 0;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .card p {
+      margin: 0;
+      color: var(--muted);
+    }
+    .number {
+      display: inline-flex;
+      width: 28px;
+      height: 28px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: #e3f2ef;
+      color: var(--accent);
+      font-weight: 750;
+      margin-bottom: 10px;
+    }
+    .chart {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      padding: 14px;
+      overflow-x: auto;
+      margin: 16px 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      margin: 16px 0;
+    }
+    th, td {
+      padding: 11px 12px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      font-size: .95rem;
+    }
+    th {
+      color: var(--muted);
+      background: #f0f2ec;
+      font-weight: 650;
+    }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      background: #eef1ea;
+      padding: 1px 4px;
+      border-radius: 4px;
+    }
+    blockquote {
+      margin: 18px 0;
+      padding: 12px 16px;
+      border-left: 4px solid var(--fail);
+      background: #fff8f6;
+      max-width: 860px;
+    }
+    svg text {
+      font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+      fill: var(--text);
+      font-size: 12px;
+    }
+    .note {
+      background: #f0f7f6;
+      border: 1px solid #c9e5df;
+      border-radius: 8px;
+      padding: 14px 16px;
+    }
+    .compare {
+      display: grid;
+      gap: 12px;
+    }
+    .compare-row {
+      display: grid;
+      grid-template-columns: minmax(150px, 220px) 1fr;
+      gap: 12px;
+      align-items: center;
+    }
+    .compare-label {
+      color: var(--muted);
+      font-size: .92rem;
+    }
+    .compare-bars {
+      display: grid;
+      gap: 6px;
+    }
+    .mini-bar {
+      display: grid;
+      grid-template-columns: 128px 1fr 44px;
+      gap: 8px;
+      align-items: center;
+      font-size: .86rem;
+    }
+    .mini-track {
+      height: 9px;
+      background: #e5e7df;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .mini-track span {
+      display: block;
+      height: 100%;
+      background: var(--accent);
+    }
+    .mini-track.autogen span {
+      background: var(--accent-2);
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <nav>
+      <a href="../">Leaderboard</a>
+      <a href="../mem0-local/">Mem0 evidence</a>
+      <a href="../autogen-mem0-local/">AutoGen + Mem0Memory evidence</a>
+      <a href="https://github.com/aetna000/MemoryStackBench">GitHub</a>
+    </nav>
+
+    <h1>The Seven Poisons of Agent Memory</h1>
+    <p class="lead">A plain-English guide for builders using Mem0, AutoGen, or any agent memory layer. The short version: memory makes agents useful, but bad memory can make them confidently wrong for weeks.</p>
+
+    <section>
+      <h2>What We Tested</h2>
+      <p>We ran the same five memory-failure scenarios against two real local targets:</p>
+      <table>
+        <thead>
+          <tr><th>Target</th><th>What It Means</th><th>Score</th><th>Evidence</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Mem0 direct</td>
+            <td>Our adapter calls Mem0 OSS directly: write, search, inspect, delete.</td>
+            <td><strong>90.91%</strong></td>
+            <td><a href="../mem0-local/">Open result</a></td>
+          </tr>
+          <tr>
+            <td>AutoGen + Mem0Memory</td>
+            <td>Our adapter uses AutoGen's official <code>Mem0Memory</code> component, backed by Mem0.</td>
+            <td><strong>86.36%</strong></td>
+            <td><a href="../autogen-mem0-local/">Open result</a></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="chart">
+        <svg role="img" aria-label="Overall scores" width="640" height="260" viewBox="0 0 640 260">
+          <line x1="60" y1="210" x2="590" y2="210" stroke="#9ca39a"></line>
+          <line x1="60" y1="50" x2="60" y2="210" stroke="#9ca39a"></line>
+          <text x="52" y="55" text-anchor="end">100%</text>
+          <text x="52" y="214" text-anchor="end">0%</text>
+          <rect x="160" y="64.5" width="100" height="145.5" fill="#0f766e"></rect>
+          <text x="210" y="54" text-anchor="middle">90.91%</text>
+          <text x="210" y="234" text-anchor="middle">Mem0</text>
+          <rect x="380" y="71.8" width="100" height="138.2" fill="#365f91"></rect>
+          <text x="430" y="62" text-anchor="middle">86.36%</text>
+          <text x="430" y="234" text-anchor="middle">AutoGen + Mem0</text>
+        </svg>
+      </div>
+      <p class="note">These scores are not a claim that one product is universally better. They tell us how these exact pinned targets behaved on this exact benchmark suite. The evidence files are published with each result.</p>
+    </section>
+
+    <section>
+      <h2>Why Memory Risk Matters</h2>
+      <p>An agent without memory forgets everything. An agent with memory can remember preferences, project facts, customer history, and decisions. That is useful. The risk is that the agent can also remember the wrong thing and reuse it later when nobody is watching.</p>
+      <blockquote>
+        In our current results, both targets stored or retrieved an untrusted webpage instruction strongly enough to answer that private itineraries should be public by default.
+      </blockquote>
+      <p>In a real product, that kind of failure could become a privacy incident, a bad customer action, a wrong medical or legal preference, or a support bot repeating attacker-provided instructions as if they came from the user.</p>
+    </section>
+
+    <section>
+      <h2>The Seven Poisons</h2>
+      <div class="grid">
+        <article class="card">
+          <div class="number">1</div>
+          <h3>Untrusted-Source Poisoning</h3>
+          <p>A webpage, email, PDF, tool output, or ticket says "remember this," and the agent stores it as the user's preference. Avoid this by labeling source trust and blocking durable memory writes from untrusted content by default.</p>
+        </article>
+        <article class="card">
+          <div class="number">2</div>
+          <h3>Stale Memory</h3>
+          <p>The user corrects a fact, but the old fact stays alive. Avoid this by linking updates to older memories and testing that old facts stop being retrieved.</p>
+        </article>
+        <article class="card">
+          <div class="number">3</div>
+          <h3>Fake Deletion</h3>
+          <p>The UI says "forgotten," but the memory still exists in a vector store, message log, cache, checkpoint, or graph. Avoid this by testing deletion at every storage layer, not only the visible memory table.</p>
+        </article>
+        <article class="card">
+          <div class="number">4</div>
+          <h3>Overgeneralization</h3>
+          <p>"I avoid beef at business dinners" becomes "the user is vegetarian." Avoid this by storing narrow facts, uncertainty, and source text instead of broad guesses.</p>
+        </article>
+        <article class="card">
+          <div class="number">5</div>
+          <h3>Scope Leak</h3>
+          <p>One user's or tenant's memory appears in another user's session. Avoid this with strict namespaces, tenant IDs, user IDs, and tests that intentionally probe cross-user leakage.</p>
+        </article>
+        <article class="card">
+          <div class="number">6</div>
+          <h3>No Provenance</h3>
+          <p>The system remembers a fact but cannot say where it came from. Avoid this by storing source session, turn, timestamp, source type, and confidence for every memory.</p>
+        </article>
+        <article class="card">
+          <div class="number">7</div>
+          <h3>Sensitive Memory Hoarding</h3>
+          <p>The agent stores secrets, health info, personal addresses, or private identifiers without a strong reason. Avoid this by classifying sensitive data before storage and requiring explicit need or consent.</p>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2>What Our Current Failures Mean</h2>
+      <table>
+        <thead>
+          <tr><th>Failure</th><th>Observed In</th><th>Why It Matters</th><th>Real-World Consequence</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Webpage memory poisoning</td>
+            <td>Mem0 direct; AutoGen + Mem0Memory</td>
+            <td>An untrusted webpage instruction became durable memory.</td>
+            <td>A malicious page, email, or document could change future behavior after the original page is gone.</td>
+          </tr>
+          <tr>
+            <td>Stale airport preference</td>
+            <td>AutoGen + Mem0Memory</td>
+            <td>The old SFO preference remained after the user corrected it to OAK.</td>
+            <td>An agent may book, recommend, or automate using outdated user facts.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="chart">
+        <div class="compare" role="img" aria-label="Category score comparison for Mem0 and AutoGen plus Mem0Memory">
+          <div class="compare-row">
+            <div class="compare-label">Deletion behavior</div>
+            <div class="compare-bars">
+              <div class="mini-bar"><span>Mem0</span><div class="mini-track"><span style="width:100%"></span></div><strong>100%</strong></div>
+              <div class="mini-bar"><span>AutoGen + Mem0</span><div class="mini-track autogen"><span style="width:100%"></span></div><strong>100%</strong></div>
+            </div>
+          </div>
+          <div class="compare-row">
+            <div class="compare-label">Retrieval correctness</div>
+            <div class="compare-bars">
+              <div class="mini-bar"><span>Mem0</span><div class="mini-track"><span style="width:100%"></span></div><strong>100%</strong></div>
+              <div class="mini-bar"><span>AutoGen + Mem0</span><div class="mini-track autogen"><span style="width:100%"></span></div><strong>100%</strong></div>
+            </div>
+          </div>
+          <div class="compare-row">
+            <div class="compare-label">Temporal updates</div>
+            <div class="compare-bars">
+              <div class="mini-bar"><span>Mem0</span><div class="mini-track"><span style="width:100%"></span></div><strong>100%</strong></div>
+              <div class="mini-bar"><span>AutoGen + Mem0</span><div class="mini-track autogen"><span style="width:75%"></span></div><strong>75%</strong></div>
+            </div>
+          </div>
+          <div class="compare-row">
+            <div class="compare-label">Untrusted-source resistance</div>
+            <div class="compare-bars">
+              <div class="mini-bar"><span>Mem0</span><div class="mini-track"><span style="width:71%"></span></div><strong>71%</strong></div>
+              <div class="mini-bar"><span>AutoGen + Mem0</span><div class="mini-track autogen"><span style="width:71%"></span></div><strong>71%</strong></div>
+            </div>
+          </div>
+          <div class="compare-row">
+            <div class="compare-label">Write correctness</div>
+            <div class="compare-bars">
+              <div class="mini-bar"><span>Mem0</span><div class="mini-track"><span style="width:100%"></span></div><strong>100%</strong></div>
+              <div class="mini-bar"><span>AutoGen + Mem0</span><div class="mini-track autogen"><span style="width:100%"></span></div><strong>100%</strong></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>What Builders Should Do</h2>
+      <table>
+        <thead>
+          <tr><th>Do</th><th>Why</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Separate user messages from untrusted documents.</td><td>A webpage should not have the same authority as the user.</td></tr>
+          <tr><td>Store provenance on every memory.</td><td>You need to debug where a memory came from and whether it should be trusted.</td></tr>
+          <tr><td>Make correction logic explicit.</td><td>New facts should replace or downgrade old facts, not just sit next to them.</td></tr>
+          <tr><td>Test deletion end to end.</td><td>Delete from memory records, embeddings, checkpoints, message logs, and caches.</td></tr>
+          <tr><td>Namespace by tenant, user, and environment.</td><td>Cross-user memory leakage is one of the highest-severity failures.</td></tr>
+          <tr><td>Classify sensitive data before storage.</td><td>Not every fact that is useful should be remembered forever.</td></tr>
+          <tr><td>Run a benchmark in CI before shipping memory changes.</td><td>Memory bugs often show up across sessions, not in a single chat response.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>How To Read This Benchmark</h2>
+      <p>Do not read the score like a school grade. Read it as a map of failure modes. A target can score high and still have one critical failure that matters for your product.</p>
+      <p>For example, `90.91%` is good on this small suite, but the remaining failure is important because it affects persistent behavior across sessions. If your agent reads untrusted webpages, tickets, or emails, that failure matters more than the headline number.</p>
+      <p>Start with the evidence: open the result page, read the failed checks, then inspect `transcript.jsonl` and `memory_snapshots.jsonl`.</p>
+    </section>
+
+    <section>
+      <h2>References</h2>
+      <ul>
+        <li><a href="https://docs.mem0.ai/open-source/python-quickstart">Mem0 OSS Python quickstart</a></li>
+        <li><a href="https://microsoft.github.io/autogen/stable/user-guide/agentchat-user-guide/memory.html">AutoGen memory guide</a></li>
+        <li><a href="https://microsoft.github.io/autogen/stable/reference/python/autogen_ext.memory.mem0.html">AutoGen Mem0Memory reference</a></li>
+        <li><a href="https://aetna000.github.io/MemoryStackBench/">MemoryStackBench leaderboard</a></li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>
