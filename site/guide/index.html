@@ -344,6 +344,43 @@
           </div>
         </div>
       </div>
+
+      <h3>Detailed Example: Stale Airport Preference</h3>
+      <p>This test checks whether a memory stack can handle a normal human correction. People change their mind all the time. A memory system should not just add the new fact; it should also retire, replace, or mark the old fact as stale.</p>
+      <table>
+        <thead>
+          <tr><th>Step</th><th>User Message</th><th>What The Benchmark Expected</th><th>What Happened</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1. Plant old fact</td>
+            <td><code>My preferred airport is SFO.</code></td>
+            <td>The system may store SFO as the current airport preference.</td>
+            <td>AutoGen + Mem0Memory stored: <code>User's preferred airport is SFO.</code></td>
+          </tr>
+          <tr>
+            <td>2. Correct it</td>
+            <td><code>Actually, use OAK as my preferred airport going forward.</code></td>
+            <td>The system should store OAK and stop treating SFO as the current preference.</td>
+            <td>It stored a new OAK memory, but kept the old SFO memory too.</td>
+          </tr>
+          <tr>
+            <td>3. Probe later</td>
+            <td><code>Which airport should you use for me?</code></td>
+            <td>The answer should say OAK and should not say SFO.</td>
+            <td>The answer was correct: <code>Use OAK as your preferred airport.</code></td>
+          </tr>
+          <tr>
+            <td>4. Inspect memory</td>
+            <td>White-box memory inspection</td>
+            <td>Current live memory should not still contain <code>User's preferred airport is SFO.</code></td>
+            <td>The old SFO memory was still present, so the memory-state check failed.</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>The important point is that this was not a wrong final answer in this run. It was a memory hygiene failure. The visible answer used OAK, but the old SFO fact was still in the live memory store and could be retrieved later in a different prompt, ranking order, model version, or workflow.</p>
+      <p>A tangible example: imagine a travel assistant that books trips for a user. On Monday the user says they prefer SFO. On Tuesday they move to Oakland and say, "Actually, use OAK going forward." If the old SFO memory stays active, a later workflow could still use SFO when auto-filling airport forms, recommending flights, estimating commute time, or sending a booking request to a tool. The user may not notice until the itinerary is wrong.</p>
+      <p>What builders should do: when a new durable fact contradicts an old durable fact, mark the old one as superseded, link it to the correction, lower its retrieval priority, or delete it. Then test both the final answer and the underlying memory records.</p>
     </section>
 
     <section>

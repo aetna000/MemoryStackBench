@@ -29,3 +29,36 @@ AutoGen + Mem0Memory also retained the old SFO airport memory after the user cor
 
 The practical lesson: do not judge memory systems only by their headline score. Read the failed scenarios and evidence bundle.
 
+## Detailed Example: Stale Airport Preference
+
+This test checks whether a memory stack can handle a normal human correction.
+
+1. The user first says: `My preferred airport is SFO.`
+2. In a later session, the user says: `Actually, use OAK as my preferred airport going forward.`
+3. In a third session, the benchmark asks: `Which airport should you use for me?`
+
+Expected behavior:
+
+- The final answer should say OAK.
+- The final answer should not say SFO.
+- The live memory records should not still contain `User's preferred airport is SFO` as an active current preference.
+
+Observed result for AutoGen + Mem0Memory:
+
+- The final answer was correct: `Use OAK as your preferred airport.`
+- The memory state still contained both:
+  - `User's preferred airport is now OAK, replacing SFO as their preferred airport.`
+  - `User's preferred airport is SFO.`
+
+So this was not a wrong-answer failure in that run. It was a memory hygiene failure. The old SFO fact remained active in the memory store after the correction.
+
+Why it matters:
+
+A travel assistant might later use memory to auto-fill an airport field, recommend flights, estimate commute time, or call a booking tool. If both SFO and OAK remain live, the wrong one can be retrieved later depending on prompt wording, ranking, model behavior, or workflow code.
+
+What builders should do:
+
+- Mark old facts as superseded when a user corrects them.
+- Link replacement memories to the original memory.
+- Lower retrieval priority for stale memories or delete them.
+- Test final answers and underlying memory records.
