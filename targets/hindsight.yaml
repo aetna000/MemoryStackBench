@@ -1,0 +1,26 @@
+id: hindsight_pinned
+framework: hindsight
+mode: white_box
+status: pending_adapter
+description: Hindsight agent memory target for retain/recall/reflect behavior.
+source_url: https://hindsight.vectorize.io/
+source:
+  type: github_or_hosted_api
+  repo: vectorize-io/hindsight
+  ref: TODO_PIN_COMMIT
+runtime:
+  type: local_or_external_service
+model:
+  provider: openai_compatible
+  model: TODO_FIXED_MODEL
+  temperature: 0
+adapter:
+  module: memorybench.adapters.pending
+  class: PendingAdapter
+capabilities:
+  inspect_memory: true
+  delete_memory: partial
+  retrieval_log: partial
+  multi_user: true
+  multi_tenant: true
+

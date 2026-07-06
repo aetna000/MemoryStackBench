@@ -1,0 +1,29 @@
+id: langgraph_persistence_pinned
+framework: langgraph
+mode: white_box
+status: pending_adapter
+description: LangGraph persistence target with checkpointer and store variants.
+source_url: https://docs.langchain.com/oss/python/langgraph/persistence
+source:
+  type: python_package
+  package: langgraph
+  version: TODO_PIN_EXACT_VERSION
+runtime:
+  type: local_python
+variants:
+  - langgraph_checkpointer_only
+  - langgraph_store_enabled
+model:
+  provider: openai_compatible
+  model: TODO_FIXED_MODEL
+  temperature: 0
+adapter:
+  module: memorybench.adapters.pending
+  class: PendingAdapter
+capabilities:
+  inspect_memory: true
+  delete_memory: partial
+  retrieval_log: partial
+  multi_user: true
+  multi_tenant: false
+

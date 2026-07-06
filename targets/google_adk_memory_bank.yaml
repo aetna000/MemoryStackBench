@@ -1,0 +1,30 @@
+id: google_adk_memory_bank_pinned
+framework: google_adk_memory_bank
+mode: white_box
+status: pending_adapter
+description: Google ADK target integrated with Vertex AI / Agent Platform Memory Bank.
+source_url: https://adk.dev/sessions/memory/
+source:
+  type: google_cloud_service
+  package: google-adk
+  version: TODO_PIN_EXACT_VERSION
+runtime:
+  type: external_service
+  required_env:
+    - GOOGLE_CLOUD_PROJECT
+    - GOOGLE_CLOUD_LOCATION
+    - GOOGLE_APPLICATION_CREDENTIALS
+model:
+  provider: google
+  model: TODO_FIXED_MODEL
+  temperature: 0
+adapter:
+  module: memorybench.adapters.pending
+  class: PendingAdapter
+capabilities:
+  inspect_memory: partial
+  delete_memory: partial
+  retrieval_log: partial
+  multi_user: true
+  multi_tenant: true
+

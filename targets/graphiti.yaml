@@ -1,0 +1,28 @@
+id: graphiti_neo4j_pinned
+framework: graphiti
+mode: white_box
+status: pending_adapter
+description: Graphiti temporal knowledge graph memory target. Requires Neo4j and pinned graphiti package/repo.
+source_url: https://github.com/getzep/graphiti
+source:
+  type: github_or_python_package
+  repo: getzep/graphiti
+  ref: TODO_PIN_COMMIT
+runtime:
+  type: docker_compose
+  services:
+    - neo4j
+model:
+  provider: openai_compatible
+  model: TODO_FIXED_MODEL
+  temperature: 0
+adapter:
+  module: memorybench.adapters.pending
+  class: PendingAdapter
+capabilities:
+  inspect_memory: true
+  delete_memory: partial
+  retrieval_log: partial
+  multi_user: true
+  multi_tenant: false
+

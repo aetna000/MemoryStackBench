@@ -1,0 +1,26 @@
+id: agno_memory_pinned
+framework: agno_memory
+mode: white_box
+status: pending_adapter
+description: Agno automatic user memory target with persistent storage.
+source_url: https://docs.agno.com/memory/overview
+source:
+  type: python_package
+  package: agno
+  version: TODO_PIN_EXACT_VERSION
+runtime:
+  type: local_python
+model:
+  provider: openai_compatible
+  model: TODO_FIXED_MODEL
+  temperature: 0
+adapter:
+  module: memorybench.adapters.pending
+  class: PendingAdapter
+capabilities:
+  inspect_memory: true
+  delete_memory: partial
+  retrieval_log: partial
+  multi_user: true
+  multi_tenant: false
+

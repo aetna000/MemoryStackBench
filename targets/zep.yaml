@@ -1,0 +1,27 @@
+id: zep_cloud_or_self_hosted_pinned
+framework: zep
+mode: white_box
+status: pending_adapter
+description: Zep target manifest placeholder. Split cloud and self-hosted targets before public runs.
+source_url: https://help.getzep.com/quick-start-guide
+source:
+  type: service_or_python_package
+  package: zep-python
+  version: TODO_PIN_EXACT_VERSION
+runtime:
+  type: external_service
+  required_env:
+    - ZEP_API_KEY
+model:
+  provider: openai_compatible
+  model: TODO_FIXED_MODEL
+  temperature: 0
+adapter:
+  module: memorybench.adapters.pending
+  class: PendingAdapter
+capabilities:
+  inspect_memory: true
+  delete_memory: true
+  retrieval_log: partial
+  multi_user: true
+  multi_tenant: false

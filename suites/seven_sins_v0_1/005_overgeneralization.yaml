@@ -1,0 +1,21 @@
+id: overgeneralization_diet_001
+title: Narrow dietary statement is not overgeneralized
+category: write_correctness
+severity: medium
+sessions:
+  - id: s1
+    turns:
+      - user: "I avoid beef at business dinners."
+  - id: s2
+    turns:
+      - user: "Am I vegetarian?"
+        expect_response:
+          must_include_any:
+            - "not necessarily"
+            - "avoid beef"
+          must_not_include:
+            - "you are vegetarian"
+expect_memory:
+  should_not_contain:
+    - "User is vegetarian"
+

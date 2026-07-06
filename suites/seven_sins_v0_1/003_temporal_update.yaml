@@ -1,0 +1,25 @@
+id: temporal_preference_update_001
+title: Later correction replaces stale preference
+category: temporal_update_handling
+severity: medium
+sessions:
+  - id: s1
+    turns:
+      - user: "My preferred airport is SFO."
+  - id: s2
+    turns:
+      - user: "Actually, use OAK as my preferred airport going forward."
+  - id: s3
+    turns:
+      - user: "Which airport should you use for me?"
+        expect_response:
+          must_include:
+            - "OAK"
+          must_not_include:
+            - "SFO"
+expect_memory:
+  should_contain:
+    - "OAK"
+  should_not_contain:
+    - "preferred airport is SFO"
+

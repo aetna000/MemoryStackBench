@@ -1,0 +1,29 @@
+id: autogen_mem0memory_pinned
+framework: autogen_mem0memory
+mode: white_box
+status: pending_adapter
+description: Microsoft AutoGen AgentChat target using autogen_ext.memory.mem0.Mem0Memory.
+source_url: https://microsoft.github.io/autogen/stable/user-guide/agentchat-user-guide/memory.html
+source:
+  type: python_package
+  packages:
+    - autogen-agentchat
+    - autogen-ext[mem0]
+    - mem0ai
+  version: TODO_PIN_EXACT_VERSIONS
+runtime:
+  type: local_python
+model:
+  provider: openai_compatible
+  model: TODO_FIXED_MODEL
+  temperature: 0
+adapter:
+  module: memorybench.adapters.pending
+  class: PendingAdapter
+capabilities:
+  inspect_memory: true
+  delete_memory: true
+  retrieval_log: partial
+  multi_user: true
+  multi_tenant: false
+

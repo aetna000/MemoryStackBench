@@ -1,0 +1,26 @@
+id: letta_self_hosted_pinned
+framework: letta
+mode: white_box
+status: pending_adapter
+description: Letta self-hosted target manifest placeholder. Pin server image/client before public runs.
+source_url: https://docs.letta.com/api/python/
+source:
+  type: docker_image
+  image: TODO_PIN_IMAGE_DIGEST
+runtime:
+  type: docker_compose
+  compose_file: targets/letta/docker-compose.yml
+  healthcheck: http://localhost:8283/health
+model:
+  provider: openai_compatible
+  model: TODO_FIXED_MODEL
+  temperature: 0
+adapter:
+  module: memorybench.adapters.pending
+  class: PendingAdapter
+capabilities:
+  inspect_memory: true
+  delete_memory: true
+  retrieval_log: partial
+  multi_user: true
+  multi_tenant: false

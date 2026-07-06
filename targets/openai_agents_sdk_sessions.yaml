@@ -1,0 +1,30 @@
+id: openai_agents_sdk_sessions_pinned
+framework: openai_agents_sdk_sessions
+mode: black_box
+status: pending_adapter
+description: OpenAI Agents SDK Sessions target for persistent conversation history across agent runs.
+source_url: https://openai.github.io/openai-agents-python/sessions/
+source:
+  type: python_package
+  package: openai-agents
+  version: TODO_PIN_EXACT_VERSION
+runtime:
+  type: local_python
+  required_env:
+    - OPENAI_API_KEY
+model:
+  provider: openai
+  model: TODO_FIXED_MODEL
+  temperature: 0
+adapter:
+  module: memorybench.adapters.pending
+  class: PendingAdapter
+capabilities:
+  inspect_memory: partial
+  delete_memory: partial
+  retrieval_log: false
+  multi_user: true
+  multi_tenant: false
+notes:
+  - Sessions are conversation-history memory, not necessarily long-term semantic memory.
+

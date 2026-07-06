@@ -1,0 +1,26 @@
+id: llamaindex_memory_pinned
+framework: llamaindex_memory
+mode: white_box
+status: pending_adapter
+description: LlamaIndex Memory target covering short-term and long-term memory blocks.
+source_url: https://developers.llamaindex.ai/python/framework/module_guides/deploying/agents/memory/
+source:
+  type: python_package
+  package: llama-index
+  version: TODO_PIN_EXACT_VERSION
+runtime:
+  type: local_python
+model:
+  provider: openai_compatible
+  model: TODO_FIXED_MODEL
+  temperature: 0
+adapter:
+  module: memorybench.adapters.pending
+  class: PendingAdapter
+capabilities:
+  inspect_memory: true
+  delete_memory: partial
+  retrieval_log: partial
+  multi_user: true
+  multi_tenant: false
+

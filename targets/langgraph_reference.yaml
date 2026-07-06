@@ -1,0 +1,14 @@
+id: langgraph_reference_local
+framework: langgraph
+mode: white_box_reference
+description: Temporary local reference target. Not a real LangGraph framework score.
+adapter:
+  module: memorybench.adapters.langgraph_reference
+  class: LangGraphReferenceAdapter
+capabilities:
+  inspect_memory: true
+  delete_memory: true
+  retrieval_log: true
+  multi_user: true
+  multi_tenant: false
+

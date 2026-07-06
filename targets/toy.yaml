@@ -1,0 +1,14 @@
+id: toy_naive_memory
+framework: toy
+mode: white_box
+description: Deterministic naive target for harness validation only.
+adapter:
+  module: memorybench.adapters.toy
+  class: ToyMemoryAdapter
+capabilities:
+  inspect_memory: true
+  delete_memory: true
+  retrieval_log: true
+  multi_user: true
+  multi_tenant: false
+

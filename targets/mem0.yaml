@@ -1,0 +1,40 @@
+id: mem0_open_source_pinned
+framework: mem0
+mode: white_box
+status: implemented
+description: Local Mem0 OSS target. Requires mem0ai and provider credentials.
+source:
+  type: python_package
+  package: mem0ai
+  version: "2.0.11"
+runtime:
+  type: local_python
+model:
+  provider: openai
+  model: gpt-4o-mini
+  temperature: 0
+mem0_config:
+  vector_store:
+    provider: qdrant
+    config:
+      collection_name: memorystackbench_mem0
+      path: /tmp/memorystackbench/qdrant
+      on_disk: true
+  llm:
+    provider: openai
+    config:
+      model: gpt-4o-mini
+      temperature: 0
+  embedder:
+    provider: openai
+    config:
+      model: text-embedding-3-small
+adapter:
+  module: memorybench.adapters.mem0
+  class: Mem0Adapter
+capabilities:
+  inspect_memory: true
+  delete_memory: true
+  retrieval_log: partial
+  multi_user: true
+  multi_tenant: false

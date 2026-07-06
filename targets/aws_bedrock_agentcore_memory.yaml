@@ -1,0 +1,31 @@
+id: aws_bedrock_agentcore_memory_pinned
+framework: aws_bedrock_agentcore_memory
+mode: white_box
+status: pending_adapter
+description: AWS Bedrock AgentCore Memory managed-service target.
+source_url: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/memory.html
+source:
+  type: aws_managed_service
+  service: bedrock-agentcore-memory
+  sdk: boto3
+  version: TODO_PIN_EXACT_VERSION
+runtime:
+  type: external_service
+  required_env:
+    - AWS_REGION
+    - AWS_ACCESS_KEY_ID
+    - AWS_SECRET_ACCESS_KEY
+model:
+  provider: aws_bedrock
+  model: TODO_FIXED_MODEL
+  temperature: 0
+adapter:
+  module: memorybench.adapters.pending
+  class: PendingAdapter
+capabilities:
+  inspect_memory: partial
+  delete_memory: partial
+  retrieval_log: partial
+  multi_user: true
+  multi_tenant: true
+
