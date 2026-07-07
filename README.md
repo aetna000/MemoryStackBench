@@ -45,6 +45,7 @@ The current checked-in static site contains real runs for the `seven_sins_v0_1` 
 | `agno-memory-local` | Agno MemoryManager harness | `20 / 20` (`100%`) |
 | `aws-agentcore-memory-local` | AWS Bedrock AgentCore Memory event-memory harness | `20 / 20` (`100%`) |
 | `cognee-local` | Cognee remember/recall/forget harness | `20 / 20` (`100%`) |
+| `hindsight-local` | Hindsight retain/recall/list/delete harness | `20 / 20` (`100%`) |
 | `langgraph-local` | LangGraph Store harness | `20 / 20` (`100%`) |
 | `langmem-local` | LangMem manage/search tools harness | `20 / 20` (`100%`) |
 | `llamaindex-memory-local` | LlamaIndex ChatMemoryBuffer harness | `20 / 20` (`100%`) |
@@ -63,6 +64,7 @@ Important interpretation notes:
 - The LangGraph result is a store-level harness using `InMemoryStore` plus the benchmark adapter's explicit write/update/delete policy; it is not a built-in semantic memory agent.
 - The LlamaIndex, LangMem, and Agno results are local Python memory/store harnesses using their real memory APIs plus the same explicit benchmark write/update/delete policy for comparability.
 - The Cognee result is a real local Cognee 1.2.2 run using temporary datasets, `DataItem` + `remember()`, graph-backed `recall(..., only_context=True)`, and `forget()` cleanup. It is an `implemented_store_harness` result, not a score for every possible automatic agent integration built on Cognee.
+- The Hindsight result is a real self-hosted Hindsight 0.8.4 slim Docker run on Colima using temporary banks, `retain()`, `recall()`, native `list_memories()`, and document deletion. It uses OpenAI `gpt-4o-mini`, OpenAI `text-embedding-3-small` embeddings, and RRF reranking.
 - The Supermemory result is a real hosted API run using direct memory-entry create/search/list/forget endpoints. It does not measure Supermemory document ingestion, user profiles, connectors, or self-hosted mode.
 - OpenAI Agents SDK Sessions is conversation-history persistence, not semantic long-term memory. Its remaining failures are raw transcript retention of poisoned webpage text and stale SFO text.
 - Graphiti is a real Graphiti + Neo4j run. The current adapter scores derived `RELATES_TO` facts; several simple preference statements were not extracted into scored facts in this suite.

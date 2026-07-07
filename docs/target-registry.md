@@ -27,7 +27,7 @@ Status meanings:
 | 13 | AWS Bedrock AgentCore Memory | `targets/aws_bedrock_agentcore_memory.yaml` | implemented_store_harness | managed short-term event memory APIs |
 | 14 | OpenAI Agents SDK Sessions | `targets/openai_agents_sdk_sessions.yaml` | implemented | session persistence across agent runs |
 | 15 | Supermemory | `targets/supermemory.yaml` | implemented | hosted memory entry create, search, list, forget |
-| 16 | Hindsight | `targets/hindsight.yaml` | implemented_unverified | official client, retain, recall, list/delete through API server |
+| 16 | Hindsight | `targets/hindsight.yaml` | implemented_store_harness | official client, retain, recall, list/delete through API server |
 
 Additional harness targets:
 
@@ -53,14 +53,13 @@ The lowest-risk implementation order is:
 13. CrewAI Memory: current 1.x package does not resolve on this macOS/Python 3.12 host because its lancedb pin is unavailable; use a Linux runner or choose an older explicit pin.
 14. Zep self-hosted/native automatic extraction split: separate from the current cloud graph harness.
 15. Supermemory hosted direct memory-entry API: implemented and scored with temporary container cleanup.
-16. Hindsight official-client adapter: implemented, but live scoring is blocked until a Hindsight API server can run locally or on a VM.
+16. Hindsight official-client retain/recall harness: implemented and scored on self-hosted slim Docker.
 17. Google ADK + Memory Bank: cloud credentials and cleanup discipline.
 18. AWS Bedrock AgentCore Memory long-term extraction strategy: IAM execution role, model access, async activation, and cleanup discipline.
 
 ## Current Local Blockers
 
 - CrewAI: `crewai==1.15.1` does not resolve locally because `lancedb>=0.29.2,<0.30.1` has no matching distribution for this host. `crewai==0.203.2` dry-runs, but that would be an older benchmark pin.
-- Hindsight: adapter code now uses the official `hindsight-client==0.8.4`; live scoring is blocked on this host because Docker's image store returned input/output errors after local disk filled during the Hindsight image pull. Retry with `ghcr.io/vectorize-io/hindsight:0.8.4-slim` on repaired Docker storage or a VM with more free disk.
 
 ## Sources Used For Initial Registry
 
