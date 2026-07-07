@@ -1,0 +1,54 @@
+name: Deploy Hugging Face Space
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: huggingface-space
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Clone Hugging Face Space
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          git clone https://oauth2:${HF_TOKEN}@huggingface.co/spaces/Aetna000/MemoryStackBench hf-space
+
+      - name: Copy static leaderboard site
+        run: |
+          rsync -a --delete --exclude ".git" site/ hf-space/
+
+          cat > hf-space/README.md <<'EOF'
+          ---
+          title: MemoryStackBench
+          colorFrom: teal
+          colorTo: blue
+          sdk: static
+          pinned: false
+          short_description: Agent memory safety leaderboard
+          ---
+
+          # MemoryStackBench
+
+          Static leaderboard generated from the MemoryStackBench GitHub project.
+          EOF
+
+      - name: Push to Hugging Face
+        working-directory: hf-space
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add .
+          git commit -m "Deploy leaderboard" || exit 0
+          git push
