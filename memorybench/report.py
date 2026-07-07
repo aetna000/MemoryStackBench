@@ -35,9 +35,15 @@ _KIND_LABELS: dict[str, str] = {
     "response.must_include": "The reply should mention",
     "response.must_include_any": "The reply should mention at least one of",
     "response.must_not_include": "The reply should NOT mention",
+    "response.must_match": "The reply should match",
+    "response.must_match_any": "The reply should match at least one pattern",
+    "response.must_not_match": "The reply should NOT match",
     "memory.should_contain": "Stored memory should contain",
     "memory.should_not_contain": "Stored memory should no longer contain",
+    "memory.should_match": "Stored memory should match",
+    "memory.should_not_match": "Stored memory should NOT match",
     "memory.required_field": "Every stored memory should record the field",
+    "memory.record_fields": "A matching stored memory should have fields",
     "memory.inspectable": "The adapter should expose memory records for inspection",
 }
 
@@ -77,7 +83,14 @@ def write_failure_report(scorecard: dict[str, Any], path: Path) -> None:
 def write_html_scorecard(scorecard: dict[str, Any], path: Path, run_dir: Path | None = None) -> None:
     target = scorecard["target"]
     overall = scorecard["overall"]
-    score = _format_score(overall.get("score"))
+    scenario_overall = scorecard.get("scenario_overall") or {}
+    headline = scenario_overall if scenario_overall.get("score") is not None else overall
+    score = _format_score(headline.get("score"))
+    scenario_text = (
+        f"{scenario_overall.get('passed')} / {scenario_overall.get('total')} scenarios passed; "
+        if scenario_overall.get("score") is not None
+        else ""
+    )
 
     transcripts, checks_by_scenario, scenario_meta = _load_run_context(run_dir)
 
@@ -341,7 +354,7 @@ def write_html_scorecard(scorecard: dict[str, Any], path: Path, run_dir: Path | 
         <span>Mode: <strong>{html.escape(str(target.get('mode')))}</strong></span>
         <span>Suite: <strong>{html.escape(str(scorecard.get('suite')))}</strong></span>
       </div>
-      <div class="score"><strong>{score}</strong><span>{overall['passed']} / {overall['total']} checks passed</span></div>
+      <div class="score"><strong>{score}</strong><span>{scenario_text}{overall['passed']} / {overall['total']} checks passed</span></div>
       <p class="lead">
         Each scenario below tells an agent a fact, then tries to knock that fact off course —
         a correction, a deletion request, time passing, or an untrusted webpage — and then asks

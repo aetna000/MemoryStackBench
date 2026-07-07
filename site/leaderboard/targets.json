@@ -1,6 +1,7 @@
 [
   {
     "blockers": [],
+    "check_score": 1.0,
     "framework": "agno_memory",
     "manifest": "agno_memory.yaml",
     "missing_env": [],
@@ -13,18 +14,20 @@
   },
   {
     "blockers": [],
+    "check_score": 0.9091,
     "framework": "autogen_mem0memory",
     "manifest": "autogen_mem0memory.yaml",
     "missing_env": [],
     "required_env": [],
     "run": "autogen-mem0-local",
     "runtime": "local_python",
-    "score": 0.95,
+    "score": 0.6,
     "status": "implemented",
     "target": "autogen_mem0memory_pinned"
   },
   {
     "blockers": [],
+    "check_score": 1.0,
     "framework": "aws_bedrock_agentcore_memory",
     "manifest": "aws_bedrock_agentcore_memory.yaml",
     "missing_env": [],
@@ -41,6 +44,7 @@
   },
   {
     "blockers": [],
+    "check_score": 1.0,
     "framework": "cognee",
     "manifest": "cognee.yaml",
     "missing_env": [],
@@ -55,6 +59,7 @@
   },
   {
     "blockers": [],
+    "check_score": 1.0,
     "framework": "crewai_memory",
     "manifest": "crewai_memory.yaml",
     "missing_env": [],
@@ -69,6 +74,7 @@
   },
   {
     "blockers": [],
+    "check_score": 1.0,
     "framework": "google_adk_memory_bank",
     "manifest": "google_adk_memory_bank.yaml",
     "missing_env": [],
@@ -85,6 +91,7 @@
   },
   {
     "blockers": [],
+    "check_score": 0.7273,
     "framework": "graphiti",
     "manifest": "graphiti.yaml",
     "missing_env": [],
@@ -93,12 +100,13 @@
     ],
     "run": "graphiti-neo4j-local",
     "runtime": "docker_compose",
-    "score": 0.7,
+    "score": 0.2,
     "status": "implemented",
     "target": "graphiti_neo4j_pinned"
   },
   {
     "blockers": [],
+    "check_score": 1.0,
     "framework": "hindsight",
     "manifest": "hindsight.yaml",
     "missing_env": [],
@@ -113,6 +121,7 @@
   },
   {
     "blockers": [],
+    "check_score": 1.0,
     "framework": "langgraph",
     "manifest": "langgraph.yaml",
     "missing_env": [],
@@ -125,6 +134,7 @@
   },
   {
     "blockers": [],
+    "check_score": 1.0,
     "framework": "langmem",
     "manifest": "langmem.yaml",
     "missing_env": [],
@@ -137,6 +147,7 @@
   },
   {
     "blockers": [],
+    "check_score": 0.9394,
     "framework": "letta",
     "manifest": "letta.yaml",
     "missing_env": [],
@@ -145,12 +156,13 @@
     ],
     "run": "letta-local",
     "runtime": "docker_compose",
-    "score": 0.95,
+    "score": 0.6,
     "status": "implemented",
     "target": "letta_self_hosted_pinned"
   },
   {
     "blockers": [],
+    "check_score": 1.0,
     "framework": "llamaindex_memory",
     "manifest": "llamaindex_memory.yaml",
     "missing_env": [],
@@ -163,18 +175,20 @@
   },
   {
     "blockers": [],
+    "check_score": 0.9091,
     "framework": "mem0",
     "manifest": "mem0.yaml",
     "missing_env": [],
     "required_env": [],
     "run": "mem0-local",
     "runtime": "local_python",
-    "score": 0.95,
+    "score": 0.6,
     "status": "implemented",
     "target": "mem0_open_source_pinned"
   },
   {
     "blockers": [],
+    "check_score": 0.9091,
     "framework": "openai_agents_sdk_sessions",
     "manifest": "openai_agents_sdk_sessions.yaml",
     "missing_env": [],
@@ -183,12 +197,13 @@
     ],
     "run": "openai-agents-sessions-local",
     "runtime": "local_python",
-    "score": 0.85,
+    "score": 0.6,
     "status": "implemented",
     "target": "openai_agents_sdk_sessions_pinned"
   },
   {
     "blockers": [],
+    "check_score": 1.0,
     "framework": "supermemory",
     "manifest": "supermemory.yaml",
     "missing_env": [],
@@ -203,6 +218,7 @@
   },
   {
     "blockers": [],
+    "check_score": 1.0,
     "framework": "zep",
     "manifest": "zep.yaml",
     "missing_env": [],

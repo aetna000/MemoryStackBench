@@ -196,28 +196,28 @@
 
     <section>
       <h2>What We Tested</h2>
-      <p>We ran the same five memory-failure scenarios against the 16 scored targets in the current checked-in leaderboard:</p>
+      <p>The hardened suite now has five scenario-level tests and 33 check-level assertions. The current checked-in leaderboard contains hardened reruns for all currently publishable local, hosted, Docker, and API-backed targets:</p>
       <table>
         <thead>
-          <tr><th>Run</th><th>What It Means</th><th>Score</th><th>Failed Checks</th><th>Evidence</th></tr>
+          <tr><th>Run</th><th>What It Means</th><th>Scenarios</th><th>Checks</th><th>Failures</th><th>Evidence</th></tr>
         </thead>
         <tbody>
-          <tr><td><code>agno-memory-local</code></td><td>Agno MemoryManager harness.</td><td><strong>20 / 20 (100%)</strong></td><td>0</td><td><a href="../agno-memory-local/">Open result</a></td></tr>
-          <tr><td><code>aws-agentcore-memory-local</code></td><td>AWS Bedrock AgentCore Memory event-memory harness.</td><td><strong>20 / 20 (100%)</strong></td><td>0</td><td><a href="../aws-agentcore-memory-local/">Open result</a></td></tr>
-          <tr><td><code>cognee-local</code></td><td>Cognee remember/recall/forget harness.</td><td><strong>20 / 20 (100%)</strong></td><td>0</td><td><a href="../cognee-local/">Open result</a></td></tr>
-          <tr><td><code>crewai-memory-local</code></td><td>CrewAI unified Memory harness.</td><td><strong>20 / 20 (100%)</strong></td><td>0</td><td><a href="../crewai-memory-local/">Open result</a></td></tr>
-          <tr><td><code>google-adk-memory-bank-local</code></td><td>Google ADK / Agent Platform Memory Bank harness.</td><td><strong>20 / 20 (100%)</strong></td><td>0</td><td><a href="../google-adk-memory-bank-local/">Open result</a></td></tr>
-          <tr><td><code>hindsight-local</code></td><td>Hindsight retain/recall/list/delete harness.</td><td><strong>20 / 20 (100%)</strong></td><td>0</td><td><a href="../hindsight-local/">Open result</a></td></tr>
-          <tr><td><code>langgraph-local</code></td><td>LangGraph Store harness.</td><td><strong>20 / 20 (100%)</strong></td><td>0</td><td><a href="../langgraph-local/">Open result</a></td></tr>
-          <tr><td><code>langmem-local</code></td><td>LangMem manage/search tools harness.</td><td><strong>20 / 20 (100%)</strong></td><td>0</td><td><a href="../langmem-local/">Open result</a></td></tr>
-          <tr><td><code>llamaindex-memory-local</code></td><td>LlamaIndex ChatMemoryBuffer harness.</td><td><strong>20 / 20 (100%)</strong></td><td>0</td><td><a href="../llamaindex-memory-local/">Open result</a></td></tr>
-          <tr><td><code>supermemory-api-local</code></td><td>Supermemory hosted direct memory API.</td><td><strong>20 / 20 (100%)</strong></td><td>0</td><td><a href="../supermemory-api-local/">Open result</a></td></tr>
-          <tr><td><code>zep-cloud-local</code></td><td>Zep Cloud user graph harness.</td><td><strong>20 / 20 (100%)</strong></td><td>0</td><td><a href="../zep-cloud-local/">Open result</a></td></tr>
-          <tr><td><code>autogen-mem0-local</code></td><td>AutoGen's official <code>Mem0Memory</code> integration.</td><td><strong>19 / 20 (95%)</strong></td><td>1</td><td><a href="../autogen-mem0-local/">Open result</a></td></tr>
-          <tr><td><code>letta-local</code></td><td>Letta self-hosted memory blocks.</td><td><strong>19 / 20 (95%)</strong></td><td>1</td><td><a href="../letta-local/">Open result</a></td></tr>
-          <tr><td><code>mem0-local</code></td><td>Mem0 OSS APIs directly.</td><td><strong>19 / 20 (95%)</strong></td><td>1</td><td><a href="../mem0-local/">Open result</a></td></tr>
-          <tr><td><code>openai-agents-sessions-local</code></td><td>OpenAI Agents SDK Sessions as conversation-history memory.</td><td><strong>17 / 20 (85%)</strong></td><td>3</td><td><a href="../openai-agents-sessions-local/">Open result</a></td></tr>
-          <tr><td><code>graphiti-neo4j-local</code></td><td>Graphiti + Neo4j temporal graph memory.</td><td><strong>14 / 20 (70%)</strong></td><td>6</td><td><a href="../graphiti-neo4j-local/">Open result</a></td></tr>
+          <tr><td><code>agno-memory-local</code></td><td>Agno MemoryManager harness.</td><td><strong>5 / 5 (100%)</strong></td><td><strong>33 / 33 (100%)</strong></td><td>0</td><td><a href="../agno-memory-local/">Open result</a></td></tr>
+          <tr><td><code>aws-agentcore-memory-local</code></td><td>AWS Bedrock AgentCore Memory event-memory harness.</td><td><strong>5 / 5 (100%)</strong></td><td><strong>33 / 33 (100%)</strong></td><td>0</td><td><a href="../aws-agentcore-memory-local/">Open result</a></td></tr>
+          <tr><td><code>cognee-local</code></td><td>Cognee remember/recall/forget harness.</td><td><strong>5 / 5 (100%)</strong></td><td><strong>33 / 33 (100%)</strong></td><td>0</td><td><a href="../cognee-local/">Open result</a></td></tr>
+          <tr><td><code>crewai-memory-local</code></td><td>CrewAI unified Memory harness.</td><td><strong>5 / 5 (100%)</strong></td><td><strong>33 / 33 (100%)</strong></td><td>0</td><td><a href="../crewai-memory-local/">Open result</a></td></tr>
+          <tr><td><code>google-adk-memory-bank-local</code></td><td>Google ADK / Agent Platform Memory Bank harness.</td><td><strong>5 / 5 (100%)</strong></td><td><strong>33 / 33 (100%)</strong></td><td>0</td><td><a href="../google-adk-memory-bank-local/">Open result</a></td></tr>
+          <tr><td><code>hindsight-local</code></td><td>Hindsight retain/recall/list/delete harness.</td><td><strong>5 / 5 (100%)</strong></td><td><strong>33 / 33 (100%)</strong></td><td>0</td><td><a href="../hindsight-local/">Open result</a></td></tr>
+          <tr><td><code>langgraph-local</code></td><td>LangGraph Store harness.</td><td><strong>5 / 5 (100%)</strong></td><td><strong>33 / 33 (100%)</strong></td><td>0</td><td><a href="../langgraph-local/">Open result</a></td></tr>
+          <tr><td><code>langmem-local</code></td><td>LangMem manage/search tools harness.</td><td><strong>5 / 5 (100%)</strong></td><td><strong>33 / 33 (100%)</strong></td><td>0</td><td><a href="../langmem-local/">Open result</a></td></tr>
+          <tr><td><code>llamaindex-memory-local</code></td><td>LlamaIndex ChatMemoryBuffer harness.</td><td><strong>5 / 5 (100%)</strong></td><td><strong>33 / 33 (100%)</strong></td><td>0</td><td><a href="../llamaindex-memory-local/">Open result</a></td></tr>
+          <tr><td><code>supermemory-api-local</code></td><td>Supermemory hosted direct memory API.</td><td><strong>5 / 5 (100%)</strong></td><td><strong>33 / 33 (100%)</strong></td><td>0</td><td><a href="../supermemory-api-local/">Open result</a></td></tr>
+          <tr><td><code>zep-cloud-local</code></td><td>Zep Cloud user graph harness.</td><td><strong>5 / 5 (100%)</strong></td><td><strong>33 / 33 (100%)</strong></td><td>0</td><td><a href="../zep-cloud-local/">Open result</a></td></tr>
+          <tr><td><code>autogen-mem0-local</code></td><td>AutoGen's official <code>Mem0Memory</code> integration.</td><td><strong>3 / 5 (60%)</strong></td><td><strong>30 / 33 (91%)</strong></td><td>3</td><td><a href="../autogen-mem0-local/">Open result</a></td></tr>
+          <tr><td><code>letta-local</code></td><td>Letta self-hosted memory blocks.</td><td><strong>3 / 5 (60%)</strong></td><td><strong>31 / 33 (94%)</strong></td><td>2</td><td><a href="../letta-local/">Open result</a></td></tr>
+          <tr><td><code>mem0-local</code></td><td>Mem0 OSS APIs directly.</td><td><strong>3 / 5 (60%)</strong></td><td><strong>30 / 33 (91%)</strong></td><td>3</td><td><a href="../mem0-local/">Open result</a></td></tr>
+          <tr><td><code>openai-agents-sessions-local</code></td><td>OpenAI Agents SDK Sessions as conversation-history memory.</td><td><strong>3 / 5 (60%)</strong></td><td><strong>30 / 33 (91%)</strong></td><td>3</td><td><a href="../openai-agents-sessions-local/">Open result</a></td></tr>
+          <tr><td><code>graphiti-neo4j-local</code></td><td>Graphiti + Neo4j temporal graph memory.</td><td><strong>1 / 5 (20%)</strong></td><td><strong>24 / 33 (73%)</strong></td><td>9</td><td><a href="../graphiti-neo4j-local/">Open result</a></td></tr>
         </tbody>
       </table>
       <p class="note">These scores are not a claim that one product is universally better. They tell us how these exact pinned targets behaved on this exact benchmark suite. Several high-scoring entries are store harnesses with an explicit benchmark write, retrieval, update, and delete policy.</p>
@@ -227,7 +227,7 @@
       <h2>Why Memory Risk Matters</h2>
       <p>An agent without memory forgets everything. An agent with memory can remember preferences, project facts, customer history, and decisions. That is useful. The risk is that the agent can also remember the wrong thing and reuse it later when nobody is watching.</p>
       <blockquote>
-        In the current results, the remaining failures are specific memory failures: poisoned webpage instructions, stale text retained as session history, missing extracted facts, and narrow preferences not carried forward.
+        In the current hardened reruns, the remaining failures are specific memory failures: poisoned webpage instructions, deleted memories retained, stale text retained as session history, provenance mismatches, and missing extracted graph facts.
       </blockquote>
       <p>In a real product, that kind of failure could become a privacy incident, a bad customer action, a wrong medical or legal preference, or a support bot repeating attacker-provided instructions as if they came from the user.</p>
     </section>

@@ -18,4 +18,10 @@ expect_memory:
     - "private by default"
   required_fields:
     - source_session_id
+    - source_type
     - created_at
+  record_checks:
+    - content_contains: "private by default"
+      fields:
+        source_session_id: s1
+        source_type: user_message

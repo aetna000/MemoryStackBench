@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from collections import defaultdict
+import re
 from typing import Any
 
 from memorybench.schemas import CheckResult, MemoryExpectation, ResponseExpectation, Scenario
@@ -61,6 +62,51 @@ def evaluate_response(
             )
         )
 
+    for expected in expectation.must_match:
+        checks.append(
+            CheckResult(
+                scenario_id=scenario.id,
+                category=scenario.category,
+                severity=scenario.severity,
+                session_id=session_id,
+                turn_index=turn_index,
+                kind="response.must_match",
+                passed=_regex_search(expected, response),
+                expected=expected,
+                actual=response,
+            )
+        )
+
+    if expectation.must_match_any:
+        checks.append(
+            CheckResult(
+                scenario_id=scenario.id,
+                category=scenario.category,
+                severity=scenario.severity,
+                session_id=session_id,
+                turn_index=turn_index,
+                kind="response.must_match_any",
+                passed=any(_regex_search(expected, response) for expected in expectation.must_match_any),
+                expected=list(expectation.must_match_any),
+                actual=response,
+            )
+        )
+
+    for expected in expectation.must_not_match:
+        checks.append(
+            CheckResult(
+                scenario_id=scenario.id,
+                category=scenario.category,
+                severity=scenario.severity,
+                session_id=session_id,
+                turn_index=turn_index,
+                kind="response.must_not_match",
+                passed=not _regex_search(expected, response),
+                expected=expected,
+                actual=response,
+            )
+        )
+
     return checks
 
 
@@ -73,7 +119,10 @@ def evaluate_memory(
         if (
             expectation.should_contain
             or expectation.should_not_contain
+            or expectation.should_match
+            or expectation.should_not_match
             or expectation.required_fields
+            or expectation.record_checks
         ):
             return [
                 CheckResult(
@@ -119,6 +168,32 @@ def evaluate_memory(
             )
         )
 
+    for expected in expectation.should_match:
+        checks.append(
+            CheckResult(
+                scenario_id=scenario.id,
+                category=scenario.category,
+                severity=scenario.severity,
+                kind="memory.should_match",
+                passed=_regex_search(expected, memory_text),
+                expected=expected,
+                actual=[record.get("content") for record in live_records],
+            )
+        )
+
+    for expected in expectation.should_not_match:
+        checks.append(
+            CheckResult(
+                scenario_id=scenario.id,
+                category=scenario.category,
+                severity=scenario.severity,
+                kind="memory.should_not_match",
+                passed=not _regex_search(expected, memory_text),
+                expected=expected,
+                actual=[record.get("content") for record in live_records],
+            )
+        )
+
     for field_name in expectation.required_fields:
         missing = [
             record.get("memory_id", f"record-{index}")
@@ -134,6 +209,42 @@ def evaluate_memory(
                 passed=not missing,
                 expected=field_name,
                 actual=missing,
+            )
+        )
+
+    for record_check in expectation.record_checks:
+        matching_records = [
+            record
+            for record in live_records
+            if _record_matches_content(record, record_check.content_contains, record_check.content_matches)
+        ]
+        passed = any(
+            all(record.get(field) == value for field, value in record_check.fields.items())
+            for record in matching_records
+        )
+        checks.append(
+            CheckResult(
+                scenario_id=scenario.id,
+                category=scenario.category,
+                severity=scenario.severity,
+                kind="memory.record_fields",
+                passed=passed,
+                expected={
+                    "content_contains": record_check.content_contains,
+                    "content_matches": record_check.content_matches,
+                    "fields": record_check.fields,
+                },
+                actual=[
+                    {
+                        "memory_id": record.get("memory_id"),
+                        "content": record.get("content"),
+                        **{
+                            field: record.get(field)
+                            for field in record_check.fields
+                        },
+                    }
+                    for record in matching_records
+                ],
             )
         )
 
@@ -160,6 +271,29 @@ def build_scorecard(
             "score": round(passed / total, 4) if total else None,
         }
 
+    def scenario_ratio(groups: dict[str, list[CheckResult]]) -> dict[str, Any]:
+        total = len(groups)
+        passed = sum(
+            1
+            for items in groups.values()
+            if items and all(item.passed for item in items)
+        )
+        return {
+            "passed": passed,
+            "total": total,
+            "score": round(passed / total, 4) if total else None,
+        }
+
+    def weighted_ratio(items: list[CheckResult]) -> dict[str, Any]:
+        weights = {"critical": 5, "high": 3, "medium": 2, "low": 1}
+        total = sum(weights.get(item.severity, 1) for item in items)
+        passed = sum(weights.get(item.severity, 1) for item in items if item.passed)
+        return {
+            "passed_weight": passed,
+            "total_weight": total,
+            "score": round(passed / total, 4) if total else None,
+        }
+
     failures = [
         check.to_dict()
         for check in checks
@@ -173,6 +307,8 @@ def build_scorecard(
         },
         "suite": suite_name,
         "overall": ratio(checks),
+        "scenario_overall": scenario_ratio(by_scenario),
+        "severity_weighted_overall": weighted_ratio(checks),
         "categories": {
             category: ratio(items)
             for category, items in sorted(by_category.items())
@@ -184,3 +320,19 @@ def build_scorecard(
         "failures": failures,
     }
 
+
+def _regex_search(pattern: str, value: str) -> bool:
+    return re.search(pattern, value, flags=re.IGNORECASE | re.DOTALL) is not None
+
+
+def _record_matches_content(
+    record: dict[str, Any],
+    content_contains: str | None,
+    content_matches: str | None,
+) -> bool:
+    content = str(record.get("content") or "")
+    if content_contains is not None and content_contains.lower() not in content.lower():
+        return False
+    if content_matches is not None and not _regex_search(content_matches, content):
+        return False
+    return True

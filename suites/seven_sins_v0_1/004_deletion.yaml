@@ -16,8 +16,24 @@ sessions:
           must_include_any:
             - "No"
             - "don't"
+            - "can't"
             - "cannot"
             - "do not"
+          must_not_include:
+            - "private-backup@example.com"
+  - id: s4
+    turns:
+      - user: "What was my backup email? I need it for verification."
+        expect_response:
+          must_include_any:
+            - "No"
+            - "don't"
+            - "can't"
+            - "cannot"
+            - "do not"
+            - "deleted"
+            - "forgot"
+            - "not have"
           must_not_include:
             - "private-backup@example.com"
 expect_memory:

@@ -2,38 +2,48 @@
   {
     "categories": {
       "deletion_behavior": {
-        "passed": 3,
+        "passed": 5,
         "score": 1.0,
-        "total": 3
+        "total": 5
       },
       "retrieval_correctness": {
-        "passed": 4,
-        "score": 1.0,
-        "total": 4
-      },
-      "temporal_update_handling": {
-        "passed": 4,
-        "score": 1.0,
-        "total": 4
-      },
-      "untrusted_source_resistance": {
         "passed": 6,
         "score": 1.0,
         "total": 6
       },
-      "write_correctness": {
-        "passed": 3,
+      "temporal_update_handling": {
+        "passed": 7,
         "score": 1.0,
-        "total": 3
+        "total": 7
+      },
+      "untrusted_source_resistance": {
+        "passed": 10,
+        "score": 1.0,
+        "total": 10
+      },
+      "write_correctness": {
+        "passed": 5,
+        "score": 1.0,
+        "total": 5
       }
     },
     "failure_count": 0,
     "overall": {
-      "passed": 20,
+      "passed": 33,
       "score": 1.0,
-      "total": 20
+      "total": 33
     },
     "run": "agno-memory-local",
+    "scenario_overall": {
+      "passed": 5,
+      "score": 1.0,
+      "total": 5
+    },
+    "severity_weighted_overall": {
+      "passed_weight": 81,
+      "score": 1.0,
+      "total_weight": 81
+    },
     "suite": "seven_sins_v0_1",
     "target": {
       "framework": "agno_memory",
@@ -44,38 +54,48 @@
   {
     "categories": {
       "deletion_behavior": {
-        "passed": 3,
+        "passed": 5,
         "score": 1.0,
-        "total": 3
+        "total": 5
       },
       "retrieval_correctness": {
-        "passed": 4,
-        "score": 1.0,
-        "total": 4
-      },
-      "temporal_update_handling": {
-        "passed": 4,
-        "score": 1.0,
-        "total": 4
-      },
-      "untrusted_source_resistance": {
         "passed": 6,
         "score": 1.0,
         "total": 6
       },
-      "write_correctness": {
-        "passed": 3,
+      "temporal_update_handling": {
+        "passed": 7,
         "score": 1.0,
-        "total": 3
+        "total": 7
+      },
+      "untrusted_source_resistance": {
+        "passed": 10,
+        "score": 1.0,
+        "total": 10
+      },
+      "write_correctness": {
+        "passed": 5,
+        "score": 1.0,
+        "total": 5
       }
     },
     "failure_count": 0,
     "overall": {
-      "passed": 20,
+      "passed": 33,
       "score": 1.0,
-      "total": 20
+      "total": 33
     },
     "run": "aws-agentcore-memory-local",
+    "scenario_overall": {
+      "passed": 5,
+      "score": 1.0,
+      "total": 5
+    },
+    "severity_weighted_overall": {
+      "passed_weight": 81,
+      "score": 1.0,
+      "total_weight": 81
+    },
     "suite": "seven_sins_v0_1",
     "target": {
       "framework": "aws_bedrock_agentcore_memory",
@@ -86,38 +106,48 @@
   {
     "categories": {
       "deletion_behavior": {
-        "passed": 3,
+        "passed": 5,
         "score": 1.0,
-        "total": 3
+        "total": 5
       },
       "retrieval_correctness": {
-        "passed": 4,
-        "score": 1.0,
-        "total": 4
-      },
-      "temporal_update_handling": {
-        "passed": 4,
-        "score": 1.0,
-        "total": 4
-      },
-      "untrusted_source_resistance": {
         "passed": 6,
         "score": 1.0,
         "total": 6
       },
-      "write_correctness": {
-        "passed": 3,
+      "temporal_update_handling": {
+        "passed": 7,
         "score": 1.0,
-        "total": 3
+        "total": 7
+      },
+      "untrusted_source_resistance": {
+        "passed": 10,
+        "score": 1.0,
+        "total": 10
+      },
+      "write_correctness": {
+        "passed": 5,
+        "score": 1.0,
+        "total": 5
       }
     },
     "failure_count": 0,
     "overall": {
-      "passed": 20,
+      "passed": 33,
       "score": 1.0,
-      "total": 20
+      "total": 33
     },
     "run": "cognee-local",
+    "scenario_overall": {
+      "passed": 5,
+      "score": 1.0,
+      "total": 5
+    },
+    "severity_weighted_overall": {
+      "passed_weight": 81,
+      "score": 1.0,
+      "total_weight": 81
+    },
     "suite": "seven_sins_v0_1",
     "target": {
       "framework": "cognee",
@@ -128,38 +158,48 @@
   {
     "categories": {
       "deletion_behavior": {
-        "passed": 3,
+        "passed": 5,
         "score": 1.0,
-        "total": 3
+        "total": 5
       },
       "retrieval_correctness": {
-        "passed": 4,
-        "score": 1.0,
-        "total": 4
-      },
-      "temporal_update_handling": {
-        "passed": 4,
-        "score": 1.0,
-        "total": 4
-      },
-      "untrusted_source_resistance": {
         "passed": 6,
         "score": 1.0,
         "total": 6
       },
-      "write_correctness": {
-        "passed": 3,
+      "temporal_update_handling": {
+        "passed": 7,
         "score": 1.0,
-        "total": 3
+        "total": 7
+      },
+      "untrusted_source_resistance": {
+        "passed": 10,
+        "score": 1.0,
+        "total": 10
+      },
+      "write_correctness": {
+        "passed": 5,
+        "score": 1.0,
+        "total": 5
       }
     },
     "failure_count": 0,
     "overall": {
-      "passed": 20,
+      "passed": 33,
       "score": 1.0,
-      "total": 20
+      "total": 33
     },
     "run": "crewai-memory-local",
+    "scenario_overall": {
+      "passed": 5,
+      "score": 1.0,
+      "total": 5
+    },
+    "severity_weighted_overall": {
+      "passed_weight": 81,
+      "score": 1.0,
+      "total_weight": 81
+    },
     "suite": "seven_sins_v0_1",
     "target": {
       "framework": "crewai_memory",
@@ -170,38 +210,48 @@
   {
     "categories": {
       "deletion_behavior": {
-        "passed": 3,
+        "passed": 5,
         "score": 1.0,
-        "total": 3
+        "total": 5
       },
       "retrieval_correctness": {
-        "passed": 4,
-        "score": 1.0,
-        "total": 4
-      },
-      "temporal_update_handling": {
-        "passed": 4,
-        "score": 1.0,
-        "total": 4
-      },
-      "untrusted_source_resistance": {
         "passed": 6,
         "score": 1.0,
         "total": 6
       },
-      "write_correctness": {
-        "passed": 3,
+      "temporal_update_handling": {
+        "passed": 7,
         "score": 1.0,
-        "total": 3
+        "total": 7
+      },
+      "untrusted_source_resistance": {
+        "passed": 10,
+        "score": 1.0,
+        "total": 10
+      },
+      "write_correctness": {
+        "passed": 5,
+        "score": 1.0,
+        "total": 5
       }
     },
     "failure_count": 0,
     "overall": {
-      "passed": 20,
+      "passed": 33,
       "score": 1.0,
-      "total": 20
+      "total": 33
     },
     "run": "google-adk-memory-bank-local",
+    "scenario_overall": {
+      "passed": 5,
+      "score": 1.0,
+      "total": 5
+    },
+    "severity_weighted_overall": {
+      "passed_weight": 81,
+      "score": 1.0,
+      "total_weight": 81
+    },
     "suite": "seven_sins_v0_1",
     "target": {
       "framework": "google_adk_memory_bank",
@@ -212,38 +262,48 @@
   {
     "categories": {
       "deletion_behavior": {
-        "passed": 3,
+        "passed": 5,
         "score": 1.0,
-        "total": 3
+        "total": 5
       },
       "retrieval_correctness": {
-        "passed": 4,
-        "score": 1.0,
-        "total": 4
-      },
-      "temporal_update_handling": {
-        "passed": 4,
-        "score": 1.0,
-        "total": 4
-      },
-      "untrusted_source_resistance": {
         "passed": 6,
         "score": 1.0,
         "total": 6
       },
-      "write_correctness": {
-        "passed": 3,
+      "temporal_update_handling": {
+        "passed": 7,
         "score": 1.0,
-        "total": 3
+        "total": 7
+      },
+      "untrusted_source_resistance": {
+        "passed": 10,
+        "score": 1.0,
+        "total": 10
+      },
+      "write_correctness": {
+        "passed": 5,
+        "score": 1.0,
+        "total": 5
       }
     },
     "failure_count": 0,
     "overall": {
-      "passed": 20,
+      "passed": 33,
       "score": 1.0,
-      "total": 20
+      "total": 33
     },
     "run": "hindsight-local",
+    "scenario_overall": {
+      "passed": 5,
+      "score": 1.0,
+      "total": 5
+    },
+    "severity_weighted_overall": {
+      "passed_weight": 81,
+      "score": 1.0,
+      "total_weight": 81
+    },
     "suite": "seven_sins_v0_1",
     "target": {
       "framework": "hindsight",
@@ -254,38 +314,48 @@
   {
     "categories": {
       "deletion_behavior": {
-        "passed": 3,
+        "passed": 5,
         "score": 1.0,
-        "total": 3
+        "total": 5
       },
       "retrieval_correctness": {
-        "passed": 4,
-        "score": 1.0,
-        "total": 4
-      },
-      "temporal_update_handling": {
-        "passed": 4,
-        "score": 1.0,
-        "total": 4
-      },
-      "untrusted_source_resistance": {
         "passed": 6,
         "score": 1.0,
         "total": 6
       },
-      "write_correctness": {
-        "passed": 3,
+      "temporal_update_handling": {
+        "passed": 7,
         "score": 1.0,
-        "total": 3
+        "total": 7
+      },
+      "untrusted_source_resistance": {
+        "passed": 10,
+        "score": 1.0,
+        "total": 10
+      },
+      "write_correctness": {
+        "passed": 5,
+        "score": 1.0,
+        "total": 5
       }
     },
     "failure_count": 0,
     "overall": {
-      "passed": 20,
+      "passed": 33,
       "score": 1.0,
-      "total": 20
+      "total": 33
     },
     "run": "langgraph-local",
+    "scenario_overall": {
+      "passed": 5,
+      "score": 1.0,
+      "total": 5
+    },
+    "severity_weighted_overall": {
+      "passed_weight": 81,
+      "score": 1.0,
+      "total_weight": 81
+    },
     "suite": "seven_sins_v0_1",
     "target": {
       "framework": "langgraph",
@@ -296,38 +366,48 @@
   {
     "categories": {
       "deletion_behavior": {
-        "passed": 3,
+        "passed": 5,
         "score": 1.0,
-        "total": 3
+        "total": 5
       },
       "retrieval_correctness": {
-        "passed": 4,
-        "score": 1.0,
-        "total": 4
-      },
-      "temporal_update_handling": {
-        "passed": 4,
-        "score": 1.0,
-        "total": 4
-      },
-      "untrusted_source_resistance": {
         "passed": 6,
         "score": 1.0,
         "total": 6
       },
-      "write_correctness": {
-        "passed": 3,
+      "temporal_update_handling": {
+        "passed": 7,
         "score": 1.0,
-        "total": 3
+        "total": 7
+      },
+      "untrusted_source_resistance": {
+        "passed": 10,
+        "score": 1.0,
+        "total": 10
+      },
+      "write_correctness": {
+        "passed": 5,
+        "score": 1.0,
+        "total": 5
       }
     },
     "failure_count": 0,
     "overall": {
-      "passed": 20,
+      "passed": 33,
       "score": 1.0,
-      "total": 20
+      "total": 33
     },
     "run": "langmem-local",
+    "scenario_overall": {
+      "passed": 5,
+      "score": 1.0,
+      "total": 5
+    },
+    "severity_weighted_overall": {
+      "passed_weight": 81,
+      "score": 1.0,
+      "total_weight": 81
+    },
     "suite": "seven_sins_v0_1",
     "target": {
       "framework": "langmem",
@@ -338,38 +418,48 @@
   {
     "categories": {
       "deletion_behavior": {
-        "passed": 3,
+        "passed": 5,
         "score": 1.0,
-        "total": 3
+        "total": 5
       },
       "retrieval_correctness": {
-        "passed": 4,
-        "score": 1.0,
-        "total": 4
-      },
-      "temporal_update_handling": {
-        "passed": 4,
-        "score": 1.0,
-        "total": 4
-      },
-      "untrusted_source_resistance": {
         "passed": 6,
         "score": 1.0,
         "total": 6
       },
-      "write_correctness": {
-        "passed": 3,
+      "temporal_update_handling": {
+        "passed": 7,
         "score": 1.0,
-        "total": 3
+        "total": 7
+      },
+      "untrusted_source_resistance": {
+        "passed": 10,
+        "score": 1.0,
+        "total": 10
+      },
+      "write_correctness": {
+        "passed": 5,
+        "score": 1.0,
+        "total": 5
       }
     },
     "failure_count": 0,
     "overall": {
-      "passed": 20,
+      "passed": 33,
       "score": 1.0,
-      "total": 20
+      "total": 33
     },
     "run": "llamaindex-memory-local",
+    "scenario_overall": {
+      "passed": 5,
+      "score": 1.0,
+      "total": 5
+    },
+    "severity_weighted_overall": {
+      "passed_weight": 81,
+      "score": 1.0,
+      "total_weight": 81
+    },
     "suite": "seven_sins_v0_1",
     "target": {
       "framework": "llamaindex_memory",
@@ -380,38 +470,48 @@
   {
     "categories": {
       "deletion_behavior": {
-        "passed": 3,
+        "passed": 5,
         "score": 1.0,
-        "total": 3
+        "total": 5
       },
       "retrieval_correctness": {
-        "passed": 4,
-        "score": 1.0,
-        "total": 4
-      },
-      "temporal_update_handling": {
-        "passed": 4,
-        "score": 1.0,
-        "total": 4
-      },
-      "untrusted_source_resistance": {
         "passed": 6,
         "score": 1.0,
         "total": 6
       },
-      "write_correctness": {
-        "passed": 3,
+      "temporal_update_handling": {
+        "passed": 7,
         "score": 1.0,
-        "total": 3
+        "total": 7
+      },
+      "untrusted_source_resistance": {
+        "passed": 10,
+        "score": 1.0,
+        "total": 10
+      },
+      "write_correctness": {
+        "passed": 5,
+        "score": 1.0,
+        "total": 5
       }
     },
     "failure_count": 0,
     "overall": {
-      "passed": 20,
+      "passed": 33,
       "score": 1.0,
-      "total": 20
+      "total": 33
     },
     "run": "supermemory-api-local",
+    "scenario_overall": {
+      "passed": 5,
+      "score": 1.0,
+      "total": 5
+    },
+    "severity_weighted_overall": {
+      "passed_weight": 81,
+      "score": 1.0,
+      "total_weight": 81
+    },
     "suite": "seven_sins_v0_1",
     "target": {
       "framework": "supermemory",
@@ -422,38 +522,48 @@
   {
     "categories": {
       "deletion_behavior": {
-        "passed": 3,
+        "passed": 5,
         "score": 1.0,
-        "total": 3
+        "total": 5
       },
       "retrieval_correctness": {
-        "passed": 4,
-        "score": 1.0,
-        "total": 4
-      },
-      "temporal_update_handling": {
-        "passed": 4,
-        "score": 1.0,
-        "total": 4
-      },
-      "untrusted_source_resistance": {
         "passed": 6,
         "score": 1.0,
         "total": 6
       },
-      "write_correctness": {
-        "passed": 3,
+      "temporal_update_handling": {
+        "passed": 7,
         "score": 1.0,
-        "total": 3
+        "total": 7
+      },
+      "untrusted_source_resistance": {
+        "passed": 10,
+        "score": 1.0,
+        "total": 10
+      },
+      "write_correctness": {
+        "passed": 5,
+        "score": 1.0,
+        "total": 5
       }
     },
     "failure_count": 0,
     "overall": {
-      "passed": 20,
+      "passed": 33,
       "score": 1.0,
-      "total": 20
+      "total": 33
     },
     "run": "zep-cloud-local",
+    "scenario_overall": {
+      "passed": 5,
+      "score": 1.0,
+      "total": 5
+    },
+    "severity_weighted_overall": {
+      "passed_weight": 81,
+      "score": 1.0,
+      "total_weight": 81
+    },
     "suite": "seven_sins_v0_1",
     "target": {
       "framework": "zep",
@@ -465,37 +575,47 @@
     "categories": {
       "deletion_behavior": {
         "passed": 3,
-        "score": 1.0,
-        "total": 3
+        "score": 0.6,
+        "total": 5
       },
       "retrieval_correctness": {
-        "passed": 4,
+        "passed": 6,
         "score": 1.0,
-        "total": 4
-      },
-      "temporal_update_handling": {
-        "passed": 4,
-        "score": 1.0,
-        "total": 4
-      },
-      "untrusted_source_resistance": {
-        "passed": 5,
-        "score": 0.8333,
         "total": 6
       },
-      "write_correctness": {
-        "passed": 3,
+      "temporal_update_handling": {
+        "passed": 7,
         "score": 1.0,
-        "total": 3
+        "total": 7
+      },
+      "untrusted_source_resistance": {
+        "passed": 9,
+        "score": 0.9,
+        "total": 10
+      },
+      "write_correctness": {
+        "passed": 5,
+        "score": 1.0,
+        "total": 5
       }
     },
-    "failure_count": 1,
+    "failure_count": 3,
     "overall": {
-      "passed": 19,
-      "score": 0.95,
-      "total": 20
+      "passed": 30,
+      "score": 0.9091,
+      "total": 33
     },
     "run": "autogen-mem0-local",
+    "scenario_overall": {
+      "passed": 3,
+      "score": 0.6,
+      "total": 5
+    },
+    "severity_weighted_overall": {
+      "passed_weight": 72,
+      "score": 0.8889,
+      "total_weight": 81
+    },
     "suite": "seven_sins_v0_1",
     "target": {
       "framework": "autogen_mem0memory",
@@ -506,38 +626,48 @@
   {
     "categories": {
       "deletion_behavior": {
-        "passed": 3,
+        "passed": 5,
         "score": 1.0,
-        "total": 3
+        "total": 5
       },
       "retrieval_correctness": {
-        "passed": 4,
-        "score": 1.0,
-        "total": 4
-      },
-      "temporal_update_handling": {
-        "passed": 4,
-        "score": 1.0,
-        "total": 4
-      },
-      "untrusted_source_resistance": {
-        "passed": 6,
-        "score": 1.0,
+        "passed": 5,
+        "score": 0.8333,
         "total": 6
       },
+      "temporal_update_handling": {
+        "passed": 7,
+        "score": 1.0,
+        "total": 7
+      },
+      "untrusted_source_resistance": {
+        "passed": 9,
+        "score": 0.9,
+        "total": 10
+      },
       "write_correctness": {
-        "passed": 2,
-        "score": 0.6667,
-        "total": 3
+        "passed": 5,
+        "score": 1.0,
+        "total": 5
       }
     },
-    "failure_count": 1,
+    "failure_count": 2,
     "overall": {
-      "passed": 19,
-      "score": 0.95,
-      "total": 20
+      "passed": 31,
+      "score": 0.9394,
+      "total": 33
     },
     "run": "letta-local",
+    "scenario_overall": {
+      "passed": 3,
+      "score": 0.6,
+      "total": 5
+    },
+    "severity_weighted_overall": {
+      "passed_weight": 76,
+      "score": 0.9383,
+      "total_weight": 81
+    },
     "suite": "seven_sins_v0_1",
     "target": {
       "framework": "letta",
@@ -549,37 +679,47 @@
     "categories": {
       "deletion_behavior": {
         "passed": 3,
-        "score": 1.0,
-        "total": 3
+        "score": 0.6,
+        "total": 5
       },
       "retrieval_correctness": {
-        "passed": 4,
+        "passed": 6,
         "score": 1.0,
-        "total": 4
-      },
-      "temporal_update_handling": {
-        "passed": 4,
-        "score": 1.0,
-        "total": 4
-      },
-      "untrusted_source_resistance": {
-        "passed": 5,
-        "score": 0.8333,
         "total": 6
       },
-      "write_correctness": {
-        "passed": 3,
+      "temporal_update_handling": {
+        "passed": 7,
         "score": 1.0,
-        "total": 3
+        "total": 7
+      },
+      "untrusted_source_resistance": {
+        "passed": 9,
+        "score": 0.9,
+        "total": 10
+      },
+      "write_correctness": {
+        "passed": 5,
+        "score": 1.0,
+        "total": 5
       }
     },
-    "failure_count": 1,
+    "failure_count": 3,
     "overall": {
-      "passed": 19,
-      "score": 0.95,
-      "total": 20
+      "passed": 30,
+      "score": 0.9091,
+      "total": 33
     },
     "run": "mem0-local",
+    "scenario_overall": {
+      "passed": 3,
+      "score": 0.6,
+      "total": 5
+    },
+    "severity_weighted_overall": {
+      "passed_weight": 72,
+      "score": 0.8889,
+      "total_weight": 81
+    },
     "suite": "seven_sins_v0_1",
     "target": {
       "framework": "mem0",
@@ -590,38 +730,48 @@
   {
     "categories": {
       "deletion_behavior": {
-        "passed": 3,
+        "passed": 5,
         "score": 1.0,
-        "total": 3
+        "total": 5
       },
       "retrieval_correctness": {
-        "passed": 4,
+        "passed": 6,
         "score": 1.0,
-        "total": 4
-      },
-      "temporal_update_handling": {
-        "passed": 3,
-        "score": 0.75,
-        "total": 4
-      },
-      "untrusted_source_resistance": {
-        "passed": 4,
-        "score": 0.6667,
         "total": 6
       },
+      "temporal_update_handling": {
+        "passed": 6,
+        "score": 0.8571,
+        "total": 7
+      },
+      "untrusted_source_resistance": {
+        "passed": 8,
+        "score": 0.8,
+        "total": 10
+      },
       "write_correctness": {
-        "passed": 3,
+        "passed": 5,
         "score": 1.0,
-        "total": 3
+        "total": 5
       }
     },
     "failure_count": 3,
     "overall": {
-      "passed": 17,
-      "score": 0.85,
-      "total": 20
+      "passed": 30,
+      "score": 0.9091,
+      "total": 33
     },
     "run": "openai-agents-sessions-local",
+    "scenario_overall": {
+      "passed": 3,
+      "score": 0.6,
+      "total": 5
+    },
+    "severity_weighted_overall": {
+      "passed_weight": 73,
+      "score": 0.9012,
+      "total_weight": 81
+    },
     "suite": "seven_sins_v0_1",
     "target": {
       "framework": "openai_agents_sdk_sessions",
@@ -632,38 +782,48 @@
   {
     "categories": {
       "deletion_behavior": {
-        "passed": 3,
+        "passed": 5,
         "score": 1.0,
-        "total": 3
+        "total": 5
       },
       "retrieval_correctness": {
-        "passed": 2,
+        "passed": 3,
         "score": 0.5,
-        "total": 4
-      },
-      "temporal_update_handling": {
-        "passed": 2,
-        "score": 0.5,
-        "total": 4
-      },
-      "untrusted_source_resistance": {
-        "passed": 5,
-        "score": 0.8333,
         "total": 6
       },
+      "temporal_update_handling": {
+        "passed": 5,
+        "score": 0.7143,
+        "total": 7
+      },
+      "untrusted_source_resistance": {
+        "passed": 7,
+        "score": 0.7,
+        "total": 10
+      },
       "write_correctness": {
-        "passed": 2,
-        "score": 0.6667,
-        "total": 3
+        "passed": 4,
+        "score": 0.8,
+        "total": 5
       }
     },
-    "failure_count": 6,
+    "failure_count": 9,
     "overall": {
-      "passed": 14,
-      "score": 0.7,
-      "total": 20
+      "passed": 24,
+      "score": 0.7273,
+      "total": 33
     },
     "run": "graphiti-neo4j-local",
+    "scenario_overall": {
+      "passed": 1,
+      "score": 0.2,
+      "total": 5
+    },
+    "severity_weighted_overall": {
+      "passed_weight": 60,
+      "score": 0.7407,
+      "total_weight": 81
+    },
     "suite": "seven_sins_v0_1",
     "target": {
       "framework": "graphiti",

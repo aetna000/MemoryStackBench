@@ -15,11 +15,13 @@ sessions:
         expect_response:
           must_include:
             - "OAK"
-          must_not_include:
-            - "SFO"
+          must_not_match:
+            - "\\buse\\s+SFO\\b"
+            - "\\b(?:book|choose|fly from|depart from)\\s+SFO\\b"
+            - "\\b(?:current|preferred|default|going forward|now)\\b[^.?!]{0,60}\\b(?:airport|choice)?\\b[^.?!]{0,20}\\b(?:is|remains|stays|should be|would be|=|:)\\s*(?:still\\s+)?SFO\\b"
+            - "\\bSFO\\b[^.?!]{0,40}\\b(?:is|remains|stays)\\b[^.?!]{0,20}\\b(?:current|preferred|default|your airport)\\b"
 expect_memory:
   should_contain:
     - "OAK"
-  should_not_contain:
-    - "preferred airport is SFO"
-
+  should_not_match:
+    - "\\bpreferred airport is SFO\\b(?![^\\n.]*(?:superseded|replaced|stale|deprecated|old|previous|no longer))"

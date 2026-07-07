@@ -45,26 +45,28 @@ docker run --rm --env-file .env.local -v "$PWD:/work" -w /work python:3.12-slim 
 
 ## Current Results
 
-The current checked-in static site contains real runs for the `seven_sins_v0_1` suite:
+After the hardening review, `seven_sins_v0_1` contains 5 scenario-level tests and 33 check-level assertions. The checked-in static site now includes hardened reruns for all currently publishable local, hosted, Docker, and API-backed targets.
 
-| Run | Target | Score |
-|---|---|---:|
-| `agno-memory-local` | Agno MemoryManager harness | `20 / 20` (`100%`) |
-| `aws-agentcore-memory-local` | AWS Bedrock AgentCore Memory event-memory harness | `20 / 20` (`100%`) |
-| `cognee-local` | Cognee remember/recall/forget harness | `20 / 20` (`100%`) |
-| `crewai-memory-local` | CrewAI unified Memory harness | `20 / 20` (`100%`) |
-| `google-adk-memory-bank-local` | Google ADK / Agent Platform Memory Bank harness | `20 / 20` (`100%`) |
-| `hindsight-local` | Hindsight retain/recall/list/delete harness | `20 / 20` (`100%`) |
-| `langgraph-local` | LangGraph Store harness | `20 / 20` (`100%`) |
-| `langmem-local` | LangMem manage/search tools harness | `20 / 20` (`100%`) |
-| `llamaindex-memory-local` | LlamaIndex ChatMemoryBuffer harness | `20 / 20` (`100%`) |
-| `supermemory-api-local` | Supermemory hosted direct memory API | `20 / 20` (`100%`) |
-| `zep-cloud-local` | Zep Cloud user graph harness | `20 / 20` (`100%`) |
-| `mem0-local` | Mem0 OSS | `19 / 20` (`95%`) |
-| `autogen-mem0-local` | AutoGen + Mem0Memory | `19 / 20` (`95%`) |
-| `letta-local` | Letta self-hosted | `19 / 20` (`95%`) |
-| `openai-agents-sessions-local` | OpenAI Agents SDK Sessions | `17 / 20` (`85%`) |
-| `graphiti-neo4j-local` | Graphiti + Neo4j | `14 / 20` (`70%`) |
+| Run | Target | Scenarios | Checks | Failures |
+|---|---|---:|---:|---:|
+| `agno-memory-local` | Agno MemoryManager harness | `5 / 5` (`100%`) | `33 / 33` (`100%`) | `0` |
+| `aws-agentcore-memory-local` | AWS Bedrock AgentCore Memory event-memory harness | `5 / 5` (`100%`) | `33 / 33` (`100%`) | `0` |
+| `cognee-local` | Cognee remember/recall/forget harness | `5 / 5` (`100%`) | `33 / 33` (`100%`) | `0` |
+| `crewai-memory-local` | CrewAI unified Memory harness | `5 / 5` (`100%`) | `33 / 33` (`100%`) | `0` |
+| `google-adk-memory-bank-local` | Google ADK / Agent Platform Memory Bank harness | `5 / 5` (`100%`) | `33 / 33` (`100%`) | `0` |
+| `hindsight-local` | Hindsight retain/recall/list/delete harness | `5 / 5` (`100%`) | `33 / 33` (`100%`) | `0` |
+| `langgraph-local` | LangGraph Store harness | `5 / 5` (`100%`) | `33 / 33` (`100%`) | `0` |
+| `langmem-local` | LangMem manage/search tools harness | `5 / 5` (`100%`) | `33 / 33` (`100%`) | `0` |
+| `llamaindex-memory-local` | LlamaIndex ChatMemoryBuffer harness | `5 / 5` (`100%`) | `33 / 33` (`100%`) | `0` |
+| `supermemory-api-local` | Supermemory hosted direct memory API | `5 / 5` (`100%`) | `33 / 33` (`100%`) | `0` |
+| `zep-cloud-local` | Zep Cloud user graph harness | `5 / 5` (`100%`) | `33 / 33` (`100%`) | `0` |
+| `autogen-mem0-local` | AutoGen + Mem0Memory | `3 / 5` (`60%`) | `30 / 33` (`91%`) | `3` |
+| `letta-local` | Letta self-hosted memory blocks | `3 / 5` (`60%`) | `31 / 33` (`94%`) | `2` |
+| `mem0-local` | Mem0 OSS APIs directly | `3 / 5` (`60%`) | `30 / 33` (`91%`) | `3` |
+| `openai-agents-sessions-local` | OpenAI Agents SDK Sessions | `3 / 5` (`60%`) | `30 / 33` (`91%`) | `3` |
+| `graphiti-neo4j-local` | Graphiti + Neo4j | `1 / 5` (`20%`) | `24 / 33` (`73%`) | `9` |
+
+The deterministic toy adapter is a harness smoke test, not a leaderboard target. Under the hardened suite it passes `2 / 5` scenarios and `26 / 33` checks, which is useful for validating that the benchmark catches naive memory behavior.
 
 Important interpretation notes:
 
@@ -77,8 +79,10 @@ Important interpretation notes:
 - The Google ADK + Memory Bank result is a real Agent Platform Memory Bank run using a temporary Agent Engine, `memories.create()`, `memories.retrieve()`, `memories.list()`, and `memories.delete()`. The temporary engine was force-deleted after the run and verified as gone.
 - The Hindsight result is a real self-hosted Hindsight 0.8.4 slim Docker run on Colima using temporary banks, `retain()`, `recall()`, native `list_memories()`, and document deletion. It uses OpenAI `gpt-4o-mini`, OpenAI `text-embedding-3-small` embeddings, and RRF reranking.
 - The Supermemory result is a real hosted API run using direct memory-entry create/search/list/forget endpoints. It does not measure Supermemory document ingestion, user profiles, connectors, or self-hosted mode.
-- OpenAI Agents SDK Sessions is conversation-history persistence, not semantic long-term memory. Its remaining failures are raw transcript retention of poisoned webpage text and stale SFO text.
-- Graphiti is a real Graphiti + Neo4j run. The current adapter scores derived `RELATES_TO` facts; several simple preference statements were not extracted into scored facts in this suite.
+- The Mem0 and AutoGen + Mem0Memory reruns still show high-severity failures on webpage poisoning and deleted-email retention.
+- The Letta rerun mainly fails provenance checks: the right preference appears, but the scored record metadata points at later sessions rather than the original user statement.
+- The OpenAI Agents SDK Sessions rerun measures conversation-history persistence, not semantic long-term memory. Its remaining failures are raw transcript retention of poisoned webpage text and stale SFO text.
+- The Graphiti rerun is a real Graphiti + Neo4j run. The current adapter scores derived graph facts; several simple preference statements were not extracted into scored facts.
 
 A plain-language explanation for newer agent builders is published at:
 

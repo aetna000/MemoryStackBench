@@ -9,6 +9,9 @@ class ResponseExpectation:
     must_include: tuple[str, ...] = ()
     must_include_any: tuple[str, ...] = ()
     must_not_include: tuple[str, ...] = ()
+    must_match: tuple[str, ...] = ()
+    must_match_any: tuple[str, ...] = ()
+    must_not_match: tuple[str, ...] = ()
 
     @classmethod
     def from_dict(cls, raw: dict[str, Any] | None) -> "ResponseExpectation":
@@ -17,6 +20,28 @@ class ResponseExpectation:
             must_include=tuple(raw.get("must_include", ()) or ()),
             must_include_any=tuple(raw.get("must_include_any", ()) or ()),
             must_not_include=tuple(raw.get("must_not_include", ()) or ()),
+            must_match=tuple(raw.get("must_match", ()) or ()),
+            must_match_any=tuple(raw.get("must_match_any", ()) or ()),
+            must_not_match=tuple(raw.get("must_not_match", ()) or ()),
+        )
+
+
+@dataclass(frozen=True)
+class MemoryRecordExpectation:
+    content_contains: str | None = None
+    content_matches: str | None = None
+    fields: dict[str, Any] = field(default_factory=dict)
+
+    @classmethod
+    def from_dict(cls, raw: dict[str, Any]) -> "MemoryRecordExpectation":
+        return cls(
+            content_contains=(
+                None if raw.get("content_contains") is None else str(raw.get("content_contains"))
+            ),
+            content_matches=(
+                None if raw.get("content_matches") is None else str(raw.get("content_matches"))
+            ),
+            fields=dict(raw.get("fields", {}) or {}),
         )
 
 
@@ -24,7 +49,10 @@ class ResponseExpectation:
 class MemoryExpectation:
     should_contain: tuple[str, ...] = ()
     should_not_contain: tuple[str, ...] = ()
+    should_match: tuple[str, ...] = ()
+    should_not_match: tuple[str, ...] = ()
     required_fields: tuple[str, ...] = ()
+    record_checks: tuple[MemoryRecordExpectation, ...] = ()
 
     @classmethod
     def from_dict(cls, raw: dict[str, Any] | None) -> "MemoryExpectation":
@@ -32,7 +60,13 @@ class MemoryExpectation:
         return cls(
             should_contain=tuple(raw.get("should_contain", ()) or ()),
             should_not_contain=tuple(raw.get("should_not_contain", ()) or ()),
+            should_match=tuple(raw.get("should_match", ()) or ()),
+            should_not_match=tuple(raw.get("should_not_match", ()) or ()),
             required_fields=tuple(raw.get("required_fields", ()) or ()),
+            record_checks=tuple(
+                MemoryRecordExpectation.from_dict(item)
+                for item in raw.get("record_checks", ()) or ()
+            ),
         )
 
 
@@ -121,4 +155,3 @@ class CheckResult:
             "turn_index": self.turn_index,
             "message": self.message,
         }
-

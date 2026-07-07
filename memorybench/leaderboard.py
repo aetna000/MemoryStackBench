@@ -79,7 +79,11 @@ def _summary(scorecards: list[dict[str, Any]]) -> list[dict[str, Any]]:
     rows = []
     for scorecard in sorted(
         scorecards,
-        key=lambda item: item.get("overall", {}).get("score") or 0,
+        key=lambda item: (
+            item.get("scenario_overall", {}).get("score")
+            if item.get("scenario_overall", {}).get("score") is not None
+            else item.get("overall", {}).get("score") or 0
+        ),
         reverse=True,
     ):
         rows.append(
@@ -88,6 +92,8 @@ def _summary(scorecards: list[dict[str, Any]]) -> list[dict[str, Any]]:
                 "target": scorecard.get("target", {}),
                 "suite": scorecard.get("suite"),
                 "overall": scorecard.get("overall"),
+                "scenario_overall": scorecard.get("scenario_overall"),
+                "severity_weighted_overall": scorecard.get("severity_weighted_overall"),
                 "categories": scorecard.get("categories"),
                 "failure_count": len(scorecard.get("failures", [])),
             }
@@ -122,7 +128,8 @@ def _target_summary(
                 "required_env": required_env,
                 "missing_env": missing_env,
                 "blockers": blockers,
-                "score": None if scorecard is None else scorecard.get("overall", {}).get("score"),
+                "score": None if scorecard is None else _headline_score(scorecard),
+                "check_score": None if scorecard is None else scorecard.get("overall", {}).get("score"),
                 "run": None if scorecard is None else scorecard.get("_run_dir"),
             }
         )
@@ -165,7 +172,7 @@ def _html(scorecards: list[dict[str, Any]], targets: list[dict[str, Any]], run_p
         _status_row(row, run_prefix) for row in _target_summary(targets, scorecards)
     )
     if not rows:
-        table_rows = "<tr><td colspan=\"7\">No scorecards found.</td></tr>"
+        table_rows = "<tr><td colspan=\"8\">No scorecards found.</td></tr>"
         cards = "<p>No runs found yet.</p>"
     if not status_rows:
         status_rows = "<tr><td colspan=\"7\">No target manifests found.</td></tr>"
@@ -324,7 +331,7 @@ def _html(scorecards: list[dict[str, Any]], targets: list[dict[str, Any]], run_p
       <h2>Ranked Runs</h2>
       <table>
         <thead>
-          <tr><th>#</th><th>Run</th><th>Target</th><th>Framework</th><th>Suite</th><th>Score</th><th>Failures</th></tr>
+          <tr><th>#</th><th>Run</th><th>Target</th><th>Framework</th><th>Suite</th><th>Scenarios</th><th>Checks</th><th>Failures</th></tr>
         </thead>
         <tbody>{table_rows}</tbody>
       </table>
@@ -353,6 +360,8 @@ def _html(scorecards: list[dict[str, Any]], targets: list[dict[str, Any]], run_p
 def _table_row(row: dict[str, Any], rank: int, run_prefix: str) -> str:
     target = row.get("target", {})
     run = str(row.get("run"))
+    scenario_score = row.get("scenario_overall") or {}
+    check_score = row.get("overall") or {}
     return (
         "<tr>"
         f"<td>{rank}</td>"
@@ -360,7 +369,8 @@ def _table_row(row: dict[str, Any], rank: int, run_prefix: str) -> str:
         f"<td>{html.escape(str(target.get('id')))}</td>"
         f"<td>{html.escape(str(target.get('framework')))}</td>"
         f"<td>{html.escape(str(row.get('suite')))}</td>"
-        f"<td class=\"score\">{_pct(row.get('overall', {}).get('score'))}</td>"
+        f"<td class=\"score\">{_score_text(scenario_score)}</td>"
+        f"<td class=\"score\">{_score_text(check_score)}</td>"
         f"<td>{row.get('failure_count')}</td>"
         "</tr>"
     )
@@ -369,6 +379,8 @@ def _table_row(row: dict[str, Any], rank: int, run_prefix: str) -> str:
 def _target_card(row: dict[str, Any]) -> str:
     target = row.get("target", {})
     categories = row.get("categories") or {}
+    scenario_score = row.get("scenario_overall") or {}
+    check_score = row.get("overall") or {}
     category_rows = "\n".join(
         f"<div class=\"cat\"><span>{html.escape(name)}</span><strong>{_pct(value.get('score'))}</strong></div>"
         f"<div class=\"bar\"><span style=\"width: {_width(value.get('score'))}%\"></span></div>"
@@ -376,8 +388,8 @@ def _target_card(row: dict[str, Any]) -> str:
     )
     return f"""    <article class="card">
       <h3>{html.escape(str(target.get('id')))}</h3>
-      <div class="score">Overall {_pct(row.get('overall', {}).get('score'))}</div>
-      <div class="bar"><span style="width: {_width(row.get('overall', {}).get('score'))}%"></span></div>
+      <div class="score">Scenarios {_score_text(scenario_score)} · Checks {_score_text(check_score)}</div>
+      <div class="bar"><span style="width: {_width(scenario_score.get('score'))}%"></span></div>
       {category_rows}
     </article>"""
 
@@ -415,7 +427,7 @@ def _overall_chart(rows: list[dict[str, Any]]) -> str:
     bars = []
     for index, row in enumerate(rows):
         x = 70 + index * 130
-        score = row.get("overall", {}).get("score") or 0
+        score = _headline_score(row) or 0
         bar_height = score * max_bar_height
         y = baseline - bar_height
         label = str(row.get("target", {}).get("framework") or row.get("run"))
@@ -447,3 +459,20 @@ def _width(score: float | None) -> int:
     if score is None:
         return 0
     return max(0, min(100, round(score * 100)))
+
+
+def _score_text(score: dict[str, Any] | None) -> str:
+    if not score or score.get("score") is None:
+        return "N/A"
+    passed = score.get("passed")
+    total = score.get("total")
+    if passed is not None and total is not None:
+        return f"{html.escape(str(passed))}/{html.escape(str(total))} ({_pct(score.get('score'))})"
+    return _pct(score.get("score"))
+
+
+def _headline_score(row: dict[str, Any]) -> float | None:
+    scenario_score = (row.get("scenario_overall") or {}).get("score")
+    if scenario_score is not None:
+        return scenario_score
+    return (row.get("overall") or {}).get("score")

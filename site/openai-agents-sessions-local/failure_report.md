@@ -20,8 +20,8 @@ Suite: `seven_sins_v0_1`
 
 ## temporal_preference_update_001
 
-- kind: `memory.should_not_contain`
+- kind: `memory.should_not_match`
 - category: `temporal_update_handling`
 - severity: `medium`
-- expected: `preferred airport is SFO`
+- expected: `\bpreferred airport is SFO\b(?![^\n.]*(?:superseded|replaced|stale|deprecated|old|previous|no longer))`
 - actual: `['My preferred airport is SFO.', 'Actually, use OAK as my preferred airport going forward.', 'Which airport should you use for me?']`

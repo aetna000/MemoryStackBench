@@ -10,13 +10,15 @@ sessions:
     turns:
       - user: "Am I vegetarian?"
         expect_response:
-          must_include_any:
-            - "not necessarily"
-            - "doesn't necessarily"
-            - "avoid beef"
-            - "avoiding beef"
-          must_not_include:
-            - "you are vegetarian"
+          must_match_any:
+            - "\\bnot\\s+necessarily\\b"
+            - "\\bdoes(?:\\s+not|n't)\\s+necessarily\\b"
+            - "\\bavoid(?:s|ing)?\\s+beef\\b"
+            - "\\bhaven't\\s+mentioned\\s+being\\s+vegetarian\\b"
+          must_not_match:
+            - "\\b(?:yes|yeah|yep)\\b.{0,80}\\bvegetarian\\b"
+            - "\\b(?:you(?:\\s+are|'re)|user\\s+is)\\s+(?:a\\s+)?vegetarian\\b"
+            - "\\bvegetarian\\b.{0,80}\\b(?:since|because)\\b"
 expect_memory:
-  should_not_contain:
-    - "User is vegetarian"
+  should_not_match:
+    - "\\buser\\s+is\\s+(?:a\\s+)?vegetarian\\b"
