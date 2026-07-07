@@ -20,7 +20,7 @@ Status meanings:
 | 6 | LangMem | `targets/langmem.yaml` | implemented_store_harness | manage/search tools over LangGraph store |
 | 7 | Cognee | `targets/cognee.yaml` | implemented_store_harness | temporary datasets, remember, graph recall, forget |
 | 8 | LlamaIndex Memory | `targets/llamaindex_memory.yaml` | implemented_store_harness | ChatMemoryBuffer with explicit benchmark policy |
-| 9 | CrewAI Memory | `targets/crewai_memory.yaml` | pending_adapter | built-in crew memory and persistence path |
+| 9 | CrewAI Memory | `targets/crewai_memory.yaml` | implemented_store_harness | unified Memory API, LanceDB storage, list/forget audit path |
 | 10 | Agno Memory | `targets/agno_memory.yaml` | implemented_store_harness | MemoryManager with InMemoryDb |
 | 11 | AutoGen + Mem0Memory | `targets/autogen_mem0memory.yaml` | implemented | `autogen_ext.memory.mem0.Mem0Memory` |
 | 12 | Google ADK + Memory Bank | `targets/google_adk_memory_bank.yaml` | pending_adapter | ADK memory service and Vertex/Agent Platform Memory Bank |
@@ -50,7 +50,7 @@ The lowest-risk implementation order is:
 10. LlamaIndex ChatMemoryBuffer harness: implemented and scored.
 11. Agno MemoryManager harness: implemented and scored.
 12. Cognee remember/recall/forget harness: implemented and scored with temporary datasets and OpenAI-backed graph recall.
-13. CrewAI Memory: current 1.x package does not resolve on this macOS/Python 3.12 host because its lancedb pin is unavailable; use a Linux runner or choose an older explicit pin.
+13. CrewAI Memory: implemented and scored with the current 1.15.1 pin in a Linux/Colima runner because the host macOS/Rosetta Python cannot resolve the required LanceDB wheel.
 14. Zep self-hosted/native automatic extraction split: separate from the current cloud graph harness.
 15. Supermemory hosted direct memory-entry API: implemented and scored with temporary container cleanup.
 16. Hindsight official-client retain/recall harness: implemented and scored on self-hosted slim Docker.
@@ -59,7 +59,7 @@ The lowest-risk implementation order is:
 
 ## Current Local Blockers
 
-- CrewAI: `crewai==1.15.1` does not resolve locally because `lancedb>=0.29.2,<0.30.1` has no matching distribution for this host. `crewai==0.203.2` dry-runs, but that would be an older benchmark pin.
+- CrewAI: host-native installation remains blocked on this macOS/Rosetta Python because `lancedb>=0.29.2,<0.30.1` has no matching distribution there. The scored target is pinned to `crewai==1.15.1` and runs in Linux/Colima instead of downgrading to an older CrewAI release.
 
 ## Sources Used For Initial Registry
 

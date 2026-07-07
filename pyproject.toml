@@ -55,6 +55,9 @@ cognee = [
 hindsight = [
   "hindsight-client==0.8.4",
 ]
+crewai = [
+  "crewai==1.15.1",
+]
 
 [project.scripts]
 memorybench = "memorybench.cli:main"

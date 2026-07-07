@@ -54,19 +54,17 @@
     "target": "cognee_local_pinned"
   },
   {
-    "blockers": [
-      "crewai==1.15.1 does not resolve on this macOS/Python 3.12 host because lancedb>=0.29.2,<0.30.1 has no matching distribution.",
-      "crewai==0.203.2 dry-runs locally, but that would be an older benchmark pin rather than the current 1.x target.",
-      "adapter pending"
-    ],
+    "blockers": [],
     "framework": "crewai_memory",
     "manifest": "crewai_memory.yaml",
     "missing_env": [],
-    "required_env": [],
-    "run": null,
-    "runtime": "local_python",
-    "score": null,
-    "status": "pending_adapter",
+    "required_env": [
+      "OPENAI_API_KEY"
+    ],
+    "run": "crewai-memory-local",
+    "runtime": "linux_container",
+    "score": 1.0,
+    "status": "implemented_store_harness",
     "target": "crewai_memory_pinned"
   },
   {
