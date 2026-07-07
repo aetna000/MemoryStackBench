@@ -20,6 +20,7 @@ EXPECTED_TARGETS = {
     "openai_agents_sdk_sessions.yaml",
     "supermemory.yaml",
     "hindsight.yaml",
+    "tencentdb_agent_memory.yaml",
 }
 
 
@@ -39,4 +40,3 @@ def test_target_manifests_have_required_fields() -> None:
         assert manifest["mode"]
         assert manifest["adapter"]["module"]
         assert manifest["adapter"]["class"]
-

@@ -21,7 +21,7 @@
     "required_env": [],
     "run": "autogen-mem0-local",
     "runtime": "local_python",
-    "score": 0.6,
+    "score": 0.9091,
     "status": "implemented",
     "target": "autogen_mem0memory_pinned"
   },
@@ -100,7 +100,7 @@
     ],
     "run": "graphiti-neo4j-local",
     "runtime": "docker_compose",
-    "score": 0.2,
+    "score": 0.7273,
     "status": "implemented",
     "target": "graphiti_neo4j_pinned"
   },
@@ -156,7 +156,7 @@
     ],
     "run": "letta-local",
     "runtime": "docker_compose",
-    "score": 0.6,
+    "score": 0.9394,
     "status": "implemented",
     "target": "letta_self_hosted_pinned"
   },
@@ -182,7 +182,7 @@
     "required_env": [],
     "run": "mem0-local",
     "runtime": "local_python",
-    "score": 0.6,
+    "score": 0.9091,
     "status": "implemented",
     "target": "mem0_open_source_pinned"
   },
@@ -197,7 +197,7 @@
     ],
     "run": "openai-agents-sessions-local",
     "runtime": "local_python",
-    "score": 0.6,
+    "score": 0.9091,
     "status": "implemented",
     "target": "openai_agents_sdk_sessions_pinned"
   },
@@ -215,6 +215,21 @@
     "score": 1.0,
     "status": "implemented",
     "target": "supermemory_api_pinned"
+  },
+  {
+    "blockers": [],
+    "check_score": 0.7879,
+    "framework": "tencentdb-agent-memory",
+    "manifest": "tencentdb_agent_memory.yaml",
+    "missing_env": [],
+    "required_env": [
+      "OPENAI_API_KEY"
+    ],
+    "run": "tencentdb-agent-memory-local",
+    "runtime": "local_node_gateway",
+    "score": 0.7879,
+    "status": "implemented",
+    "target": "tencentdb_agent_memory_pinned"
   },
   {
     "blockers": [],

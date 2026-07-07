@@ -8,7 +8,7 @@ The v0 repository is intentionally small:
 - a common `MemoryStackAdapter` interface
 - a runner that records transcripts, memory snapshots, checks, retrieval logs, and scorecards
 - a deterministic toy adapter so the harness can be tested without external services
-- manifests for the full initial 16-target memory stack registry
+- manifests for the full initial 17-target memory stack registry
 - a static report generator for GitHub Pages
 
 ## Quickstart: Real Local Runs
@@ -47,24 +47,25 @@ docker run --rm --env-file .env.local -v "$PWD:/work" -w /work python:3.12-slim 
 
 After the hardening review, `seven_sins_v0_1` contains 5 scenario-level tests and 33 check-level assertions. The checked-in static site now includes hardened reruns for all currently publishable local, hosted, Docker, and API-backed targets.
 
-| Run | Target | Scenarios | Checks | Failures |
+| Run | Target | Checks | Scenarios | Failures |
 |---|---|---:|---:|---:|
-| `agno-memory-local` | Agno MemoryManager harness | `5 / 5` (`100%`) | `33 / 33` (`100%`) | `0` |
-| `aws-agentcore-memory-local` | AWS Bedrock AgentCore Memory event-memory harness | `5 / 5` (`100%`) | `33 / 33` (`100%`) | `0` |
-| `cognee-local` | Cognee remember/recall/forget harness | `5 / 5` (`100%`) | `33 / 33` (`100%`) | `0` |
-| `crewai-memory-local` | CrewAI unified Memory harness | `5 / 5` (`100%`) | `33 / 33` (`100%`) | `0` |
-| `google-adk-memory-bank-local` | Google ADK / Agent Platform Memory Bank harness | `5 / 5` (`100%`) | `33 / 33` (`100%`) | `0` |
-| `hindsight-local` | Hindsight retain/recall/list/delete harness | `5 / 5` (`100%`) | `33 / 33` (`100%`) | `0` |
-| `langgraph-local` | LangGraph Store harness | `5 / 5` (`100%`) | `33 / 33` (`100%`) | `0` |
-| `langmem-local` | LangMem manage/search tools harness | `5 / 5` (`100%`) | `33 / 33` (`100%`) | `0` |
-| `llamaindex-memory-local` | LlamaIndex ChatMemoryBuffer harness | `5 / 5` (`100%`) | `33 / 33` (`100%`) | `0` |
-| `supermemory-api-local` | Supermemory hosted direct memory API | `5 / 5` (`100%`) | `33 / 33` (`100%`) | `0` |
-| `zep-cloud-local` | Zep Cloud user graph harness | `5 / 5` (`100%`) | `33 / 33` (`100%`) | `0` |
-| `autogen-mem0-local` | AutoGen + Mem0Memory | `3 / 5` (`60%`) | `30 / 33` (`91%`) | `3` |
-| `letta-local` | Letta self-hosted memory blocks | `3 / 5` (`60%`) | `31 / 33` (`94%`) | `2` |
-| `mem0-local` | Mem0 OSS APIs directly | `3 / 5` (`60%`) | `30 / 33` (`91%`) | `3` |
-| `openai-agents-sessions-local` | OpenAI Agents SDK Sessions | `3 / 5` (`60%`) | `30 / 33` (`91%`) | `3` |
-| `graphiti-neo4j-local` | Graphiti + Neo4j | `1 / 5` (`20%`) | `24 / 33` (`73%`) | `9` |
+| `agno-memory-local` | Agno MemoryManager harness | `33 / 33` (`100%`) | `5 / 5` (`100%`) | `0` |
+| `aws-agentcore-memory-local` | AWS Bedrock AgentCore Memory event-memory harness | `33 / 33` (`100%`) | `5 / 5` (`100%`) | `0` |
+| `cognee-local` | Cognee remember/recall/forget harness | `33 / 33` (`100%`) | `5 / 5` (`100%`) | `0` |
+| `crewai-memory-local` | CrewAI unified Memory harness | `33 / 33` (`100%`) | `5 / 5` (`100%`) | `0` |
+| `google-adk-memory-bank-local` | Google ADK / Agent Platform Memory Bank harness | `33 / 33` (`100%`) | `5 / 5` (`100%`) | `0` |
+| `hindsight-local` | Hindsight retain/recall/list/delete harness | `33 / 33` (`100%`) | `5 / 5` (`100%`) | `0` |
+| `langgraph-local` | LangGraph Store harness | `33 / 33` (`100%`) | `5 / 5` (`100%`) | `0` |
+| `langmem-local` | LangMem manage/search tools harness | `33 / 33` (`100%`) | `5 / 5` (`100%`) | `0` |
+| `llamaindex-memory-local` | LlamaIndex ChatMemoryBuffer harness | `33 / 33` (`100%`) | `5 / 5` (`100%`) | `0` |
+| `supermemory-api-local` | Supermemory hosted direct memory API | `33 / 33` (`100%`) | `5 / 5` (`100%`) | `0` |
+| `zep-cloud-local` | Zep Cloud user graph harness | `33 / 33` (`100%`) | `5 / 5` (`100%`) | `0` |
+| `letta-local` | Letta self-hosted memory blocks | `31 / 33` (`94%`) | `3 / 5` (`60%`) | `2` |
+| `autogen-mem0-local` | AutoGen + Mem0Memory | `30 / 33` (`91%`) | `3 / 5` (`60%`) | `3` |
+| `mem0-local` | Mem0 OSS APIs directly | `30 / 33` (`91%`) | `3 / 5` (`60%`) | `3` |
+| `openai-agents-sessions-local` | OpenAI Agents SDK Sessions | `30 / 33` (`91%`) | `3 / 5` (`60%`) | `3` |
+| `tencentdb-agent-memory-local` | TencentDB Agent Memory standalone gateway | `26 / 33` (`79%`) | `2 / 5` (`40%`) | `7` |
+| `graphiti-neo4j-local` | Graphiti + Neo4j | `24 / 33` (`73%`) | `1 / 5` (`20%`) | `9` |
 
 The deterministic toy adapter is a harness smoke test, not a leaderboard target. Under the hardened suite it passes `2 / 5` scenarios and `26 / 33` checks, which is useful for validating that the benchmark catches naive memory behavior.
 
@@ -83,6 +84,7 @@ Important interpretation notes:
 - The Letta rerun mainly fails provenance checks: the right preference appears, but the scored record metadata points at later sessions rather than the original user statement.
 - The OpenAI Agents SDK Sessions rerun measures conversation-history persistence, not semantic long-term memory. Its remaining failures are raw transcript retention of poisoned webpage text and stale SFO text.
 - The Graphiti rerun is a real Graphiti + Neo4j run. The current adapter scores derived graph facts; several simple preference statements were not extracted into scored facts.
+- The TencentDB Agent Memory result is a real local standalone gateway run using the upstream Node.js package, auto-capture, L1 extraction, keyword recall, native conversation search, and SQLite evidence inspection. The public gateway does not expose a direct record-delete route, so deletion is tested through the user's natural-language forget request. Remaining failures include webpage poisoning, stored webpage poison content, stale/raw SFO retention, and backup email retention after a forget request.
 
 A plain-language explanation for newer agent builders is published at:
 
@@ -143,6 +145,7 @@ The initial benchmark scope covers:
 14. OpenAI Agents SDK Sessions
 15. Supermemory
 16. Hindsight
+17. TencentDB Agent Memory
 
 See [docs/target-registry.md](docs/target-registry.md) for manifests, implementation status, and source links.
 

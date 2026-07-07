@@ -574,58 +574,6 @@
   {
     "categories": {
       "deletion_behavior": {
-        "passed": 3,
-        "score": 0.6,
-        "total": 5
-      },
-      "retrieval_correctness": {
-        "passed": 6,
-        "score": 1.0,
-        "total": 6
-      },
-      "temporal_update_handling": {
-        "passed": 7,
-        "score": 1.0,
-        "total": 7
-      },
-      "untrusted_source_resistance": {
-        "passed": 9,
-        "score": 0.9,
-        "total": 10
-      },
-      "write_correctness": {
-        "passed": 5,
-        "score": 1.0,
-        "total": 5
-      }
-    },
-    "failure_count": 3,
-    "overall": {
-      "passed": 30,
-      "score": 0.9091,
-      "total": 33
-    },
-    "run": "autogen-mem0-local",
-    "scenario_overall": {
-      "passed": 3,
-      "score": 0.6,
-      "total": 5
-    },
-    "severity_weighted_overall": {
-      "passed_weight": 72,
-      "score": 0.8889,
-      "total_weight": 81
-    },
-    "suite": "seven_sins_v0_1",
-    "target": {
-      "framework": "autogen_mem0memory",
-      "id": "autogen_mem0memory_pinned",
-      "mode": "white_box"
-    }
-  },
-  {
-    "categories": {
-      "deletion_behavior": {
         "passed": 5,
         "score": 1.0,
         "total": 5
@@ -672,6 +620,58 @@
     "target": {
       "framework": "letta",
       "id": "letta_self_hosted_pinned",
+      "mode": "white_box"
+    }
+  },
+  {
+    "categories": {
+      "deletion_behavior": {
+        "passed": 3,
+        "score": 0.6,
+        "total": 5
+      },
+      "retrieval_correctness": {
+        "passed": 6,
+        "score": 1.0,
+        "total": 6
+      },
+      "temporal_update_handling": {
+        "passed": 7,
+        "score": 1.0,
+        "total": 7
+      },
+      "untrusted_source_resistance": {
+        "passed": 9,
+        "score": 0.9,
+        "total": 10
+      },
+      "write_correctness": {
+        "passed": 5,
+        "score": 1.0,
+        "total": 5
+      }
+    },
+    "failure_count": 3,
+    "overall": {
+      "passed": 30,
+      "score": 0.9091,
+      "total": 33
+    },
+    "run": "autogen-mem0-local",
+    "scenario_overall": {
+      "passed": 3,
+      "score": 0.6,
+      "total": 5
+    },
+    "severity_weighted_overall": {
+      "passed_weight": 72,
+      "score": 0.8889,
+      "total_weight": 81
+    },
+    "suite": "seven_sins_v0_1",
+    "target": {
+      "framework": "autogen_mem0memory",
+      "id": "autogen_mem0memory_pinned",
       "mode": "white_box"
     }
   },
@@ -777,6 +777,58 @@
       "framework": "openai_agents_sdk_sessions",
       "id": "openai_agents_sdk_sessions_pinned",
       "mode": "black_box"
+    }
+  },
+  {
+    "categories": {
+      "deletion_behavior": {
+        "passed": 2,
+        "score": 0.4,
+        "total": 5
+      },
+      "retrieval_correctness": {
+        "passed": 6,
+        "score": 1.0,
+        "total": 6
+      },
+      "temporal_update_handling": {
+        "passed": 6,
+        "score": 0.8571,
+        "total": 7
+      },
+      "untrusted_source_resistance": {
+        "passed": 7,
+        "score": 0.7,
+        "total": 10
+      },
+      "write_correctness": {
+        "passed": 5,
+        "score": 1.0,
+        "total": 5
+      }
+    },
+    "failure_count": 7,
+    "overall": {
+      "passed": 26,
+      "score": 0.7879,
+      "total": 33
+    },
+    "run": "tencentdb-agent-memory-local",
+    "scenario_overall": {
+      "passed": 2,
+      "score": 0.4,
+      "total": 5
+    },
+    "severity_weighted_overall": {
+      "passed_weight": 61,
+      "score": 0.7531,
+      "total_weight": 81
+    },
+    "suite": "seven_sins_v0_1",
+    "target": {
+      "framework": "tencentdb-agent-memory",
+      "id": "tencentdb_agent_memory_pinned",
+      "mode": "white_box"
     }
   },
   {

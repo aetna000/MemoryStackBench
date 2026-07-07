@@ -96,3 +96,65 @@ def test_scored_target_does_not_report_missing_env_blocker(tmp_path: Path) -> No
 
     targets = json.loads((out_dir / "targets.json").read_text(encoding="utf-8"))
     assert targets[0]["blockers"] == []
+
+
+def test_leaderboard_ranks_and_reports_check_score_as_headline(tmp_path: Path) -> None:
+    runs_dir = tmp_path / "runs"
+    targets_dir = tmp_path / "targets"
+    targets_dir.mkdir()
+
+    _write_scorecard(
+        runs_dir / "scenario-heavy",
+        target_id="scenario-heavy",
+        check_score={"passed": 20, "total": 33, "score": 0.6061},
+        scenario_score={"passed": 4, "total": 5, "score": 0.8},
+    )
+    _write_scorecard(
+        runs_dir / "check-heavy",
+        target_id="check-heavy",
+        check_score={"passed": 24, "total": 33, "score": 0.7273},
+        scenario_score={"passed": 0, "total": 5, "score": 0.0},
+    )
+    (targets_dir / "scenario-heavy.yaml").write_text(
+        "id: scenario-heavy\nframework: scenario-heavy\nmode: white_box\nstatus: implemented\n",
+        encoding="utf-8",
+    )
+    (targets_dir / "check-heavy.yaml").write_text(
+        "id: check-heavy\nframework: check-heavy\nmode: white_box\nstatus: implemented\n",
+        encoding="utf-8",
+    )
+
+    out_dir = tmp_path / "site" / "leaderboard"
+    write_leaderboard(runs_dir, out_dir, targets_dir)
+
+    leaderboard = json.loads((out_dir / "leaderboard.json").read_text(encoding="utf-8"))
+    targets = json.loads((out_dir / "targets.json").read_text(encoding="utf-8"))
+    html = (out_dir / "index.html").read_text(encoding="utf-8")
+
+    assert leaderboard[0]["run"] == "check-heavy"
+    assert {target["target"]: target["score"] for target in targets}["check-heavy"] == 0.7273
+    assert "<th>Checks</th><th>Scenarios</th>" in html
+    assert "Checks 24/33 (73%) · Scenarios 0/5 (0%)" in html
+
+
+def _write_scorecard(
+    run_dir: Path,
+    *,
+    target_id: str,
+    check_score: dict[str, float],
+    scenario_score: dict[str, float],
+) -> None:
+    run_dir.mkdir(parents=True)
+    (run_dir / "scorecard.json").write_text(
+        json.dumps(
+            {
+                "target": {"id": target_id, "framework": target_id, "mode": "white_box"},
+                "suite": "seven_sins_v0_1",
+                "overall": check_score,
+                "scenario_overall": scenario_score,
+                "categories": {},
+                "failures": [],
+            }
+        ),
+        encoding="utf-8",
+    )

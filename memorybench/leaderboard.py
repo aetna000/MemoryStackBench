@@ -79,11 +79,7 @@ def _summary(scorecards: list[dict[str, Any]]) -> list[dict[str, Any]]:
     rows = []
     for scorecard in sorted(
         scorecards,
-        key=lambda item: (
-            item.get("scenario_overall", {}).get("score")
-            if item.get("scenario_overall", {}).get("score") is not None
-            else item.get("overall", {}).get("score") or 0
-        ),
+        key=lambda item: (item.get("overall") or {}).get("score") or 0,
         reverse=True,
     ):
         rows.append(
@@ -322,16 +318,16 @@ def _html(scorecards: list[dict[str, Any]], targets: list[dict[str, Any]], run_p
       <a href="https://github.com/aetna000/MemoryStackBench">GitHub</a>
     </nav>
     <h1>MemoryStackBench Leaderboard</h1>
-    <p class="meta">Quantitative memory safety scores from local and CI benchmark runs.</p>
+    <p class="meta">Quantitative memory safety check scores from local and CI benchmark runs.</p>
     <section>
-      <h2>Overall Scores</h2>
+      <h2>Overall Check Scores</h2>
       <div class="chart">{chart}</div>
     </section>
     <section>
       <h2>Ranked Runs</h2>
       <table>
         <thead>
-          <tr><th>#</th><th>Run</th><th>Target</th><th>Framework</th><th>Suite</th><th>Scenarios</th><th>Checks</th><th>Failures</th></tr>
+          <tr><th>#</th><th>Run</th><th>Target</th><th>Framework</th><th>Suite</th><th>Checks</th><th>Scenarios</th><th>Failures</th></tr>
         </thead>
         <tbody>{table_rows}</tbody>
       </table>
@@ -369,8 +365,8 @@ def _table_row(row: dict[str, Any], rank: int, run_prefix: str) -> str:
         f"<td>{html.escape(str(target.get('id')))}</td>"
         f"<td>{html.escape(str(target.get('framework')))}</td>"
         f"<td>{html.escape(str(row.get('suite')))}</td>"
-        f"<td class=\"score\">{_score_text(scenario_score)}</td>"
         f"<td class=\"score\">{_score_text(check_score)}</td>"
+        f"<td class=\"score\">{_score_text(scenario_score)}</td>"
         f"<td>{row.get('failure_count')}</td>"
         "</tr>"
     )
@@ -388,8 +384,8 @@ def _target_card(row: dict[str, Any]) -> str:
     )
     return f"""    <article class="card">
       <h3>{html.escape(str(target.get('id')))}</h3>
-      <div class="score">Scenarios {_score_text(scenario_score)} · Checks {_score_text(check_score)}</div>
-      <div class="bar"><span style="width: {_width(scenario_score.get('score'))}%"></span></div>
+      <div class="score">Checks {_score_text(check_score)} · Scenarios {_score_text(scenario_score)}</div>
+      <div class="bar"><span style="width: {_width(check_score.get('score'))}%"></span></div>
       {category_rows}
     </article>"""
 
@@ -437,7 +433,7 @@ def _overall_chart(rows: list[dict[str, Any]]) -> str:
             f'<text x="{x + 36}" y="246" text-anchor="middle">{html.escape(label[:14])}</text>'
         )
     parts = [
-        f'<svg role="img" aria-label="Overall benchmark scores" width="{width}" height="{height}" '
+        f'<svg role="img" aria-label="Overall benchmark check scores" width="{width}" height="{height}" '
         f'viewBox="0 0 {width} {height}">',
         f'<line x1="48" y1="220" x2="{width - 30}" y2="220" stroke="#9ca39a"></line>',
         '<line x1="48" y1="60" x2="48" y2="220" stroke="#9ca39a"></line>',
@@ -472,7 +468,4 @@ def _score_text(score: dict[str, Any] | None) -> str:
 
 
 def _headline_score(row: dict[str, Any]) -> float | None:
-    scenario_score = (row.get("scenario_overall") or {}).get("score")
-    if scenario_score is not None:
-        return scenario_score
     return (row.get("overall") or {}).get("score")

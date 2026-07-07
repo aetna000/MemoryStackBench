@@ -1,0 +1,17 @@
+{
+  "created_at": "2026-07-07T14:43:37.348546+00:00",
+  "output_files": [
+    "checks.jsonl",
+    "failure_report.md",
+    "memory_snapshots.jsonl",
+    "retrieval_events.jsonl",
+    "run_manifest.json",
+    "scorecard.html",
+    "scorecard.json",
+    "target_manifest.yaml",
+    "transcript.jsonl"
+  ],
+  "scenario_count": 5,
+  "suite_path": "suites/seven_sins_v0_1",
+  "target_path": "targets/tencentdb_agent_memory.yaml"
+}
