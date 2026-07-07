@@ -23,7 +23,7 @@ Status meanings:
 | 9 | CrewAI Memory | `targets/crewai_memory.yaml` | implemented_store_harness | unified Memory API, LanceDB storage, list/forget audit path |
 | 10 | Agno Memory | `targets/agno_memory.yaml` | implemented_store_harness | MemoryManager with InMemoryDb |
 | 11 | AutoGen + Mem0Memory | `targets/autogen_mem0memory.yaml` | implemented | `autogen_ext.memory.mem0.Mem0Memory` |
-| 12 | Google ADK + Memory Bank | `targets/google_adk_memory_bank.yaml` | pending_adapter | ADK memory service and Vertex/Agent Platform Memory Bank |
+| 12 | Google ADK + Memory Bank | `targets/google_adk_memory_bank.yaml` | implemented_store_harness | temporary Agent Engine, Memory Bank create/retrieve/list/delete APIs |
 | 13 | AWS Bedrock AgentCore Memory | `targets/aws_bedrock_agentcore_memory.yaml` | implemented_store_harness | managed short-term event memory APIs |
 | 14 | OpenAI Agents SDK Sessions | `targets/openai_agents_sdk_sessions.yaml` | implemented | session persistence across agent runs |
 | 15 | Supermemory | `targets/supermemory.yaml` | implemented | hosted memory entry create, search, list, forget |
@@ -54,7 +54,7 @@ The lowest-risk implementation order is:
 14. Zep self-hosted/native automatic extraction split: separate from the current cloud graph harness.
 15. Supermemory hosted direct memory-entry API: implemented and scored with temporary container cleanup.
 16. Hindsight official-client retain/recall harness: implemented and scored on self-hosted slim Docker.
-17. Google ADK + Memory Bank: cloud credentials and cleanup discipline.
+17. Google ADK + Memory Bank: implemented and scored with temporary Agent Engine cleanup and direct Memory Bank create/retrieve/list/delete APIs.
 18. AWS Bedrock AgentCore Memory long-term extraction strategy: IAM execution role, model access, async activation, and cleanup discipline.
 
 ## Current Local Blockers

@@ -68,28 +68,19 @@
     "target": "crewai_memory_pinned"
   },
   {
-    "blockers": [
-      "missing env: GOOGLE_CLOUD_PROJECT",
-      "missing env: GOOGLE_CLOUD_LOCATION",
-      "missing env: GOOGLE_APPLICATION_CREDENTIALS",
-      "adapter pending"
-    ],
+    "blockers": [],
     "framework": "google_adk_memory_bank",
     "manifest": "google_adk_memory_bank.yaml",
-    "missing_env": [
-      "GOOGLE_CLOUD_PROJECT",
-      "GOOGLE_CLOUD_LOCATION",
-      "GOOGLE_APPLICATION_CREDENTIALS"
-    ],
+    "missing_env": [],
     "required_env": [
       "GOOGLE_CLOUD_PROJECT",
       "GOOGLE_CLOUD_LOCATION",
       "GOOGLE_APPLICATION_CREDENTIALS"
     ],
-    "run": null,
+    "run": "google-adk-memory-bank-local",
     "runtime": "external_service",
-    "score": null,
-    "status": "pending_adapter",
+    "score": 1.0,
+    "status": "implemented_store_harness",
     "target": "google_adk_memory_bank_pinned"
   },
   {

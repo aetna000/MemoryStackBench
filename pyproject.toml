@@ -58,6 +58,9 @@ hindsight = [
 crewai = [
   "crewai==1.15.1",
 ]
+google-adk = [
+  "google-cloud-aiplatform[agent_engines,adk]==1.159.0",
+]
 
 [project.scripts]
 memorybench = "memorybench.cli:main"
