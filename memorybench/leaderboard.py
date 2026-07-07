@@ -133,7 +133,8 @@ def _target_blockers(
     missing_env: list[str],
 ) -> list[str]:
     runtime = target.get("runtime") or {}
-    blockers = [f"missing env: {key}" for key in missing_env]
+    blockers = [str(item) for item in (target.get("blockers") or [])]
+    blockers.extend(f"missing env: {key}" for key in missing_env)
     runtime_type = str(runtime.get("type") or "")
     if "docker" in runtime_type and shutil.which("docker") is None:
         blockers.append("Docker runtime missing")

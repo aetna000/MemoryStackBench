@@ -7,7 +7,7 @@ source_url: https://docs.cognee.ai/
 source:
   type: python_package
   package: cognee
-  version: TODO_PIN_EXACT_VERSION
+  version: 1.2.2
 runtime:
   type: local_or_docker
 model:
@@ -23,4 +23,6 @@ capabilities:
   retrieval_log: partial
   multi_user: true
   multi_tenant: false
-
+blockers:
+  - "cognee==1.2.2 installs on this macOS/Python 3.12 host only with cbor2==5.8.0 pinned as a binary-wheel workaround."
+  - "OpenAI-backed cognee.remember/recall smoke test succeeded after loading .env.local, but a publishable adapter still needs native inspect/delete/rebuild behavior pinned."

@@ -16,7 +16,7 @@ The v0 repository is intentionally small:
 ```bash
 python -m venv .venv
 source .venv/bin/activate
-pip install -e ".[dev,mem0,zep,autogen-mem0,langgraph,openai-agents,graphiti,letta,aws]"
+pip install -e ".[dev,mem0,zep,autogen-mem0,langgraph,llamaindex,langmem,agno,openai-agents,graphiti,letta,aws]"
 export OPENAI_API_KEY="..."
 
 memorybench run \
@@ -42,8 +42,11 @@ The current checked-in static site contains real runs for the `seven_sins_v0_1` 
 
 | Run | Target | Score |
 |---|---|---:|
+| `agno-memory-local` | Agno MemoryManager harness | `20 / 20` (`100%`) |
 | `aws-agentcore-memory-local` | AWS Bedrock AgentCore Memory event-memory harness | `20 / 20` (`100%`) |
 | `langgraph-local` | LangGraph Store harness | `20 / 20` (`100%`) |
+| `langmem-local` | LangMem manage/search tools harness | `20 / 20` (`100%`) |
+| `llamaindex-memory-local` | LlamaIndex ChatMemoryBuffer harness | `20 / 20` (`100%`) |
 | `zep-cloud-local` | Zep Cloud user graph harness | `20 / 20` (`100%`) |
 | `mem0-local` | Mem0 OSS | `19 / 20` (`95%`) |
 | `autogen-mem0-local` | AutoGen + Mem0Memory | `19 / 20` (`95%`) |
@@ -56,6 +59,7 @@ Important interpretation notes:
 - The AWS result is a real AWS Bedrock AgentCore Memory managed-service run using short-term event memory APIs: `create_memory`, `create_event`, `list_events`, and `delete_event`. It is an `implemented_store_harness` result with explicit benchmark write/retrieval/delete policy, not a score for AgentCore's asynchronous long-term semantic extraction strategies.
 - The Zep result is a real Zep Cloud run using temporary users/threads, user graph writes, and graph search. It is an `implemented_store_harness` result with explicit benchmark write/retrieval/delete policy, not a broad measurement of every automatic extraction path in Zep Cloud.
 - The LangGraph result is a store-level harness using `InMemoryStore` plus the benchmark adapter's explicit write/update/delete policy; it is not a built-in semantic memory agent.
+- The LlamaIndex, LangMem, and Agno results are local Python memory/store harnesses using their real memory APIs plus the same explicit benchmark write/update/delete policy for comparability.
 - OpenAI Agents SDK Sessions is conversation-history persistence, not semantic long-term memory. Its remaining failures are raw transcript retention of poisoned webpage text and stale SFO text.
 - Graphiti is a real Graphiti + Neo4j run. The current adapter scores derived `RELATES_TO` facts; several simple preference statements were not extracted into scored facts in this suite.
 
@@ -170,9 +174,9 @@ Commit `site/` for a simple static site, or have CI upload `site/` as a Pages ar
 1. Keep the harness deterministic with the toy adapter and tests.
 2. Run Mem0 locally with the current adapter and pin the exact package version after the first clean run.
 3. Add LangGraph because it can be fully local and makes short-term versus long-term memory scope explicit.
-4. Add LangMem, LlamaIndex Memory, Agno, and AutoGen + Mem0Memory as the next local Python targets.
-5. Add graph/server targets: Graphiti, Cognee, Letta, CrewAI, and Zep.
-6. Add hosted/cloud targets only with strict cleanup: Supermemory, Hindsight, Google ADK Memory Bank, AWS Bedrock AgentCore Memory, and OpenAI Agents SDK Sessions.
+4. Add Cognee and CrewAI with pinned runtime isolation and native inspect/delete behavior.
+5. Add hosted/cloud targets only with strict cleanup: Supermemory, Hindsight, and Google ADK Memory Bank.
+6. Split existing store/session harnesses from automatic-extraction variants where the framework supports both.
 7. Add VM runner isolation after the first framework adapters are producing stable bundles.
 8. Add evidence hashing and Merkle roots once output schemas stop changing.
 

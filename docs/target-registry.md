@@ -16,11 +16,11 @@ Status meanings:
 | 3 | Graphiti | `targets/graphiti.yaml` | implemented | temporal graph episodes, search, provenance |
 | 4 | Letta | `targets/letta.yaml` | implemented | agents, memory blocks, messages, archival memory |
 | 5 | LangGraph | `targets/langgraph.yaml` | implemented_store_harness | store-enabled persistence variant |
-| 6 | LangMem | `targets/langmem.yaml` | pending_adapter | extracted semantic memory over LangGraph store |
+| 6 | LangMem | `targets/langmem.yaml` | implemented_store_harness | manage/search tools over LangGraph store |
 | 7 | Cognee | `targets/cognee.yaml` | pending_adapter | graph/vector memory ingestion and search |
-| 8 | LlamaIndex Memory | `targets/llamaindex_memory.yaml` | pending_adapter | short-term queue and long-term memory blocks |
+| 8 | LlamaIndex Memory | `targets/llamaindex_memory.yaml` | implemented_store_harness | ChatMemoryBuffer with explicit benchmark policy |
 | 9 | CrewAI Memory | `targets/crewai_memory.yaml` | pending_adapter | built-in crew memory and persistence path |
-| 10 | Agno Memory | `targets/agno_memory.yaml` | pending_adapter | automatic user memory with persistent DB |
+| 10 | Agno Memory | `targets/agno_memory.yaml` | implemented_store_harness | MemoryManager with InMemoryDb |
 | 11 | AutoGen + Mem0Memory | `targets/autogen_mem0memory.yaml` | implemented | `autogen_ext.memory.mem0.Mem0Memory` |
 | 12 | Google ADK + Memory Bank | `targets/google_adk_memory_bank.yaml` | pending_adapter | ADK memory service and Vertex/Agent Platform Memory Bank |
 | 13 | AWS Bedrock AgentCore Memory | `targets/aws_bedrock_agentcore_memory.yaml` | implemented_store_harness | managed short-term event memory APIs |
@@ -45,15 +45,22 @@ The lowest-risk implementation order is:
 6. Letta self-hosted: implemented and scored.
 7. AWS Bedrock AgentCore Memory event-memory harness: implemented and scored with temporary resource cleanup.
 8. Zep Cloud user graph harness: implemented and scored with temporary user cleanup.
-9. LangMem: builds naturally on the LangGraph store path.
-10. LlamaIndex Memory: local Python target with inspectable memory classes.
-11. Agno Memory: local persistent DB path.
-12. CrewAI Memory: framework-level wrapper and memory persistence inspection.
-13. Zep self-hosted/native automatic extraction split: separate from the current cloud graph harness.
-14. Supermemory: hosted API target.
-15. Hindsight: local/cloud split after API shape is pinned.
-16. Google ADK + Memory Bank: cloud credentials and cleanup discipline.
-17. AWS Bedrock AgentCore Memory long-term extraction strategy: IAM execution role, model access, async activation, and cleanup discipline.
+9. LangMem manage/search harness: implemented and scored.
+10. LlamaIndex ChatMemoryBuffer harness: implemented and scored.
+11. Agno MemoryManager harness: implemented and scored.
+12. Cognee: package install and OpenAI-backed smoke test succeeded, but the adapter still needs native inspect/delete/rebuild behavior pinned before publishing a score.
+13. CrewAI Memory: current 1.x package does not resolve on this macOS/Python 3.12 host because its lancedb pin is unavailable; use a Linux runner or choose an older explicit pin.
+14. Zep self-hosted/native automatic extraction split: separate from the current cloud graph harness.
+15. Supermemory: hosted API target.
+16. Hindsight: local/cloud split after API shape is pinned.
+17. Google ADK + Memory Bank: cloud credentials and cleanup discipline.
+18. AWS Bedrock AgentCore Memory long-term extraction strategy: IAM execution role, model access, async activation, and cleanup discipline.
+
+## Current Local Blockers
+
+- CrewAI: `crewai==1.15.1` does not resolve locally because `lancedb>=0.29.2,<0.30.1` has no matching distribution for this host. `crewai==0.203.2` dry-runs, but that would be an older benchmark pin.
+- Cognee: `cognee==1.2.2` installs locally with `cbor2==5.8.0`; a real `remember/recall` smoke test works with `OPENAI_API_KEY`, but a publishable adapter still needs native inspection and delete/rebuild semantics pinned.
+- Hindsight: the PyPI `hindsight==0.1.7` package fails to build with `use_2to3 is invalid`; the benchmark needs the official Vectorize Hindsight SDK/API or repository commit.
 
 ## Sources Used For Initial Registry
 

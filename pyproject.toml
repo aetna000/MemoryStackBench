@@ -39,6 +39,15 @@ autogen-mem0 = [
   "autogen-agentchat>=0.7.0",
   "autogen-ext[mem0]>=0.7.0",
 ]
+llamaindex = [
+  "llama-index>=0.14.23",
+]
+langmem = [
+  "langmem>=0.0.30",
+]
+agno = [
+  "agno>=2.6.22",
+]
 
 [project.scripts]
 memorybench = "memorybench.cli:main"

@@ -1,16 +1,14 @@
 [
   {
-    "blockers": [
-      "adapter pending"
-    ],
+    "blockers": [],
     "framework": "agno_memory",
     "manifest": "agno_memory.yaml",
     "missing_env": [],
     "required_env": [],
-    "run": null,
+    "run": "agno-memory-local",
     "runtime": "local_python",
-    "score": null,
-    "status": "pending_adapter",
+    "score": 1.0,
+    "status": "implemented_store_harness",
     "target": "agno_memory_pinned"
   },
   {
@@ -26,10 +24,18 @@
     "target": "autogen_mem0memory_pinned"
   },
   {
-    "blockers": [],
+    "blockers": [
+      "missing env: AWS_REGION",
+      "missing env: AWS_ACCESS_KEY_ID",
+      "missing env: AWS_SECRET_ACCESS_KEY"
+    ],
     "framework": "aws_bedrock_agentcore_memory",
     "manifest": "aws_bedrock_agentcore_memory.yaml",
-    "missing_env": [],
+    "missing_env": [
+      "AWS_REGION",
+      "AWS_ACCESS_KEY_ID",
+      "AWS_SECRET_ACCESS_KEY"
+    ],
     "required_env": [
       "AWS_REGION",
       "AWS_ACCESS_KEY_ID",
@@ -43,6 +49,8 @@
   },
   {
     "blockers": [
+      "cognee==1.2.2 installs on this macOS/Python 3.12 host only with cbor2==5.8.0 pinned as a binary-wheel workaround.",
+      "OpenAI-backed cognee.remember/recall smoke test succeeded after loading .env.local, but a publishable adapter still needs native inspect/delete/rebuild behavior pinned.",
       "adapter pending"
     ],
     "framework": "cognee",
@@ -57,6 +65,8 @@
   },
   {
     "blockers": [
+      "crewai==1.15.1 does not resolve on this macOS/Python 3.12 host because lancedb>=0.29.2,<0.30.1 has no matching distribution.",
+      "crewai==0.203.2 dry-runs locally, but that would be an older benchmark pin rather than the current 1.x target.",
       "adapter pending"
     ],
     "framework": "crewai_memory",
@@ -95,10 +105,14 @@
     "target": "google_adk_memory_bank_pinned"
   },
   {
-    "blockers": [],
+    "blockers": [
+      "missing env: OPENAI_API_KEY"
+    ],
     "framework": "graphiti",
     "manifest": "graphiti.yaml",
-    "missing_env": [],
+    "missing_env": [
+      "OPENAI_API_KEY"
+    ],
     "required_env": [
       "OPENAI_API_KEY"
     ],
@@ -110,6 +124,8 @@
   },
   {
     "blockers": [
+      "PyPI hindsight==0.1.7 fails to build on this host: setup.py uses invalid use_2to3.",
+      "Need the official Vectorize Hindsight SDK/API shape, credentials, or a repository commit before implementing a real adapter.",
       "adapter pending"
     ],
     "framework": "hindsight",
@@ -135,24 +151,26 @@
     "target": "langgraph_persistence_pinned"
   },
   {
-    "blockers": [
-      "adapter pending"
-    ],
+    "blockers": [],
     "framework": "langmem",
     "manifest": "langmem.yaml",
     "missing_env": [],
     "required_env": [],
-    "run": null,
+    "run": "langmem-local",
     "runtime": "local_python",
-    "score": null,
-    "status": "pending_adapter",
+    "score": 1.0,
+    "status": "implemented_store_harness",
     "target": "langmem_pinned"
   },
   {
-    "blockers": [],
+    "blockers": [
+      "missing env: OPENAI_API_KEY"
+    ],
     "framework": "letta",
     "manifest": "letta.yaml",
-    "missing_env": [],
+    "missing_env": [
+      "OPENAI_API_KEY"
+    ],
     "required_env": [
       "OPENAI_API_KEY"
     ],
@@ -163,17 +181,15 @@
     "target": "letta_self_hosted_pinned"
   },
   {
-    "blockers": [
-      "adapter pending"
-    ],
+    "blockers": [],
     "framework": "llamaindex_memory",
     "manifest": "llamaindex_memory.yaml",
     "missing_env": [],
     "required_env": [],
-    "run": null,
+    "run": "llamaindex-memory-local",
     "runtime": "local_python",
-    "score": null,
-    "status": "pending_adapter",
+    "score": 1.0,
+    "status": "implemented_store_harness",
     "target": "llamaindex_memory_pinned"
   },
   {
@@ -189,10 +205,14 @@
     "target": "mem0_open_source_pinned"
   },
   {
-    "blockers": [],
+    "blockers": [
+      "missing env: OPENAI_API_KEY"
+    ],
     "framework": "openai_agents_sdk_sessions",
     "manifest": "openai_agents_sdk_sessions.yaml",
-    "missing_env": [],
+    "missing_env": [
+      "OPENAI_API_KEY"
+    ],
     "required_env": [
       "OPENAI_API_KEY"
     ],
@@ -222,10 +242,14 @@
     "target": "supermemory_api_pinned"
   },
   {
-    "blockers": [],
+    "blockers": [
+      "missing env: ZEP_API_KEY"
+    ],
     "framework": "zep",
     "manifest": "zep.yaml",
-    "missing_env": [],
+    "missing_env": [
+      "ZEP_API_KEY"
+    ],
     "required_env": [
       "ZEP_API_KEY"
     ],
