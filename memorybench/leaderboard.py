@@ -108,7 +108,9 @@ def _target_summary(
         scorecard = score_by_target.get(target.get("id"))
         runtime = target.get("runtime") or {}
         required_env = list(runtime.get("required_env", []))
-        missing_env = [key for key in required_env if not os.environ.get(str(key))]
+        missing_env = [] if scorecard is not None else [
+            key for key in required_env if not os.environ.get(str(key))
+        ]
         blockers = _target_blockers(target, scorecard, missing_env)
         rows.append(
             {

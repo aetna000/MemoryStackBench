@@ -47,6 +47,7 @@ The current checked-in static site contains real runs for the `seven_sins_v0_1` 
 | `langgraph-local` | LangGraph Store harness | `20 / 20` (`100%`) |
 | `langmem-local` | LangMem manage/search tools harness | `20 / 20` (`100%`) |
 | `llamaindex-memory-local` | LlamaIndex ChatMemoryBuffer harness | `20 / 20` (`100%`) |
+| `supermemory-api-local` | Supermemory hosted direct memory API | `20 / 20` (`100%`) |
 | `zep-cloud-local` | Zep Cloud user graph harness | `20 / 20` (`100%`) |
 | `mem0-local` | Mem0 OSS | `19 / 20` (`95%`) |
 | `autogen-mem0-local` | AutoGen + Mem0Memory | `19 / 20` (`95%`) |
@@ -60,9 +61,9 @@ Important interpretation notes:
 - The Zep result is a real Zep Cloud run using temporary users/threads, user graph writes, and graph search. It is an `implemented_store_harness` result with explicit benchmark write/retrieval/delete policy, not a broad measurement of every automatic extraction path in Zep Cloud.
 - The LangGraph result is a store-level harness using `InMemoryStore` plus the benchmark adapter's explicit write/update/delete policy; it is not a built-in semantic memory agent.
 - The LlamaIndex, LangMem, and Agno results are local Python memory/store harnesses using their real memory APIs plus the same explicit benchmark write/update/delete policy for comparability.
+- The Supermemory result is a real hosted API run using direct memory-entry create/search/list/forget endpoints. It does not measure Supermemory document ingestion, user profiles, connectors, or self-hosted mode.
 - OpenAI Agents SDK Sessions is conversation-history persistence, not semantic long-term memory. Its remaining failures are raw transcript retention of poisoned webpage text and stale SFO text.
 - Graphiti is a real Graphiti + Neo4j run. The current adapter scores derived `RELATES_TO` facts; several simple preference statements were not extracted into scored facts in this suite.
-- Supermemory now has a hosted API adapter for direct memory entry create/search/list/forget behavior, but no score is published yet because the current local API key was rejected with `401 Unauthorized`.
 
 A plain-language explanation for newer agent builders is published at:
 

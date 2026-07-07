@@ -51,7 +51,7 @@ The lowest-risk implementation order is:
 12. Cognee: package install and OpenAI-backed smoke test succeeded, but the adapter still needs native inspect/delete/rebuild behavior pinned before publishing a score.
 13. CrewAI Memory: current 1.x package does not resolve on this macOS/Python 3.12 host because its lancedb pin is unavailable; use a Linux runner or choose an older explicit pin.
 14. Zep self-hosted/native automatic extraction split: separate from the current cloud graph harness.
-15. Supermemory: adapter implemented against the hosted direct memory-entry APIs; local run is blocked by API key validation.
+15. Supermemory hosted direct memory-entry API: implemented and scored with temporary container cleanup.
 16. Hindsight: local/cloud split after API shape is pinned.
 17. Google ADK + Memory Bank: cloud credentials and cleanup discipline.
 18. AWS Bedrock AgentCore Memory long-term extraction strategy: IAM execution role, model access, async activation, and cleanup discipline.
@@ -61,7 +61,6 @@ The lowest-risk implementation order is:
 - CrewAI: `crewai==1.15.1` does not resolve locally because `lancedb>=0.29.2,<0.30.1` has no matching distribution for this host. `crewai==0.203.2` dry-runs, but that would be an older benchmark pin.
 - Cognee: `cognee==1.2.2` installs locally with `cbor2==5.8.0`; a real `remember/recall` smoke test works with `OPENAI_API_KEY`, but a publishable adapter still needs native inspection and delete/rebuild semantics pinned.
 - Hindsight: the PyPI `hindsight==0.1.7` package fails to build with `use_2to3 is invalid`; the benchmark needs the official Vectorize Hindsight SDK/API or repository commit.
-- Supermemory: adapter is implemented, but the current local `SUPPERMEMORY_API_KEY` value is rejected by the hosted API with `401 Unauthorized`. A valid `SUPERMEMORY_API_KEY` is needed before publishing a score.
 
 ## Sources Used For Initial Registry
 
