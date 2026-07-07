@@ -32,7 +32,7 @@ jobs:
           cat > hf-space/README.md <<'EOF'
           ---
           title: MemoryStackBench
-          colorFrom: teal
+          colorFrom: green
           colorTo: blue
           sdk: static
           pinned: false
