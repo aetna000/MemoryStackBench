@@ -17,7 +17,7 @@ Status meanings:
 | 4 | Letta | `targets/letta.yaml` | implemented | agents, memory blocks, messages, archival memory |
 | 5 | LangGraph | `targets/langgraph.yaml` | implemented_store_harness | store-enabled persistence variant |
 | 6 | LangMem | `targets/langmem.yaml` | implemented_store_harness | manage/search tools over LangGraph store |
-| 7 | Cognee | `targets/cognee.yaml` | pending_adapter | graph/vector memory ingestion and search |
+| 7 | Cognee | `targets/cognee.yaml` | implemented_store_harness | temporary datasets, remember, graph recall, forget |
 | 8 | LlamaIndex Memory | `targets/llamaindex_memory.yaml` | implemented_store_harness | ChatMemoryBuffer with explicit benchmark policy |
 | 9 | CrewAI Memory | `targets/crewai_memory.yaml` | pending_adapter | built-in crew memory and persistence path |
 | 10 | Agno Memory | `targets/agno_memory.yaml` | implemented_store_harness | MemoryManager with InMemoryDb |
@@ -48,7 +48,7 @@ The lowest-risk implementation order is:
 9. LangMem manage/search harness: implemented and scored.
 10. LlamaIndex ChatMemoryBuffer harness: implemented and scored.
 11. Agno MemoryManager harness: implemented and scored.
-12. Cognee: package install and OpenAI-backed smoke test succeeded, but the adapter still needs native inspect/delete/rebuild behavior pinned before publishing a score.
+12. Cognee remember/recall/forget harness: implemented and scored with temporary datasets and OpenAI-backed graph recall.
 13. CrewAI Memory: current 1.x package does not resolve on this macOS/Python 3.12 host because its lancedb pin is unavailable; use a Linux runner or choose an older explicit pin.
 14. Zep self-hosted/native automatic extraction split: separate from the current cloud graph harness.
 15. Supermemory hosted direct memory-entry API: implemented and scored with temporary container cleanup.
@@ -59,7 +59,6 @@ The lowest-risk implementation order is:
 ## Current Local Blockers
 
 - CrewAI: `crewai==1.15.1` does not resolve locally because `lancedb>=0.29.2,<0.30.1` has no matching distribution for this host. `crewai==0.203.2` dry-runs, but that would be an older benchmark pin.
-- Cognee: `cognee==1.2.2` installs locally with `cbor2==5.8.0`; a real `remember/recall` smoke test works with `OPENAI_API_KEY`, but a publishable adapter still needs native inspection and delete/rebuild semantics pinned.
 - Hindsight: the PyPI `hindsight==0.1.7` package fails to build with `use_2to3 is invalid`; the benchmark needs the official Vectorize Hindsight SDK/API or repository commit.
 
 ## Sources Used For Initial Registry

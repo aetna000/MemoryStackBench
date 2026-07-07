@@ -48,6 +48,10 @@ langmem = [
 agno = [
   "agno>=2.6.22",
 ]
+cognee = [
+  "cbor2==5.8.0",
+  "cognee==1.2.2",
+]
 
 [project.scripts]
 memorybench = "memorybench.cli:main"

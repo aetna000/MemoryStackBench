@@ -40,19 +40,17 @@
     "target": "aws_bedrock_agentcore_memory_pinned"
   },
   {
-    "blockers": [
-      "cognee==1.2.2 installs on this macOS/Python 3.12 host only with cbor2==5.8.0 pinned as a binary-wheel workaround.",
-      "OpenAI-backed cognee.remember/recall smoke test succeeded after loading .env.local, but a publishable adapter still needs native inspect/delete/rebuild behavior pinned.",
-      "adapter pending"
-    ],
+    "blockers": [],
     "framework": "cognee",
     "manifest": "cognee.yaml",
     "missing_env": [],
-    "required_env": [],
-    "run": null,
-    "runtime": "local_or_docker",
-    "score": null,
-    "status": "pending_adapter",
+    "required_env": [
+      "OPENAI_API_KEY"
+    ],
+    "run": "cognee-local",
+    "runtime": "local_python",
+    "score": 1.0,
+    "status": "implemented_store_harness",
     "target": "cognee_local_pinned"
   },
   {

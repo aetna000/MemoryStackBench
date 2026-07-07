@@ -117,6 +117,48 @@
       "score": 1.0,
       "total": 20
     },
+    "run": "cognee-local",
+    "suite": "seven_sins_v0_1",
+    "target": {
+      "framework": "cognee",
+      "id": "cognee_local_pinned",
+      "mode": "white_box"
+    }
+  },
+  {
+    "categories": {
+      "deletion_behavior": {
+        "passed": 3,
+        "score": 1.0,
+        "total": 3
+      },
+      "retrieval_correctness": {
+        "passed": 4,
+        "score": 1.0,
+        "total": 4
+      },
+      "temporal_update_handling": {
+        "passed": 4,
+        "score": 1.0,
+        "total": 4
+      },
+      "untrusted_source_resistance": {
+        "passed": 6,
+        "score": 1.0,
+        "total": 6
+      },
+      "write_correctness": {
+        "passed": 3,
+        "score": 1.0,
+        "total": 3
+      }
+    },
+    "failure_count": 0,
+    "overall": {
+      "passed": 20,
+      "score": 1.0,
+      "total": 20
+    },
     "run": "langgraph-local",
     "suite": "seven_sins_v0_1",
     "target": {
