@@ -146,7 +146,7 @@
     <p class="meta">Quantitative memory safety scores from local and CI benchmark runs.</p>
     <section>
       <h2>Overall Scores</h2>
-      <div class="chart"><svg role="img" aria-label="Overall benchmark scores" width="520" height="280" viewBox="0 0 520 280"><line x1="48" y1="220" x2="490" y2="220" stroke="#9ca39a"></line><line x1="48" y1="60" x2="48" y2="220" stroke="#9ca39a"></line><text x="42" y="66" text-anchor="end">100%</text><text x="42" y="224" text-anchor="end">0%</text><rect x="70" y="74.5" width="72" height="145.5" fill="#0f766e"></rect><text x="106" y="66.5" text-anchor="middle">91%</text><text x="106" y="246" text-anchor="middle">mem0</text><rect x="200" y="81.8" width="72" height="138.2" fill="#0f766e"></rect><text x="236" y="73.8" text-anchor="middle">86%</text><text x="236" y="246" text-anchor="middle">autogen_mem0me</text></svg></div>
+      <div class="chart"><svg role="img" aria-label="Overall benchmark scores" width="900" height="280" viewBox="0 0 900 280"><line x1="48" y1="220" x2="870" y2="220" stroke="#9ca39a"></line><line x1="48" y1="60" x2="48" y2="220" stroke="#9ca39a"></line><text x="42" y="66" text-anchor="end">100%</text><text x="42" y="224" text-anchor="end">0%</text><rect x="70" y="60.0" width="72" height="160.0" fill="#0f766e"></rect><text x="106" y="52.0" text-anchor="middle">100%</text><text x="106" y="246" text-anchor="middle">langgraph</text><rect x="200" y="68.0" width="72" height="152.0" fill="#0f766e"></rect><text x="236" y="60.0" text-anchor="middle">95%</text><text x="236" y="246" text-anchor="middle">autogen_mem0me</text><rect x="330" y="68.0" width="72" height="152.0" fill="#0f766e"></rect><text x="366" y="60.0" text-anchor="middle">95%</text><text x="366" y="246" text-anchor="middle">letta</text><rect x="460" y="68.0" width="72" height="152.0" fill="#0f766e"></rect><text x="496" y="60.0" text-anchor="middle">95%</text><text x="496" y="246" text-anchor="middle">mem0</text><rect x="590" y="84.0" width="72" height="136.0" fill="#0f766e"></rect><text x="626" y="76.0" text-anchor="middle">85%</text><text x="626" y="246" text-anchor="middle">openai_agents_</text><rect x="720" y="108.0" width="72" height="112.0" fill="#0f766e"></rect><text x="756" y="100.0" text-anchor="middle">70%</text><text x="756" y="246" text-anchor="middle">graphiti</text></svg></div>
     </section>
     <section>
       <h2>Ranked Runs</h2>
@@ -154,34 +154,86 @@
         <thead>
           <tr><th>#</th><th>Run</th><th>Target</th><th>Framework</th><th>Suite</th><th>Score</th><th>Failures</th></tr>
         </thead>
-        <tbody><tr><td>1</td><td><a href="../mem0-local/">mem0-local</a></td><td>mem0_open_source_pinned</td><td>mem0</td><td>seven_sins_v0_1</td><td class="score">91%</td><td>2</td></tr>
-<tr><td>2</td><td><a href="../autogen-mem0-local/">autogen-mem0-local</a></td><td>autogen_mem0memory_pinned</td><td>autogen_mem0memory</td><td>seven_sins_v0_1</td><td class="score">86%</td><td>3</td></tr></tbody>
+        <tbody><tr><td>1</td><td><a href="../langgraph-local/">langgraph-local</a></td><td>langgraph_persistence_pinned</td><td>langgraph</td><td>seven_sins_v0_1</td><td class="score">100%</td><td>0</td></tr>
+<tr><td>2</td><td><a href="../autogen-mem0-local/">autogen-mem0-local</a></td><td>autogen_mem0memory_pinned</td><td>autogen_mem0memory</td><td>seven_sins_v0_1</td><td class="score">95%</td><td>1</td></tr>
+<tr><td>3</td><td><a href="../letta-local/">letta-local</a></td><td>letta_self_hosted_pinned</td><td>letta</td><td>seven_sins_v0_1</td><td class="score">95%</td><td>1</td></tr>
+<tr><td>4</td><td><a href="../mem0-local/">mem0-local</a></td><td>mem0_open_source_pinned</td><td>mem0</td><td>seven_sins_v0_1</td><td class="score">95%</td><td>1</td></tr>
+<tr><td>5</td><td><a href="../openai-agents-sessions-local/">openai-agents-sessions-local</a></td><td>openai_agents_sdk_sessions_pinned</td><td>openai_agents_sdk_sessions</td><td>seven_sins_v0_1</td><td class="score">85%</td><td>3</td></tr>
+<tr><td>6</td><td><a href="../graphiti-neo4j-local/">graphiti-neo4j-local</a></td><td>graphiti_neo4j_pinned</td><td>graphiti</td><td>seven_sins_v0_1</td><td class="score">70%</td><td>6</td></tr></tbody>
       </table>
     </section>
     <section>
       <h2>Category Breakdown</h2>
       <div class="cards">
     <article class="card">
-      <h3>mem0_open_source_pinned</h3>
-      <div class="score">Overall 91%</div>
-      <div class="bar"><span style="width: 91%"></span></div>
+      <h3>langgraph_persistence_pinned</h3>
+      <div class="score">Overall 100%</div>
+      <div class="bar"><span style="width: 100%"></span></div>
       <div class="cat"><span>deletion_behavior</span><strong>100%</strong></div><div class="bar"><span style="width: 100%"></span></div>
 <div class="cat"><span>retrieval_correctness</span><strong>100%</strong></div><div class="bar"><span style="width: 100%"></span></div>
 <div class="cat"><span>temporal_update_handling</span><strong>100%</strong></div><div class="bar"><span style="width: 100%"></span></div>
-<div class="cat"><span>untrusted_source_resistance</span><strong>71%</strong></div><div class="bar"><span style="width: 71%"></span></div>
+<div class="cat"><span>untrusted_source_resistance</span><strong>100%</strong></div><div class="bar"><span style="width: 100%"></span></div>
 <div class="cat"><span>write_correctness</span><strong>100%</strong></div><div class="bar"><span style="width: 100%"></span></div>
     </article>
     
 
     <article class="card">
       <h3>autogen_mem0memory_pinned</h3>
-      <div class="score">Overall 86%</div>
-      <div class="bar"><span style="width: 86%"></span></div>
+      <div class="score">Overall 95%</div>
+      <div class="bar"><span style="width: 95%"></span></div>
+      <div class="cat"><span>deletion_behavior</span><strong>100%</strong></div><div class="bar"><span style="width: 100%"></span></div>
+<div class="cat"><span>retrieval_correctness</span><strong>100%</strong></div><div class="bar"><span style="width: 100%"></span></div>
+<div class="cat"><span>temporal_update_handling</span><strong>100%</strong></div><div class="bar"><span style="width: 100%"></span></div>
+<div class="cat"><span>untrusted_source_resistance</span><strong>83%</strong></div><div class="bar"><span style="width: 83%"></span></div>
+<div class="cat"><span>write_correctness</span><strong>100%</strong></div><div class="bar"><span style="width: 100%"></span></div>
+    </article>
+    
+
+    <article class="card">
+      <h3>letta_self_hosted_pinned</h3>
+      <div class="score">Overall 95%</div>
+      <div class="bar"><span style="width: 95%"></span></div>
+      <div class="cat"><span>deletion_behavior</span><strong>100%</strong></div><div class="bar"><span style="width: 100%"></span></div>
+<div class="cat"><span>retrieval_correctness</span><strong>100%</strong></div><div class="bar"><span style="width: 100%"></span></div>
+<div class="cat"><span>temporal_update_handling</span><strong>100%</strong></div><div class="bar"><span style="width: 100%"></span></div>
+<div class="cat"><span>untrusted_source_resistance</span><strong>100%</strong></div><div class="bar"><span style="width: 100%"></span></div>
+<div class="cat"><span>write_correctness</span><strong>67%</strong></div><div class="bar"><span style="width: 67%"></span></div>
+    </article>
+    
+
+    <article class="card">
+      <h3>mem0_open_source_pinned</h3>
+      <div class="score">Overall 95%</div>
+      <div class="bar"><span style="width: 95%"></span></div>
+      <div class="cat"><span>deletion_behavior</span><strong>100%</strong></div><div class="bar"><span style="width: 100%"></span></div>
+<div class="cat"><span>retrieval_correctness</span><strong>100%</strong></div><div class="bar"><span style="width: 100%"></span></div>
+<div class="cat"><span>temporal_update_handling</span><strong>100%</strong></div><div class="bar"><span style="width: 100%"></span></div>
+<div class="cat"><span>untrusted_source_resistance</span><strong>83%</strong></div><div class="bar"><span style="width: 83%"></span></div>
+<div class="cat"><span>write_correctness</span><strong>100%</strong></div><div class="bar"><span style="width: 100%"></span></div>
+    </article>
+    
+
+    <article class="card">
+      <h3>openai_agents_sdk_sessions_pinned</h3>
+      <div class="score">Overall 85%</div>
+      <div class="bar"><span style="width: 85%"></span></div>
       <div class="cat"><span>deletion_behavior</span><strong>100%</strong></div><div class="bar"><span style="width: 100%"></span></div>
 <div class="cat"><span>retrieval_correctness</span><strong>100%</strong></div><div class="bar"><span style="width: 100%"></span></div>
 <div class="cat"><span>temporal_update_handling</span><strong>75%</strong></div><div class="bar"><span style="width: 75%"></span></div>
-<div class="cat"><span>untrusted_source_resistance</span><strong>71%</strong></div><div class="bar"><span style="width: 71%"></span></div>
+<div class="cat"><span>untrusted_source_resistance</span><strong>67%</strong></div><div class="bar"><span style="width: 67%"></span></div>
 <div class="cat"><span>write_correctness</span><strong>100%</strong></div><div class="bar"><span style="width: 100%"></span></div>
+    </article>
+    
+
+    <article class="card">
+      <h3>graphiti_neo4j_pinned</h3>
+      <div class="score">Overall 70%</div>
+      <div class="bar"><span style="width: 70%"></span></div>
+      <div class="cat"><span>deletion_behavior</span><strong>100%</strong></div><div class="bar"><span style="width: 100%"></span></div>
+<div class="cat"><span>retrieval_correctness</span><strong>50%</strong></div><div class="bar"><span style="width: 50%"></span></div>
+<div class="cat"><span>temporal_update_handling</span><strong>50%</strong></div><div class="bar"><span style="width: 50%"></span></div>
+<div class="cat"><span>untrusted_source_resistance</span><strong>83%</strong></div><div class="bar"><span style="width: 83%"></span></div>
+<div class="cat"><span>write_correctness</span><strong>67%</strong></div><div class="bar"><span style="width: 67%"></span></div>
     </article>
     </div>
     </section>
@@ -189,24 +241,24 @@
       <h2>Target Coverage</h2>
       <table>
         <thead>
-          <tr><th>Target</th><th>Framework</th><th>Status</th><th>Runtime</th><th>Score</th><th>Run</th><th>Missing Credentials / Runtime</th></tr>
+          <tr><th>Target</th><th>Framework</th><th>Status</th><th>Runtime</th><th>Score</th><th>Run</th><th>Blockers / Notes</th></tr>
         </thead>
         <tbody><tr><td>agno_memory_pinned</td><td>agno_memory</td><td>pending_adapter</td><td>local_python</td><td class="score">N/A</td><td></td><td><span class="pill">adapter pending</span></td></tr>
-<tr><td>autogen_mem0memory_pinned</td><td>autogen_mem0memory</td><td>implemented</td><td>local_python</td><td class="score">86%</td><td><a href="../autogen-mem0-local/">autogen-mem0-local</a></td><td></td></tr>
-<tr><td>aws_bedrock_agentcore_memory_pinned</td><td>aws_bedrock_agentcore_memory</td><td>pending_adapter</td><td>external_service</td><td class="score">N/A</td><td></td><td><span class="pill">AWS_REGION</span> <span class="pill">AWS_ACCESS_KEY_ID</span> <span class="pill">AWS_SECRET_ACCESS_KEY</span></td></tr>
-<tr><td>cognee_local_pinned</td><td>cognee</td><td>pending_adapter</td><td>local_or_docker</td><td class="score">N/A</td><td></td><td><span class="pill">Docker runtime</span></td></tr>
+<tr><td>autogen_mem0memory_pinned</td><td>autogen_mem0memory</td><td>implemented</td><td>local_python</td><td class="score">95%</td><td><a href="../autogen-mem0-local/">autogen-mem0-local</a></td><td></td></tr>
+<tr><td>aws_bedrock_agentcore_memory_pinned</td><td>aws_bedrock_agentcore_memory</td><td>pending_adapter</td><td>external_service</td><td class="score">N/A</td><td></td><td><span class="pill">missing env: AWS_REGION</span> <span class="pill">missing env: AWS_ACCESS_KEY_ID</span> <span class="pill">missing env: AWS_SECRET_ACCESS_KEY</span> <span class="pill">adapter pending</span></td></tr>
+<tr><td>cognee_local_pinned</td><td>cognee</td><td>pending_adapter</td><td>local_or_docker</td><td class="score">N/A</td><td></td><td><span class="pill">adapter pending</span></td></tr>
 <tr><td>crewai_memory_pinned</td><td>crewai_memory</td><td>pending_adapter</td><td>local_python</td><td class="score">N/A</td><td></td><td><span class="pill">adapter pending</span></td></tr>
-<tr><td>google_adk_memory_bank_pinned</td><td>google_adk_memory_bank</td><td>pending_adapter</td><td>external_service</td><td class="score">N/A</td><td></td><td><span class="pill">GOOGLE_CLOUD_PROJECT</span> <span class="pill">GOOGLE_CLOUD_LOCATION</span> <span class="pill">GOOGLE_APPLICATION_CREDENTIALS</span></td></tr>
-<tr><td>graphiti_neo4j_pinned</td><td>graphiti</td><td>pending_adapter</td><td>docker_compose</td><td class="score">N/A</td><td></td><td><span class="pill">Docker runtime</span></td></tr>
+<tr><td>google_adk_memory_bank_pinned</td><td>google_adk_memory_bank</td><td>pending_adapter</td><td>external_service</td><td class="score">N/A</td><td></td><td><span class="pill">missing env: GOOGLE_CLOUD_PROJECT</span> <span class="pill">missing env: GOOGLE_CLOUD_LOCATION</span> <span class="pill">missing env: GOOGLE_APPLICATION_CREDENTIALS</span> <span class="pill">adapter pending</span></td></tr>
+<tr><td>graphiti_neo4j_pinned</td><td>graphiti</td><td>implemented</td><td>docker_compose</td><td class="score">70%</td><td><a href="../graphiti-neo4j-local/">graphiti-neo4j-local</a></td><td></td></tr>
 <tr><td>hindsight_pinned</td><td>hindsight</td><td>pending_adapter</td><td>local_or_external_service</td><td class="score">N/A</td><td></td><td><span class="pill">adapter pending</span></td></tr>
-<tr><td>langgraph_persistence_pinned</td><td>langgraph</td><td>pending_adapter</td><td>local_python</td><td class="score">N/A</td><td></td><td><span class="pill">adapter pending</span></td></tr>
+<tr><td>langgraph_persistence_pinned</td><td>langgraph</td><td>implemented_store_harness</td><td>local_python</td><td class="score">100%</td><td><a href="../langgraph-local/">langgraph-local</a></td><td></td></tr>
 <tr><td>langmem_pinned</td><td>langmem</td><td>pending_adapter</td><td>local_python</td><td class="score">N/A</td><td></td><td><span class="pill">adapter pending</span></td></tr>
-<tr><td>letta_self_hosted_pinned</td><td>letta</td><td>pending_adapter</td><td>docker_compose</td><td class="score">N/A</td><td></td><td><span class="pill">Docker runtime</span></td></tr>
+<tr><td>letta_self_hosted_pinned</td><td>letta</td><td>implemented</td><td>docker_compose</td><td class="score">95%</td><td><a href="../letta-local/">letta-local</a></td><td></td></tr>
 <tr><td>llamaindex_memory_pinned</td><td>llamaindex_memory</td><td>pending_adapter</td><td>local_python</td><td class="score">N/A</td><td></td><td><span class="pill">adapter pending</span></td></tr>
-<tr><td>mem0_open_source_pinned</td><td>mem0</td><td>implemented</td><td>local_python</td><td class="score">91%</td><td><a href="../mem0-local/">mem0-local</a></td><td></td></tr>
-<tr><td>openai_agents_sdk_sessions_pinned</td><td>openai_agents_sdk_sessions</td><td>pending_adapter</td><td>local_python</td><td class="score">N/A</td><td></td><td><span class="pill">OPENAI_API_KEY</span></td></tr>
-<tr><td>supermemory_api_pinned</td><td>supermemory</td><td>pending_adapter</td><td>external_service</td><td class="score">N/A</td><td></td><td><span class="pill">SUPERMEMORY_API_KEY</span></td></tr>
-<tr><td>zep_cloud_or_self_hosted_pinned</td><td>zep</td><td>pending_adapter</td><td>external_service</td><td class="score">N/A</td><td></td><td><span class="pill">ZEP_API_KEY</span></td></tr></tbody>
+<tr><td>mem0_open_source_pinned</td><td>mem0</td><td>implemented</td><td>local_python</td><td class="score">95%</td><td><a href="../mem0-local/">mem0-local</a></td><td></td></tr>
+<tr><td>openai_agents_sdk_sessions_pinned</td><td>openai_agents_sdk_sessions</td><td>implemented</td><td>local_python</td><td class="score">85%</td><td><a href="../openai-agents-sessions-local/">openai-agents-sessions-local</a></td><td></td></tr>
+<tr><td>supermemory_api_pinned</td><td>supermemory</td><td>pending_adapter</td><td>external_service</td><td class="score">N/A</td><td></td><td><span class="pill">missing env: SUPERMEMORY_API_KEY</span> <span class="pill">adapter pending</span></td></tr>
+<tr><td>zep_cloud_or_self_hosted_pinned</td><td>zep</td><td>pending_adapter</td><td>external_service</td><td class="score">N/A</td><td></td><td><span class="pill">missing env: ZEP_API_KEY</span> <span class="pill">adapter pending</span></td></tr></tbody>
       </table>
     </section>
   </main>

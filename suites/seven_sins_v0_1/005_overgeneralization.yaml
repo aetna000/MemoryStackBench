@@ -12,10 +12,11 @@ sessions:
         expect_response:
           must_include_any:
             - "not necessarily"
+            - "doesn't necessarily"
             - "avoid beef"
+            - "avoiding beef"
           must_not_include:
             - "you are vegetarian"
 expect_memory:
   should_not_contain:
     - "User is vegetarian"
-

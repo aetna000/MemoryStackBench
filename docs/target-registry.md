@@ -5,6 +5,7 @@ MemoryStackBench will track these memory systems as first-class benchmark target
 Status meanings:
 
 - `implemented`: adapter can run against the scenario suite.
+- `implemented_store_harness`: adapter runs against a real storage primitive with an explicit benchmark write/retrieval policy.
 - `reference_only`: useful for harness validation, not a publishable framework score.
 - `pending_adapter`: manifest exists, but a concrete adapter still needs to be implemented.
 
@@ -12,9 +13,9 @@ Status meanings:
 |---|---|---|---|---|
 | 1 | Mem0 | `targets/mem0.yaml` | implemented | OSS `Memory.add/search/get_all/delete_all` |
 | 2 | Zep | `targets/zep.yaml` | pending_adapter | users, threads, context block, graph/fact inspection |
-| 3 | Graphiti | `targets/graphiti.yaml` | pending_adapter | temporal graph episodes, search, provenance |
-| 4 | Letta | `targets/letta.yaml` | pending_adapter | agents, memory blocks, messages, archival memory |
-| 5 | LangGraph | `targets/langgraph.yaml` | pending_adapter | checkpointer-only and store-enabled variants |
+| 3 | Graphiti | `targets/graphiti.yaml` | implemented | temporal graph episodes, search, provenance |
+| 4 | Letta | `targets/letta.yaml` | implemented | agents, memory blocks, messages, archival memory |
+| 5 | LangGraph | `targets/langgraph.yaml` | implemented_store_harness | store-enabled persistence variant |
 | 6 | LangMem | `targets/langmem.yaml` | pending_adapter | extracted semantic memory over LangGraph store |
 | 7 | Cognee | `targets/cognee.yaml` | pending_adapter | graph/vector memory ingestion and search |
 | 8 | LlamaIndex Memory | `targets/llamaindex_memory.yaml` | pending_adapter | short-term queue and long-term memory blocks |
@@ -23,7 +24,7 @@ Status meanings:
 | 11 | AutoGen + Mem0Memory | `targets/autogen_mem0memory.yaml` | implemented | `autogen_ext.memory.mem0.Mem0Memory` |
 | 12 | Google ADK + Memory Bank | `targets/google_adk_memory_bank.yaml` | pending_adapter | ADK memory service and Vertex/Agent Platform Memory Bank |
 | 13 | AWS Bedrock AgentCore Memory | `targets/aws_bedrock_agentcore_memory.yaml` | pending_adapter | short-term and long-term managed memories |
-| 14 | OpenAI Agents SDK Sessions | `targets/openai_agents_sdk_sessions.yaml` | pending_adapter | session persistence across agent runs |
+| 14 | OpenAI Agents SDK Sessions | `targets/openai_agents_sdk_sessions.yaml` | implemented | session persistence across agent runs |
 | 15 | Supermemory | `targets/supermemory.yaml` | pending_adapter | hosted memory API ingestion, search, delete |
 | 16 | Hindsight | `targets/hindsight.yaml` | pending_adapter | retain, recall, reflect memory operations |
 
@@ -38,13 +39,13 @@ The lowest-risk implementation order is:
 
 1. Mem0 local OSS: implemented and scored.
 2. AutoGen + Mem0Memory: implemented and scored.
-3. LangGraph: fully local and defines thread/store isolation clearly.
-4. LangMem: builds naturally on the LangGraph store path.
-5. LlamaIndex Memory: local Python target with inspectable memory classes.
-6. Agno Memory: local persistent DB path.
-7. Graphiti: needs Neo4j and temporal graph assertions.
-8. Cognee: needs graph/vector backend setup.
-9. Letta: needs pinned self-hosted server and agent inspection.
+3. LangGraph store harness: implemented and scored.
+4. OpenAI Agents SDK Sessions: implemented and scored as session-history memory.
+5. Graphiti + Neo4j: implemented and scored.
+6. Letta self-hosted: implemented and scored.
+7. LangMem: builds naturally on the LangGraph store path.
+8. LlamaIndex Memory: local Python target with inspectable memory classes.
+9. Agno Memory: local persistent DB path.
 10. CrewAI Memory: framework-level wrapper and memory persistence inspection.
 11. Zep: cloud or self-hosted split.
 12. Supermemory: hosted API target.

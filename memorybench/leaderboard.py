@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import html
 import json
+import os
+import shutil
 from pathlib import Path
 from typing import Any
 
@@ -105,6 +107,9 @@ def _target_summary(
     for target in targets:
         scorecard = score_by_target.get(target.get("id"))
         runtime = target.get("runtime") or {}
+        required_env = list(runtime.get("required_env", []))
+        missing_env = [key for key in required_env if not os.environ.get(str(key))]
+        blockers = _target_blockers(target, scorecard, missing_env)
         rows.append(
             {
                 "target": target.get("id"),
@@ -112,12 +117,38 @@ def _target_summary(
                 "status": target.get("status", "unknown"),
                 "manifest": target.get("_manifest"),
                 "runtime": runtime.get("type"),
-                "required_env": runtime.get("required_env", []),
+                "required_env": required_env,
+                "missing_env": missing_env,
+                "blockers": blockers,
                 "score": None if scorecard is None else scorecard.get("overall", {}).get("score"),
                 "run": None if scorecard is None else scorecard.get("_run_dir"),
             }
         )
     return rows
+
+
+def _target_blockers(
+    target: dict[str, Any],
+    scorecard: dict[str, Any] | None,
+    missing_env: list[str],
+) -> list[str]:
+    runtime = target.get("runtime") or {}
+    blockers = [f"missing env: {key}" for key in missing_env]
+    runtime_type = str(runtime.get("type") or "")
+    if "docker" in runtime_type and shutil.which("docker") is None:
+        blockers.append("Docker runtime missing")
+
+    compose_file = runtime.get("compose_file")
+    if compose_file and not Path(str(compose_file)).exists():
+        blockers.append(f"compose file missing: {compose_file}")
+
+    status = str(target.get("status") or "")
+    if status == "pending_adapter":
+        blockers.append("adapter pending")
+    elif scorecard is None and status.startswith("implemented"):
+        blockers.append("not run locally")
+
+    return blockers
 
 
 def _html(scorecards: list[dict[str, Any]], targets: list[dict[str, Any]], run_prefix: str) -> str:
@@ -303,7 +334,7 @@ def _html(scorecards: list[dict[str, Any]], targets: list[dict[str, Any]], run_p
       <h2>Target Coverage</h2>
       <table>
         <thead>
-          <tr><th>Target</th><th>Framework</th><th>Status</th><th>Runtime</th><th>Score</th><th>Run</th><th>Missing Credentials / Runtime</th></tr>
+          <tr><th>Target</th><th>Framework</th><th>Status</th><th>Runtime</th><th>Score</th><th>Run</th><th>Blockers / Notes</th></tr>
         </thead>
         <tbody>{status_rows}</tbody>
       </table>
@@ -355,12 +386,8 @@ def _status_row(row: dict[str, Any], run_prefix: str) -> str:
         escaped = html.escape(str(run))
         run_cell = f'<a href="{html.escape(run_prefix + str(run))}/">{escaped}</a>'
 
-    blockers = list(row.get("required_env") or [])
+    blockers = list(row.get("blockers") or [])
     runtime = str(row.get("runtime") or "")
-    if "docker" in runtime:
-        blockers.append("Docker runtime")
-    if not blockers and not run:
-        blockers.append("adapter pending")
     blockers_cell = " ".join(
         f'<span class="pill">{html.escape(str(item))}</span>' for item in blockers
     )

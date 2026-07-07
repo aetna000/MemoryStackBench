@@ -1,0 +1,14 @@
+services:
+  letta:
+    image: letta/letta@sha256:aa66c3eeee13d2dfc40c650d709b550237ee31bfc91942a52fa488a13fa8c102
+    container_name: memorystackbench-letta
+    environment:
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      MEMORY_REPO_MANAGER_TYPE: local
+    ports:
+      - "8283:8283"
+    volumes:
+      - letta_pgdata:/var/lib/postgresql/data
+
+volumes:
+  letta_pgdata:

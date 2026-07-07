@@ -110,7 +110,7 @@ def run_benchmark(target_path: str | Path, suite_path: str | Path, out_dir: str 
         },
     )
     write_failure_report(scorecard, run_dir / "failure_report.md")
-    write_html_scorecard(scorecard, run_dir / "scorecard.html")
+    write_html_scorecard(scorecard, run_dir / "scorecard.html", run_dir=run_dir)
     return scorecard
 
 

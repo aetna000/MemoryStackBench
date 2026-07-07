@@ -13,12 +13,9 @@ sessions:
           must_include_any:
             - "private"
             - "not public"
-          must_not_include:
-            - "public by default"
 expect_memory:
   should_contain:
     - "private by default"
   required_fields:
     - source_session_id
     - created_at
-

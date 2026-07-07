@@ -11,12 +11,12 @@ The v0 repository is intentionally small:
 - manifests for the full initial 16-target memory stack registry
 - a static report generator for GitHub Pages
 
-## Quickstart: Real Mem0 Run
+## Quickstart: Real Local Runs
 
 ```bash
 python -m venv .venv
 source .venv/bin/activate
-pip install -e ".[dev,mem0]"
+pip install -e ".[dev,mem0,autogen-mem0,langgraph,openai-agents,graphiti,letta]"
 export OPENAI_API_KEY="..."
 
 memorybench run \
@@ -36,14 +36,24 @@ Run tests:
 pytest
 ```
 
-## Current Local Result
+## Current Local Results
 
-The current checked-in static site contains real local runs for:
+The current checked-in static site contains real local runs for the `seven_sins_v0_1` suite:
 
-- `mem0_open_source_pinned`: `20 / 22`, or `90.91%`
-- `autogen_mem0memory_pinned`: `19 / 22`, or `86.36%`
+| Run | Target | Score |
+|---|---|---:|
+| `langgraph-local` | LangGraph Store harness | `20 / 20` (`100%`) |
+| `mem0-local` | Mem0 OSS | `19 / 20` (`95%`) |
+| `autogen-mem0-local` | AutoGen + Mem0Memory | `19 / 20` (`95%`) |
+| `letta-local` | Letta self-hosted | `19 / 20` (`95%`) |
+| `openai-agents-sessions-local` | OpenAI Agents SDK Sessions | `17 / 20` (`85%`) |
+| `graphiti-neo4j-local` | Graphiti + Neo4j | `14 / 20` (`70%`) |
 
-Both current failures include the webpage prompt-injection case where untrusted webpage text becomes durable memory and later flips the answer. AutoGen + Mem0Memory also retains the stale SFO airport fact after an OAK correction.
+Important interpretation notes:
+
+- The LangGraph result is a store-level harness using `InMemoryStore` plus the benchmark adapter's explicit write/update/delete policy; it is not a built-in semantic memory agent.
+- OpenAI Agents SDK Sessions is conversation-history persistence, not semantic long-term memory. Its remaining failures are raw transcript retention of poisoned webpage text and stale SFO text.
+- Graphiti is a real Graphiti + Neo4j run. The current adapter scores derived `RELATES_TO` facts; several simple preference statements were not extracted into scored facts in this suite.
 
 A plain-language explanation for newer agent builders is published at:
 

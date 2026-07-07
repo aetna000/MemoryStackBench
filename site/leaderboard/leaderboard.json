@@ -7,9 +7,51 @@
         "total": 3
       },
       "retrieval_correctness": {
-        "passed": 5,
+        "passed": 4,
         "score": 1.0,
-        "total": 5
+        "total": 4
+      },
+      "temporal_update_handling": {
+        "passed": 4,
+        "score": 1.0,
+        "total": 4
+      },
+      "untrusted_source_resistance": {
+        "passed": 6,
+        "score": 1.0,
+        "total": 6
+      },
+      "write_correctness": {
+        "passed": 3,
+        "score": 1.0,
+        "total": 3
+      }
+    },
+    "failure_count": 0,
+    "overall": {
+      "passed": 20,
+      "score": 1.0,
+      "total": 20
+    },
+    "run": "langgraph-local",
+    "suite": "seven_sins_v0_1",
+    "target": {
+      "framework": "langgraph",
+      "id": "langgraph_persistence_pinned",
+      "mode": "white_box"
+    }
+  },
+  {
+    "categories": {
+      "deletion_behavior": {
+        "passed": 3,
+        "score": 1.0,
+        "total": 3
+      },
+      "retrieval_correctness": {
+        "passed": 4,
+        "score": 1.0,
+        "total": 4
       },
       "temporal_update_handling": {
         "passed": 4,
@@ -18,8 +60,8 @@
       },
       "untrusted_source_resistance": {
         "passed": 5,
-        "score": 0.7143,
-        "total": 7
+        "score": 0.8333,
+        "total": 6
       },
       "write_correctness": {
         "passed": 3,
@@ -27,11 +69,95 @@
         "total": 3
       }
     },
-    "failure_count": 2,
+    "failure_count": 1,
     "overall": {
-      "passed": 20,
-      "score": 0.9091,
-      "total": 22
+      "passed": 19,
+      "score": 0.95,
+      "total": 20
+    },
+    "run": "autogen-mem0-local",
+    "suite": "seven_sins_v0_1",
+    "target": {
+      "framework": "autogen_mem0memory",
+      "id": "autogen_mem0memory_pinned",
+      "mode": "white_box"
+    }
+  },
+  {
+    "categories": {
+      "deletion_behavior": {
+        "passed": 3,
+        "score": 1.0,
+        "total": 3
+      },
+      "retrieval_correctness": {
+        "passed": 4,
+        "score": 1.0,
+        "total": 4
+      },
+      "temporal_update_handling": {
+        "passed": 4,
+        "score": 1.0,
+        "total": 4
+      },
+      "untrusted_source_resistance": {
+        "passed": 6,
+        "score": 1.0,
+        "total": 6
+      },
+      "write_correctness": {
+        "passed": 2,
+        "score": 0.6667,
+        "total": 3
+      }
+    },
+    "failure_count": 1,
+    "overall": {
+      "passed": 19,
+      "score": 0.95,
+      "total": 20
+    },
+    "run": "letta-local",
+    "suite": "seven_sins_v0_1",
+    "target": {
+      "framework": "letta",
+      "id": "letta_self_hosted_pinned",
+      "mode": "white_box"
+    }
+  },
+  {
+    "categories": {
+      "deletion_behavior": {
+        "passed": 3,
+        "score": 1.0,
+        "total": 3
+      },
+      "retrieval_correctness": {
+        "passed": 4,
+        "score": 1.0,
+        "total": 4
+      },
+      "temporal_update_handling": {
+        "passed": 4,
+        "score": 1.0,
+        "total": 4
+      },
+      "untrusted_source_resistance": {
+        "passed": 5,
+        "score": 0.8333,
+        "total": 6
+      },
+      "write_correctness": {
+        "passed": 3,
+        "score": 1.0,
+        "total": 3
+      }
+    },
+    "failure_count": 1,
+    "overall": {
+      "passed": 19,
+      "score": 0.95,
+      "total": 20
     },
     "run": "mem0-local",
     "suite": "seven_sins_v0_1",
@@ -49,9 +175,9 @@
         "total": 3
       },
       "retrieval_correctness": {
-        "passed": 5,
+        "passed": 4,
         "score": 1.0,
-        "total": 5
+        "total": 4
       },
       "temporal_update_handling": {
         "passed": 3,
@@ -59,9 +185,9 @@
         "total": 4
       },
       "untrusted_source_resistance": {
-        "passed": 5,
-        "score": 0.7143,
-        "total": 7
+        "passed": 4,
+        "score": 0.6667,
+        "total": 6
       },
       "write_correctness": {
         "passed": 3,
@@ -71,15 +197,57 @@
     },
     "failure_count": 3,
     "overall": {
-      "passed": 19,
-      "score": 0.8636,
-      "total": 22
+      "passed": 17,
+      "score": 0.85,
+      "total": 20
     },
-    "run": "autogen-mem0-local",
+    "run": "openai-agents-sessions-local",
     "suite": "seven_sins_v0_1",
     "target": {
-      "framework": "autogen_mem0memory",
-      "id": "autogen_mem0memory_pinned",
+      "framework": "openai_agents_sdk_sessions",
+      "id": "openai_agents_sdk_sessions_pinned",
+      "mode": "black_box"
+    }
+  },
+  {
+    "categories": {
+      "deletion_behavior": {
+        "passed": 3,
+        "score": 1.0,
+        "total": 3
+      },
+      "retrieval_correctness": {
+        "passed": 2,
+        "score": 0.5,
+        "total": 4
+      },
+      "temporal_update_handling": {
+        "passed": 2,
+        "score": 0.5,
+        "total": 4
+      },
+      "untrusted_source_resistance": {
+        "passed": 5,
+        "score": 0.8333,
+        "total": 6
+      },
+      "write_correctness": {
+        "passed": 2,
+        "score": 0.6667,
+        "total": 3
+      }
+    },
+    "failure_count": 6,
+    "overall": {
+      "passed": 14,
+      "score": 0.7,
+      "total": 20
+    },
+    "run": "graphiti-neo4j-local",
+    "suite": "seven_sins_v0_1",
+    "target": {
+      "framework": "graphiti",
+      "id": "graphiti_neo4j_pinned",
       "mode": "white_box"
     }
   }

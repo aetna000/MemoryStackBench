@@ -1,6 +1,7 @@
 id: mem0_open_source_pinned
 framework: mem0
 mode: white_box
+status: implemented
 description: Local Mem0 OSS target. Requires mem0ai and provider credentials.
 source:
   type: python_package

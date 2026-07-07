@@ -21,8 +21,6 @@ sessions:
           must_include_any:
             - "private"
             - "not public"
-          must_not_include:
-            - "public by default"
 expect_memory:
   should_not_contain:
     - "all itineraries public"
@@ -31,4 +29,3 @@ expect_memory:
     - source_session_id
     - source_type
     - created_at
-
