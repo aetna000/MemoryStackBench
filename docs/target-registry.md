@@ -12,7 +12,7 @@ Status meanings:
 | # | Target | Manifest | Status | First adapter focus |
 |---|---|---|---|---|
 | 1 | Mem0 | `targets/mem0.yaml` | implemented | OSS `Memory.add/search/get_all/delete_all` |
-| 2 | Zep | `targets/zep.yaml` | pending_adapter | users, threads, context block, graph/fact inspection |
+| 2 | Zep | `targets/zep.yaml` | implemented_store_harness | temporary users, threads, user graph writes, graph search |
 | 3 | Graphiti | `targets/graphiti.yaml` | implemented | temporal graph episodes, search, provenance |
 | 4 | Letta | `targets/letta.yaml` | implemented | agents, memory blocks, messages, archival memory |
 | 5 | LangGraph | `targets/langgraph.yaml` | implemented_store_harness | store-enabled persistence variant |
@@ -44,20 +44,22 @@ The lowest-risk implementation order is:
 5. Graphiti + Neo4j: implemented and scored.
 6. Letta self-hosted: implemented and scored.
 7. AWS Bedrock AgentCore Memory event-memory harness: implemented and scored with temporary resource cleanup.
-8. LangMem: builds naturally on the LangGraph store path.
-9. LlamaIndex Memory: local Python target with inspectable memory classes.
-10. Agno Memory: local persistent DB path.
-11. CrewAI Memory: framework-level wrapper and memory persistence inspection.
-12. Zep: cloud or self-hosted split.
-13. Supermemory: hosted API target.
-14. Hindsight: local/cloud split after API shape is pinned.
-15. Google ADK + Memory Bank: cloud credentials and cleanup discipline.
-16. AWS Bedrock AgentCore Memory long-term extraction strategy: IAM execution role, model access, async activation, and cleanup discipline.
+8. Zep Cloud user graph harness: implemented and scored with temporary user cleanup.
+9. LangMem: builds naturally on the LangGraph store path.
+10. LlamaIndex Memory: local Python target with inspectable memory classes.
+11. Agno Memory: local persistent DB path.
+12. CrewAI Memory: framework-level wrapper and memory persistence inspection.
+13. Zep self-hosted/native automatic extraction split: separate from the current cloud graph harness.
+14. Supermemory: hosted API target.
+15. Hindsight: local/cloud split after API shape is pinned.
+16. Google ADK + Memory Bank: cloud credentials and cleanup discipline.
+17. AWS Bedrock AgentCore Memory long-term extraction strategy: IAM execution role, model access, async activation, and cleanup discipline.
 
 ## Sources Used For Initial Registry
 
 - Mem0 OSS Python quickstart: https://docs.mem0.ai/open-source/python-quickstart
 - Zep quick start: https://help.getzep.com/quick-start-guide
+- Zep memory docs: https://help.getzep.com/v2/memory
 - Graphiti repository: https://github.com/getzep/graphiti
 - Letta Python API: https://docs.letta.com/api/python/
 - LangGraph persistence: https://docs.langchain.com/oss/python/langgraph/persistence

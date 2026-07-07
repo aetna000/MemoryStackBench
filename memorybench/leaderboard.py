@@ -328,7 +328,9 @@ def _html(scorecards: list[dict[str, Any]], targets: list[dict[str, Any]], run_p
     </section>
     <section>
       <h2>Category Breakdown</h2>
-      <div class="cards">{cards}</div>
+      <div class="cards">
+{cards}
+      </div>
     </section>
     <section>
       <h2>Target Coverage</h2>
@@ -369,14 +371,12 @@ def _target_card(row: dict[str, Any]) -> str:
         f"<div class=\"bar\"><span style=\"width: {_width(value.get('score'))}%\"></span></div>"
         for name, value in sorted(categories.items())
     )
-    return f"""
-    <article class="card">
+    return f"""    <article class="card">
       <h3>{html.escape(str(target.get('id')))}</h3>
       <div class="score">Overall {_pct(row.get('overall', {}).get('score'))}</div>
       <div class="bar"><span style="width: {_width(row.get('overall', {}).get('score'))}%"></span></div>
       {category_rows}
-    </article>
-    """
+    </article>"""
 
 
 def _status_row(row: dict[str, Any], run_prefix: str) -> str:

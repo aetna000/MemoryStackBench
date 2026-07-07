@@ -17,6 +17,9 @@ dev = [
 mem0 = [
   "mem0ai>=2.0.1",
 ]
+zep = [
+  "zep-cloud>=3.23.0",
+]
 langgraph = [
   "langgraph>=1.0.0",
 ]

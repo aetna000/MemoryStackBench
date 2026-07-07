@@ -222,22 +222,17 @@
     "target": "supermemory_api_pinned"
   },
   {
-    "blockers": [
-      "missing env: ZEP_API_KEY",
-      "adapter pending"
-    ],
+    "blockers": [],
     "framework": "zep",
     "manifest": "zep.yaml",
-    "missing_env": [
-      "ZEP_API_KEY"
-    ],
+    "missing_env": [],
     "required_env": [
       "ZEP_API_KEY"
     ],
-    "run": null,
+    "run": "zep-cloud-local",
     "runtime": "external_service",
-    "score": null,
-    "status": "pending_adapter",
+    "score": 1.0,
+    "status": "implemented_store_harness",
     "target": "zep_cloud_or_self_hosted_pinned"
   }
 ]
