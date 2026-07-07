@@ -62,6 +62,7 @@ Important interpretation notes:
 - The LlamaIndex, LangMem, and Agno results are local Python memory/store harnesses using their real memory APIs plus the same explicit benchmark write/update/delete policy for comparability.
 - OpenAI Agents SDK Sessions is conversation-history persistence, not semantic long-term memory. Its remaining failures are raw transcript retention of poisoned webpage text and stale SFO text.
 - Graphiti is a real Graphiti + Neo4j run. The current adapter scores derived `RELATES_TO` facts; several simple preference statements were not extracted into scored facts in this suite.
+- Supermemory now has a hosted API adapter for direct memory entry create/search/list/forget behavior, but no score is published yet because the current local API key was rejected with `401 Unauthorized`.
 
 A plain-language explanation for newer agent builders is published at:
 

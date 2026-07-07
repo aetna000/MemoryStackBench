@@ -225,7 +225,7 @@
   {
     "blockers": [
       "missing env: SUPERMEMORY_API_KEY",
-      "adapter pending"
+      "not run locally"
     ],
     "framework": "supermemory",
     "manifest": "supermemory.yaml",
@@ -238,7 +238,7 @@
     "run": null,
     "runtime": "external_service",
     "score": null,
-    "status": "pending_adapter",
+    "status": "implemented",
     "target": "supermemory_api_pinned"
   },
   {

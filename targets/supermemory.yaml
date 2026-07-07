@@ -1,28 +1,30 @@
 id: supermemory_api_pinned
 framework: supermemory
 mode: white_box
-status: pending_adapter
-description: Supermemory API target for hosted memory/context infrastructure.
-source_url: https://supermemory.ai/docs/quickstart
+status: implemented
+description: Supermemory hosted memory API target using direct memory entry create/search/list/forget APIs.
+source_url: https://supermemory.ai/docs/api-reference/content-management/create-memories-directly
 source:
   type: hosted_api
-  package: supermemory
-  version: TODO_PIN_EXACT_VERSION
+  package: supermemory_api
+  version: v4_memories_v4_search
 runtime:
   type: external_service
   required_env:
     - SUPERMEMORY_API_KEY
 model:
-  provider: openai_compatible
-  model: TODO_FIXED_MODEL
+  provider: supermemory_hosted
+  model: direct_memory_api
   temperature: 0
 adapter:
-  module: memorybench.adapters.pending
-  class: PendingAdapter
+  module: memorybench.adapters.supermemory
+  class: SupermemoryAdapter
 capabilities:
   inspect_memory: true
-  delete_memory: partial
-  retrieval_log: partial
+  delete_memory: true
+  retrieval_log: true
   multi_user: true
   multi_tenant: true
-
+notes:
+  - The adapter uses POST /v4/memories to create memory entries directly, POST /v4/search for recall, POST /v4/memories/list for inspection, and DELETE /v4/memories for cleanup/deletion checks.
+  - SUPERMEMORY_API_KEY is the official env var; the adapter also accepts SUPER_MEMORY_API_KEY and SUPPERMEMORY_API_KEY for local compatibility.
