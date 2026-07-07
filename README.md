@@ -16,7 +16,7 @@ The v0 repository is intentionally small:
 ```bash
 python -m venv .venv
 source .venv/bin/activate
-pip install -e ".[dev,mem0,zep,autogen-mem0,langgraph,llamaindex,langmem,agno,cognee,openai-agents,graphiti,letta,aws]"
+pip install -e ".[dev,mem0,zep,autogen-mem0,langgraph,llamaindex,langmem,agno,cognee,hindsight,openai-agents,graphiti,letta,aws]"
 export OPENAI_API_KEY="..."
 
 memorybench run \

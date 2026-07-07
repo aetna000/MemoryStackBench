@@ -1,28 +1,35 @@
 id: hindsight_pinned
 framework: hindsight
 mode: white_box
-status: pending_adapter
-description: Hindsight agent memory target for retain/recall/reflect behavior.
+status: implemented_unverified
+description: Hindsight memory target adapter using the official client, retain, recall, list_memories, and document deletion.
 source_url: https://hindsight.vectorize.io/
 source:
-  type: github_or_hosted_api
+  type: python_package_and_service
   repo: vectorize-io/hindsight
-  ref: TODO_PIN_COMMIT
+  package: hindsight-client
+  version: 0.8.4
 runtime:
-  type: local_or_external_service
+  type: docker_or_external_service
+  base_url: http://localhost:8888
+  required_env:
+    - OPENAI_API_KEY
 model:
-  provider: openai_compatible
-  model: TODO_FIXED_MODEL
+  provider: openai
+  model: gpt-4o-mini
   temperature: 0
 adapter:
-  module: memorybench.adapters.pending
-  class: PendingAdapter
+  module: memorybench.adapters.hindsight
+  class: HindsightAdapter
 capabilities:
   inspect_memory: true
-  delete_memory: partial
-  retrieval_log: partial
+  delete_memory: document_delete
+  retrieval_log: true
   multi_user: true
   multi_tenant: true
+notes:
+  - The adapter expects a Hindsight API server on HINDSIGHT_BASE_URL or http://localhost:8888, creates one temporary bank per benchmark subject, writes trusted facts with retain(), retrieves with recall(), inspects native list_memories(), and deletes stale entries by document_id.
+  - The official client package is hindsight-client==0.8.4. Do not use the unrelated/broken PyPI package named hindsight==0.1.7.
 blockers:
-  - "PyPI hindsight==0.1.7 fails to build on this host: setup.py uses invalid use_2to3."
-  - "Need the official Vectorize Hindsight SDK/API shape, credentials, or a repository commit before implementing a real adapter."
+  - "Live benchmark not run on this host: Docker's image store returned input/output errors after the full Hindsight image pull exhausted local disk space."
+  - "Requires a running Hindsight API server at HINDSIGHT_BASE_URL or http://localhost:8888; retry with ghcr.io/vectorize-io/hindsight:0.8.4-slim after Docker storage is repaired, or run on a VM with more free disk."

@@ -52,6 +52,9 @@ cognee = [
   "cbor2==5.8.0",
   "cognee==1.2.2",
 ]
+hindsight = [
+  "hindsight-client==0.8.4",
+]
 
 [project.scripts]
 memorybench = "memorybench.cli:main"

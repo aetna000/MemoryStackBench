@@ -6,6 +6,7 @@ Status meanings:
 
 - `implemented`: adapter can run against the scenario suite.
 - `implemented_store_harness`: adapter runs against a real storage primitive with an explicit benchmark write/retrieval policy.
+- `implemented_unverified`: adapter is implemented, but a local live run has not completed yet.
 - `reference_only`: useful for harness validation, not a publishable framework score.
 - `pending_adapter`: manifest exists, but a concrete adapter still needs to be implemented.
 
@@ -26,7 +27,7 @@ Status meanings:
 | 13 | AWS Bedrock AgentCore Memory | `targets/aws_bedrock_agentcore_memory.yaml` | implemented_store_harness | managed short-term event memory APIs |
 | 14 | OpenAI Agents SDK Sessions | `targets/openai_agents_sdk_sessions.yaml` | implemented | session persistence across agent runs |
 | 15 | Supermemory | `targets/supermemory.yaml` | implemented | hosted memory entry create, search, list, forget |
-| 16 | Hindsight | `targets/hindsight.yaml` | pending_adapter | retain, recall, reflect memory operations |
+| 16 | Hindsight | `targets/hindsight.yaml` | implemented_unverified | official client, retain, recall, list/delete through API server |
 
 Additional harness targets:
 
@@ -52,14 +53,14 @@ The lowest-risk implementation order is:
 13. CrewAI Memory: current 1.x package does not resolve on this macOS/Python 3.12 host because its lancedb pin is unavailable; use a Linux runner or choose an older explicit pin.
 14. Zep self-hosted/native automatic extraction split: separate from the current cloud graph harness.
 15. Supermemory hosted direct memory-entry API: implemented and scored with temporary container cleanup.
-16. Hindsight: local/cloud split after API shape is pinned.
+16. Hindsight official-client adapter: implemented, but live scoring is blocked until a Hindsight API server can run locally or on a VM.
 17. Google ADK + Memory Bank: cloud credentials and cleanup discipline.
 18. AWS Bedrock AgentCore Memory long-term extraction strategy: IAM execution role, model access, async activation, and cleanup discipline.
 
 ## Current Local Blockers
 
 - CrewAI: `crewai==1.15.1` does not resolve locally because `lancedb>=0.29.2,<0.30.1` has no matching distribution for this host. `crewai==0.203.2` dry-runs, but that would be an older benchmark pin.
-- Hindsight: the PyPI `hindsight==0.1.7` package fails to build with `use_2to3 is invalid`; the benchmark needs the official Vectorize Hindsight SDK/API or repository commit.
+- Hindsight: adapter code now uses the official `hindsight-client==0.8.4`; live scoring is blocked on this host because Docker's image store returned input/output errors after local disk filled during the Hindsight image pull. Retry with `ghcr.io/vectorize-io/hindsight:0.8.4-slim` on repaired Docker storage or a VM with more free disk.
 
 ## Sources Used For Initial Registry
 

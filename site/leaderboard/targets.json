@@ -110,18 +110,20 @@
   },
   {
     "blockers": [
-      "PyPI hindsight==0.1.7 fails to build on this host: setup.py uses invalid use_2to3.",
-      "Need the official Vectorize Hindsight SDK/API shape, credentials, or a repository commit before implementing a real adapter.",
-      "adapter pending"
+      "Live benchmark not run on this host: Docker's image store returned input/output errors after the full Hindsight image pull exhausted local disk space.",
+      "Requires a running Hindsight API server at HINDSIGHT_BASE_URL or http://localhost:8888; retry with ghcr.io/vectorize-io/hindsight:0.8.4-slim after Docker storage is repaired, or run on a VM with more free disk.",
+      "not run locally"
     ],
     "framework": "hindsight",
     "manifest": "hindsight.yaml",
     "missing_env": [],
-    "required_env": [],
+    "required_env": [
+      "OPENAI_API_KEY"
+    ],
     "run": null,
-    "runtime": "local_or_external_service",
+    "runtime": "docker_or_external_service",
     "score": null,
-    "status": "pending_adapter",
+    "status": "implemented_unverified",
     "target": "hindsight_pinned"
   },
   {
