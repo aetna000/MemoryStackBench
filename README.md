@@ -16,7 +16,7 @@ The v0 repository is intentionally small:
 ```bash
 python -m venv .venv
 source .venv/bin/activate
-pip install -e ".[dev,mem0,autogen-mem0,langgraph,openai-agents,graphiti,letta]"
+pip install -e ".[dev,mem0,autogen-mem0,langgraph,openai-agents,graphiti,letta,aws]"
 export OPENAI_API_KEY="..."
 
 memorybench run \
@@ -36,12 +36,13 @@ Run tests:
 pytest
 ```
 
-## Current Local Results
+## Current Results
 
-The current checked-in static site contains real local runs for the `seven_sins_v0_1` suite:
+The current checked-in static site contains real runs for the `seven_sins_v0_1` suite:
 
 | Run | Target | Score |
 |---|---|---:|
+| `aws-agentcore-memory-local` | AWS Bedrock AgentCore Memory event-memory harness | `20 / 20` (`100%`) |
 | `langgraph-local` | LangGraph Store harness | `20 / 20` (`100%`) |
 | `mem0-local` | Mem0 OSS | `19 / 20` (`95%`) |
 | `autogen-mem0-local` | AutoGen + Mem0Memory | `19 / 20` (`95%`) |
@@ -51,6 +52,7 @@ The current checked-in static site contains real local runs for the `seven_sins_
 
 Important interpretation notes:
 
+- The AWS result is a real AWS Bedrock AgentCore Memory managed-service run using short-term event memory APIs: `create_memory`, `create_event`, `list_events`, and `delete_event`. It is an `implemented_store_harness` result with explicit benchmark write/retrieval/delete policy, not a score for AgentCore's asynchronous long-term semantic extraction strategies.
 - The LangGraph result is a store-level harness using `InMemoryStore` plus the benchmark adapter's explicit write/update/delete policy; it is not a built-in semantic memory agent.
 - OpenAI Agents SDK Sessions is conversation-history persistence, not semantic long-term memory. Its remaining failures are raw transcript retention of poisoned webpage text and stale SFO text.
 - Graphiti is a real Graphiti + Neo4j run. The current adapter scores derived `RELATES_TO` facts; several simple preference statements were not extracted into scored facts in this suite.

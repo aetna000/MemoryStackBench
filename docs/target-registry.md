@@ -23,7 +23,7 @@ Status meanings:
 | 10 | Agno Memory | `targets/agno_memory.yaml` | pending_adapter | automatic user memory with persistent DB |
 | 11 | AutoGen + Mem0Memory | `targets/autogen_mem0memory.yaml` | implemented | `autogen_ext.memory.mem0.Mem0Memory` |
 | 12 | Google ADK + Memory Bank | `targets/google_adk_memory_bank.yaml` | pending_adapter | ADK memory service and Vertex/Agent Platform Memory Bank |
-| 13 | AWS Bedrock AgentCore Memory | `targets/aws_bedrock_agentcore_memory.yaml` | pending_adapter | short-term and long-term managed memories |
+| 13 | AWS Bedrock AgentCore Memory | `targets/aws_bedrock_agentcore_memory.yaml` | implemented_store_harness | managed short-term event memory APIs |
 | 14 | OpenAI Agents SDK Sessions | `targets/openai_agents_sdk_sessions.yaml` | implemented | session persistence across agent runs |
 | 15 | Supermemory | `targets/supermemory.yaml` | pending_adapter | hosted memory API ingestion, search, delete |
 | 16 | Hindsight | `targets/hindsight.yaml` | pending_adapter | retain, recall, reflect memory operations |
@@ -43,16 +43,16 @@ The lowest-risk implementation order is:
 4. OpenAI Agents SDK Sessions: implemented and scored as session-history memory.
 5. Graphiti + Neo4j: implemented and scored.
 6. Letta self-hosted: implemented and scored.
-7. LangMem: builds naturally on the LangGraph store path.
-8. LlamaIndex Memory: local Python target with inspectable memory classes.
-9. Agno Memory: local persistent DB path.
-10. CrewAI Memory: framework-level wrapper and memory persistence inspection.
-11. Zep: cloud or self-hosted split.
-12. Supermemory: hosted API target.
-13. Hindsight: local/cloud split after API shape is pinned.
-14. Google ADK + Memory Bank: cloud credentials and cleanup discipline.
-15. AWS Bedrock AgentCore Memory: AWS account, region, lifecycle cleanup.
-16. OpenAI Agents SDK Sessions: black-box/session-memory target, separate from semantic long-term memory.
+7. AWS Bedrock AgentCore Memory event-memory harness: implemented and scored with temporary resource cleanup.
+8. LangMem: builds naturally on the LangGraph store path.
+9. LlamaIndex Memory: local Python target with inspectable memory classes.
+10. Agno Memory: local persistent DB path.
+11. CrewAI Memory: framework-level wrapper and memory persistence inspection.
+12. Zep: cloud or self-hosted split.
+13. Supermemory: hosted API target.
+14. Hindsight: local/cloud split after API shape is pinned.
+15. Google ADK + Memory Bank: cloud credentials and cleanup discipline.
+16. AWS Bedrock AgentCore Memory long-term extraction strategy: IAM execution role, model access, async activation, and cleanup discipline.
 
 ## Sources Used For Initial Registry
 
@@ -69,6 +69,7 @@ The lowest-risk implementation order is:
 - AutoGen memory docs: https://microsoft.github.io/autogen/stable/user-guide/agentchat-user-guide/memory.html
 - Google ADK memory docs: https://adk.dev/sessions/memory/
 - AWS AgentCore Memory docs: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/memory.html
+- AWS AgentCore Memory SDK examples: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/aws-sdk-memory.html
 - OpenAI Agents SDK Sessions: https://openai.github.io/openai-agents-python/sessions/
 - Supermemory quickstart: https://supermemory.ai/docs/quickstart
 - Hindsight docs: https://hindsight.vectorize.io/

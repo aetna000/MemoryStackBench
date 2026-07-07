@@ -26,28 +26,19 @@
     "target": "autogen_mem0memory_pinned"
   },
   {
-    "blockers": [
-      "missing env: AWS_REGION",
-      "missing env: AWS_ACCESS_KEY_ID",
-      "missing env: AWS_SECRET_ACCESS_KEY",
-      "adapter pending"
-    ],
+    "blockers": [],
     "framework": "aws_bedrock_agentcore_memory",
     "manifest": "aws_bedrock_agentcore_memory.yaml",
-    "missing_env": [
-      "AWS_REGION",
-      "AWS_ACCESS_KEY_ID",
-      "AWS_SECRET_ACCESS_KEY"
-    ],
+    "missing_env": [],
     "required_env": [
       "AWS_REGION",
       "AWS_ACCESS_KEY_ID",
       "AWS_SECRET_ACCESS_KEY"
     ],
-    "run": null,
+    "run": "aws-agentcore-memory-local",
     "runtime": "external_service",
-    "score": null,
-    "status": "pending_adapter",
+    "score": 1.0,
+    "status": "implemented_store_harness",
     "target": "aws_bedrock_agentcore_memory_pinned"
   },
   {
