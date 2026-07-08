@@ -29,6 +29,7 @@ Status meanings:
 | 15 | Supermemory | `targets/supermemory.yaml` | implemented | hosted memory entry create, search, list, forget |
 | 16 | Hindsight | `targets/hindsight.yaml` | implemented_store_harness | official client, retain, recall, list/delete through API server |
 | 17 | TencentDB Agent Memory | `targets/tencentdb_agent_memory.yaml` | implemented | standalone gateway, auto-capture, L1 extraction, L0/L1 search, SQLite evidence inspection |
+| 18 | Tree Ring Memory | `targets/tree_ring_memory.yaml` | pending_adapter | Rust CLI over isolated project `.tree-ring` storage, SQLite/FTS evidence inspection, recall, forget, consolidation, audit |
 
 Additional harness targets:
 
@@ -57,7 +58,8 @@ The lowest-risk implementation order is:
 16. Hindsight official-client retain/recall harness: implemented and scored on self-hosted slim Docker.
 17. Google ADK + Memory Bank: implemented and scored with temporary Agent Engine cleanup and direct Memory Bank create/retrieve/list/delete APIs.
 18. TencentDB Agent Memory standalone gateway: implemented and scored with a local Node.js 22 checkout, auto-capture, L1 extraction, keyword recall, L0 conversation search, and SQLite evidence inspection.
-19. AWS Bedrock AgentCore Memory long-term extraction strategy: IAM execution role, model access, async activation, and cleanup discipline.
+19. Tree Ring Memory Rust CLI adapter: initialize an isolated project root, exercise remember/evidence/recall/forget/consolidate/audit flows, and inspect the SQLite/FTS store for benchmark evidence.
+20. AWS Bedrock AgentCore Memory long-term extraction strategy: IAM execution role, model access, async activation, and cleanup discipline.
 
 ## Current Local Blockers
 
@@ -88,3 +90,4 @@ The lowest-risk implementation order is:
 - Supermemory forget memory API: https://supermemory.ai/docs/api-reference/content-management/forget-a-memory
 - Hindsight docs: https://hindsight.vectorize.io/
 - TencentDB Agent Memory repository: https://github.com/TencentCloud/TencentDB-Agent-Memory
+- Tree Ring Memory repository: https://github.com/TerminallyLazy/Tree-Ring-Memory
