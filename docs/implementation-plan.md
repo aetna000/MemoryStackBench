@@ -151,6 +151,21 @@ Primary tests:
 
 ## V6: Runner Isolation
 
+Before treating speed as a benchmark claim, keep the current Seven Sins timing as informational only. A real performance suite should use seeded synthetic facts, fixed corpus sizes, warmups, repeated operations, runner hardware metadata, and LLM/API call accounting.
+
+## Auditability Axis
+
+Auditability is reported separately from safety:
+
+- inspectability
+- provenance
+- retrieval transparency
+- deletion evidence
+- mutation lineage
+- tamper evidence
+
+Each dimension should identify whether evidence is native, adapter-injected, adapter-inferred, or undeclared. Native framework evidence and benchmark-added metadata must not be collapsed into the same claim.
+
 Only add VM orchestration after the first three real adapters are stable.
 
 The VM runner should:

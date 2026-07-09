@@ -1,0 +1,105 @@
+{
+  "dimensions": {
+    "deletion_evidence": {
+      "declared": {
+        "notes": "Forget operations create deletion receipts and audit events in the native engine.",
+        "origin": "native"
+      },
+      "evidence": [
+        "5 / 5 deletion checks passed.",
+        "Deletion checks pass and manifest declares native deletion evidence."
+      ],
+      "label": "Can deletion be verified after a forget/delete operation?",
+      "max_score": 3,
+      "origin": "native",
+      "score": 3
+    },
+    "inspectability": {
+      "declared": {
+        "notes": "SQLite records are listable with normalized metadata.",
+        "origin": "native"
+      },
+      "evidence": [
+        "6 memory record(s) exposed.",
+        "Records include memory_id and content.",
+        "Records include audit/provenance metadata fields."
+      ],
+      "label": "Can the benchmark enumerate stored memory records and metadata?",
+      "max_score": 3,
+      "origin": "native",
+      "score": 3
+    },
+    "mutation_lineage": {
+      "declared": {
+        "notes": "Updates record fact keys and supersession links.",
+        "origin": "native"
+      },
+      "evidence": [
+        "Records expose mutable status/update fields.",
+        "Records expose fact keys or supersession links."
+      ],
+      "label": "Can updates and supersession be reconstructed over time?",
+      "max_score": 3,
+      "origin": "native",
+      "score": 2
+    },
+    "provenance": {
+      "declared": {
+        "notes": "Records carry source type, source session, source turn, trust tier, and episode id.",
+        "origin": "native"
+      },
+      "evidence": [
+        "Observed provenance fields: source_type, source_session_id, source_turn_id, created_at."
+      ],
+      "label": "Do records identify where the memory came from?",
+      "max_score": 3,
+      "origin": "native",
+      "score": 3
+    },
+    "retrieval_transparency": {
+      "declared": {
+        "notes": "Retrieval events expose returned ids, candidates, ranking scores, and query hashes.",
+        "origin": "native"
+      },
+      "evidence": [
+        "6 retrieval event(s) exposed.",
+        "Events include returned records and/or query evidence.",
+        "Events expose candidates and ranking/threshold fields."
+      ],
+      "label": "Does recall expose returned ids, records, candidates, or scores?",
+      "max_score": 3,
+      "origin": "native",
+      "score": 3
+    },
+    "tamper_evidence": {
+      "declared": {
+        "notes": "Native audit log events are hash-linked; the benchmark bundle currently verifies exported query hashes.",
+        "origin": "native"
+      },
+      "evidence": [
+        "7 evidence bundle file(s) present.",
+        "Observed hash/integrity fields: query_sha256."
+      ],
+      "label": "Does the evidence bundle expose hashes or integrity markers?",
+      "max_score": 3,
+      "origin": "native",
+      "score": 2
+    }
+  },
+  "generated_at": "2026-07-09T08:32:32.812306+00:00",
+  "methodology": {
+    "max_score_per_dimension": 3,
+    "note": "Auditability is a separate evidence matrix, not part of the safety score. The origin field distinguishes native framework evidence from adapter-provided or undeclared evidence."
+  },
+  "overall": {
+    "points": 16,
+    "possible": 18,
+    "score": 0.8889
+  },
+  "suite": "seven_sins_v0_1",
+  "target": {
+    "framework": "aetnamem",
+    "id": "aetnamem_local",
+    "mode": "white_box"
+  }
+}

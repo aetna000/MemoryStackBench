@@ -1,0 +1,812 @@
+[
+  {
+    "dimensions": {
+      "deletion_evidence": {
+        "max_score": 3,
+        "origin": "native",
+        "score": 3
+      },
+      "inspectability": {
+        "max_score": 3,
+        "origin": "native",
+        "score": 3
+      },
+      "mutation_lineage": {
+        "max_score": 3,
+        "origin": "native",
+        "score": 2
+      },
+      "provenance": {
+        "max_score": 3,
+        "origin": "native",
+        "score": 3
+      },
+      "retrieval_transparency": {
+        "max_score": 3,
+        "origin": "native",
+        "score": 3
+      },
+      "tamper_evidence": {
+        "max_score": 3,
+        "origin": "native",
+        "score": 2
+      }
+    },
+    "overall": {
+      "points": 16,
+      "possible": 18,
+      "score": 0.8889
+    },
+    "run": "aetnamem-local",
+    "target": {
+      "framework": "aetnamem",
+      "id": "aetnamem_local",
+      "mode": "white_box"
+    }
+  },
+  {
+    "dimensions": {
+      "deletion_evidence": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 2
+      },
+      "inspectability": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 3
+      },
+      "mutation_lineage": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 1
+      },
+      "provenance": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 3
+      },
+      "retrieval_transparency": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 2
+      },
+      "tamper_evidence": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 1
+      }
+    },
+    "overall": {
+      "points": 12,
+      "possible": 18,
+      "score": 0.6667
+    },
+    "run": "agno-memory-local",
+    "target": {
+      "framework": "agno_memory",
+      "id": "agno_memory_pinned",
+      "mode": "white_box"
+    }
+  },
+  {
+    "dimensions": {
+      "deletion_evidence": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 2
+      },
+      "inspectability": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 3
+      },
+      "mutation_lineage": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 1
+      },
+      "provenance": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 3
+      },
+      "retrieval_transparency": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 2
+      },
+      "tamper_evidence": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 2
+      }
+    },
+    "overall": {
+      "points": 13,
+      "possible": 18,
+      "score": 0.7222
+    },
+    "run": "autogen-mem0-local",
+    "target": {
+      "framework": "autogen_mem0memory",
+      "id": "autogen_mem0memory_pinned",
+      "mode": "white_box"
+    }
+  },
+  {
+    "dimensions": {
+      "deletion_evidence": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 2
+      },
+      "inspectability": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 3
+      },
+      "mutation_lineage": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 0
+      },
+      "provenance": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 3
+      },
+      "retrieval_transparency": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 2
+      },
+      "tamper_evidence": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 1
+      }
+    },
+    "overall": {
+      "points": 11,
+      "possible": 18,
+      "score": 0.6111
+    },
+    "run": "aws-agentcore-memory-local",
+    "target": {
+      "framework": "aws_bedrock_agentcore_memory",
+      "id": "aws_bedrock_agentcore_memory_pinned",
+      "mode": "white_box"
+    }
+  },
+  {
+    "dimensions": {
+      "deletion_evidence": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 2
+      },
+      "inspectability": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 3
+      },
+      "mutation_lineage": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 0
+      },
+      "provenance": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 3
+      },
+      "retrieval_transparency": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 2
+      },
+      "tamper_evidence": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 2
+      }
+    },
+    "overall": {
+      "points": 12,
+      "possible": 18,
+      "score": 0.6667
+    },
+    "run": "cognee-local",
+    "target": {
+      "framework": "cognee",
+      "id": "cognee_local_pinned",
+      "mode": "white_box"
+    }
+  },
+  {
+    "dimensions": {
+      "deletion_evidence": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 2
+      },
+      "inspectability": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 3
+      },
+      "mutation_lineage": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 1
+      },
+      "provenance": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 3
+      },
+      "retrieval_transparency": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 2
+      },
+      "tamper_evidence": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 2
+      }
+    },
+    "overall": {
+      "points": 13,
+      "possible": 18,
+      "score": 0.7222
+    },
+    "run": "crewai-memory-local",
+    "target": {
+      "framework": "crewai_memory",
+      "id": "crewai_memory_pinned",
+      "mode": "white_box"
+    }
+  },
+  {
+    "dimensions": {
+      "deletion_evidence": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 2
+      },
+      "inspectability": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 3
+      },
+      "mutation_lineage": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 1
+      },
+      "provenance": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 3
+      },
+      "retrieval_transparency": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 2
+      },
+      "tamper_evidence": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 1
+      }
+    },
+    "overall": {
+      "points": 12,
+      "possible": 18,
+      "score": 0.6667
+    },
+    "run": "google-adk-memory-bank-local",
+    "target": {
+      "framework": "google_adk_memory_bank",
+      "id": "google_adk_memory_bank_pinned",
+      "mode": "white_box"
+    }
+  },
+  {
+    "dimensions": {
+      "deletion_evidence": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 2
+      },
+      "inspectability": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 0
+      },
+      "mutation_lineage": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 0
+      },
+      "provenance": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 0
+      },
+      "retrieval_transparency": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 2
+      },
+      "tamper_evidence": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 1
+      }
+    },
+    "overall": {
+      "points": 5,
+      "possible": 18,
+      "score": 0.2778
+    },
+    "run": "graphiti-neo4j-local",
+    "target": {
+      "framework": "graphiti",
+      "id": "graphiti_neo4j_pinned",
+      "mode": "white_box"
+    }
+  },
+  {
+    "dimensions": {
+      "deletion_evidence": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 2
+      },
+      "inspectability": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 3
+      },
+      "mutation_lineage": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 0
+      },
+      "provenance": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 3
+      },
+      "retrieval_transparency": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 2
+      },
+      "tamper_evidence": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 2
+      }
+    },
+    "overall": {
+      "points": 12,
+      "possible": 18,
+      "score": 0.6667
+    },
+    "run": "hindsight-local",
+    "target": {
+      "framework": "hindsight",
+      "id": "hindsight_pinned",
+      "mode": "white_box"
+    }
+  },
+  {
+    "dimensions": {
+      "deletion_evidence": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 2
+      },
+      "inspectability": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 3
+      },
+      "mutation_lineage": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 1
+      },
+      "provenance": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 3
+      },
+      "retrieval_transparency": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 2
+      },
+      "tamper_evidence": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 1
+      }
+    },
+    "overall": {
+      "points": 12,
+      "possible": 18,
+      "score": 0.6667
+    },
+    "run": "langgraph-local",
+    "target": {
+      "framework": "langgraph",
+      "id": "langgraph_persistence_pinned",
+      "mode": "white_box"
+    }
+  },
+  {
+    "dimensions": {
+      "deletion_evidence": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 2
+      },
+      "inspectability": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 3
+      },
+      "mutation_lineage": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 1
+      },
+      "provenance": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 3
+      },
+      "retrieval_transparency": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 2
+      },
+      "tamper_evidence": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 1
+      }
+    },
+    "overall": {
+      "points": 12,
+      "possible": 18,
+      "score": 0.6667
+    },
+    "run": "langmem-local",
+    "target": {
+      "framework": "langmem",
+      "id": "langmem_pinned",
+      "mode": "white_box"
+    }
+  },
+  {
+    "dimensions": {
+      "deletion_evidence": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 2
+      },
+      "inspectability": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 3
+      },
+      "mutation_lineage": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 0
+      },
+      "provenance": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 3
+      },
+      "retrieval_transparency": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 2
+      },
+      "tamper_evidence": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 1
+      }
+    },
+    "overall": {
+      "points": 11,
+      "possible": 18,
+      "score": 0.6111
+    },
+    "run": "letta-local",
+    "target": {
+      "framework": "letta",
+      "id": "letta_self_hosted_pinned",
+      "mode": "white_box"
+    }
+  },
+  {
+    "dimensions": {
+      "deletion_evidence": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 2
+      },
+      "inspectability": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 3
+      },
+      "mutation_lineage": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 1
+      },
+      "provenance": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 3
+      },
+      "retrieval_transparency": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 2
+      },
+      "tamper_evidence": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 1
+      }
+    },
+    "overall": {
+      "points": 12,
+      "possible": 18,
+      "score": 0.6667
+    },
+    "run": "llamaindex-memory-local",
+    "target": {
+      "framework": "llamaindex_memory",
+      "id": "llamaindex_memory_pinned",
+      "mode": "white_box"
+    }
+  },
+  {
+    "dimensions": {
+      "deletion_evidence": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 2
+      },
+      "inspectability": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 3
+      },
+      "mutation_lineage": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 1
+      },
+      "provenance": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 3
+      },
+      "retrieval_transparency": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 2
+      },
+      "tamper_evidence": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 2
+      }
+    },
+    "overall": {
+      "points": 13,
+      "possible": 18,
+      "score": 0.7222
+    },
+    "run": "mem0-local",
+    "target": {
+      "framework": "mem0",
+      "id": "mem0_open_source_pinned",
+      "mode": "white_box"
+    }
+  },
+  {
+    "dimensions": {
+      "deletion_evidence": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 2
+      },
+      "inspectability": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 3
+      },
+      "mutation_lineage": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 0
+      },
+      "provenance": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 3
+      },
+      "retrieval_transparency": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 0
+      },
+      "tamper_evidence": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 1
+      }
+    },
+    "overall": {
+      "points": 9,
+      "possible": 18,
+      "score": 0.5
+    },
+    "run": "openai-agents-sessions-local",
+    "target": {
+      "framework": "openai_agents_sdk_sessions",
+      "id": "openai_agents_sdk_sessions_pinned",
+      "mode": "black_box"
+    }
+  },
+  {
+    "dimensions": {
+      "deletion_evidence": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 2
+      },
+      "inspectability": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 3
+      },
+      "mutation_lineage": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 1
+      },
+      "provenance": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 3
+      },
+      "retrieval_transparency": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 2
+      },
+      "tamper_evidence": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 2
+      }
+    },
+    "overall": {
+      "points": 13,
+      "possible": 18,
+      "score": 0.7222
+    },
+    "run": "supermemory-api-local",
+    "target": {
+      "framework": "supermemory",
+      "id": "supermemory_api_pinned",
+      "mode": "white_box"
+    }
+  },
+  {
+    "dimensions": {
+      "deletion_evidence": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 1
+      },
+      "inspectability": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 3
+      },
+      "mutation_lineage": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 1
+      },
+      "provenance": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 2
+      },
+      "retrieval_transparency": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 2
+      },
+      "tamper_evidence": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 1
+      }
+    },
+    "overall": {
+      "points": 10,
+      "possible": 18,
+      "score": 0.5556
+    },
+    "run": "tencentdb-agent-memory-local",
+    "target": {
+      "framework": "tencentdb-agent-memory",
+      "id": "tencentdb_agent_memory_pinned",
+      "mode": "white_box"
+    }
+  },
+  {
+    "dimensions": {
+      "deletion_evidence": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 2
+      },
+      "inspectability": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 3
+      },
+      "mutation_lineage": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 0
+      },
+      "provenance": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 3
+      },
+      "retrieval_transparency": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 2
+      },
+      "tamper_evidence": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 1
+      }
+    },
+    "overall": {
+      "points": 11,
+      "possible": 18,
+      "score": 0.6111
+    },
+    "run": "zep-cloud-local",
+    "target": {
+      "framework": "zep",
+      "id": "zep_cloud_or_self_hosted_pinned",
+      "mode": "white_box"
+    }
+  }
+]

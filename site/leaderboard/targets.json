@@ -1,5 +1,8 @@
 [
   {
+    "auditability_points": 16,
+    "auditability_possible": 18,
+    "auditability_score": 0.8889,
     "blockers": [],
     "check_score": 1.0,
     "framework": "aetnamem",
@@ -13,6 +16,9 @@
     "target": "aetnamem_local"
   },
   {
+    "auditability_points": 12,
+    "auditability_possible": 18,
+    "auditability_score": 0.6667,
     "blockers": [],
     "check_score": 1.0,
     "framework": "agno_memory",
@@ -26,19 +32,25 @@
     "target": "agno_memory_pinned"
   },
   {
+    "auditability_points": 13,
+    "auditability_possible": 18,
+    "auditability_score": 0.7222,
     "blockers": [],
-    "check_score": 0.9091,
+    "check_score": 0.9697,
     "framework": "autogen_mem0memory",
     "manifest": "autogen_mem0memory.yaml",
     "missing_env": [],
     "required_env": [],
     "run": "autogen-mem0-local",
     "runtime": "local_python",
-    "score": 0.9091,
+    "score": 0.9697,
     "status": "implemented",
     "target": "autogen_mem0memory_pinned"
   },
   {
+    "auditability_points": 11,
+    "auditability_possible": 18,
+    "auditability_score": 0.6111,
     "blockers": [],
     "check_score": 1.0,
     "framework": "aws_bedrock_agentcore_memory",
@@ -56,8 +68,11 @@
     "target": "aws_bedrock_agentcore_memory_pinned"
   },
   {
+    "auditability_points": 12,
+    "auditability_possible": 18,
+    "auditability_score": 0.6667,
     "blockers": [],
-    "check_score": 1.0,
+    "check_score": 0.9394,
     "framework": "cognee",
     "manifest": "cognee.yaml",
     "missing_env": [],
@@ -66,11 +81,14 @@
     ],
     "run": "cognee-local",
     "runtime": "local_python",
-    "score": 1.0,
+    "score": 0.9394,
     "status": "implemented_store_harness",
     "target": "cognee_local_pinned"
   },
   {
+    "auditability_points": 13,
+    "auditability_possible": 18,
+    "auditability_score": 0.7222,
     "blockers": [],
     "check_score": 1.0,
     "framework": "crewai_memory",
@@ -86,6 +104,9 @@
     "target": "crewai_memory_pinned"
   },
   {
+    "auditability_points": 12,
+    "auditability_possible": 18,
+    "auditability_score": 0.6667,
     "blockers": [],
     "check_score": 1.0,
     "framework": "google_adk_memory_bank",
@@ -103,6 +124,9 @@
     "target": "google_adk_memory_bank_pinned"
   },
   {
+    "auditability_points": 5,
+    "auditability_possible": 18,
+    "auditability_score": 0.2778,
     "blockers": [
       "Docker runtime missing"
     ],
@@ -120,6 +144,9 @@
     "target": "graphiti_neo4j_pinned"
   },
   {
+    "auditability_points": 12,
+    "auditability_possible": 18,
+    "auditability_score": 0.6667,
     "blockers": [
       "Docker runtime missing"
     ],
@@ -137,6 +164,9 @@
     "target": "hindsight_pinned"
   },
   {
+    "auditability_points": 12,
+    "auditability_possible": 18,
+    "auditability_score": 0.6667,
     "blockers": [],
     "check_score": 1.0,
     "framework": "langgraph",
@@ -150,6 +180,9 @@
     "target": "langgraph_persistence_pinned"
   },
   {
+    "auditability_points": 12,
+    "auditability_possible": 18,
+    "auditability_score": 0.6667,
     "blockers": [],
     "check_score": 1.0,
     "framework": "langmem",
@@ -163,6 +196,9 @@
     "target": "langmem_pinned"
   },
   {
+    "auditability_points": 11,
+    "auditability_possible": 18,
+    "auditability_score": 0.6111,
     "blockers": [
       "Docker runtime missing"
     ],
@@ -180,6 +216,9 @@
     "target": "letta_self_hosted_pinned"
   },
   {
+    "auditability_points": 12,
+    "auditability_possible": 18,
+    "auditability_score": 0.6667,
     "blockers": [],
     "check_score": 1.0,
     "framework": "llamaindex_memory",
@@ -193,19 +232,25 @@
     "target": "llamaindex_memory_pinned"
   },
   {
+    "auditability_points": 13,
+    "auditability_possible": 18,
+    "auditability_score": 0.7222,
     "blockers": [],
-    "check_score": 0.9091,
+    "check_score": 0.9697,
     "framework": "mem0",
     "manifest": "mem0.yaml",
     "missing_env": [],
     "required_env": [],
     "run": "mem0-local",
     "runtime": "local_python",
-    "score": 0.9091,
+    "score": 0.9697,
     "status": "implemented",
     "target": "mem0_open_source_pinned"
   },
   {
+    "auditability_points": 9,
+    "auditability_possible": 18,
+    "auditability_score": 0.5,
     "blockers": [],
     "check_score": 0.9091,
     "framework": "openai_agents_sdk_sessions",
@@ -221,6 +266,9 @@
     "target": "openai_agents_sdk_sessions_pinned"
   },
   {
+    "auditability_points": 13,
+    "auditability_possible": 18,
+    "auditability_score": 0.7222,
     "blockers": [],
     "check_score": 1.0,
     "framework": "supermemory",
@@ -236,6 +284,9 @@
     "target": "supermemory_api_pinned"
   },
   {
+    "auditability_points": 10,
+    "auditability_possible": 18,
+    "auditability_score": 0.5556,
     "blockers": [],
     "check_score": 0.7879,
     "framework": "tencentdb-agent-memory",
@@ -251,6 +302,9 @@
     "target": "tencentdb_agent_memory_pinned"
   },
   {
+    "auditability_points": 11,
+    "auditability_possible": 18,
+    "auditability_score": 0.6111,
     "blockers": [],
     "check_score": 1.0,
     "framework": "zep",

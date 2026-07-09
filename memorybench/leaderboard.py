@@ -9,6 +9,7 @@ from typing import Any
 
 import yaml
 
+from memorybench.auditability import DIMENSIONS, build_auditability_scorecard
 from memorybench.report import _write_site_index
 
 
@@ -20,6 +21,7 @@ def collect_scorecards(runs_dir: Path) -> list[dict[str, Any]]:
         if not _is_publishable(scorecard):
             continue
         scorecard["_run_dir"] = path.parent.name
+        scorecard["_run_path"] = str(path.parent)
         scorecards.append(scorecard)
     return scorecards
 
@@ -58,21 +60,63 @@ def write_leaderboard(
 ) -> None:
     scorecards = collect_scorecards(runs_dir)
     targets = collect_targets(targets_dir)
+    auditability_rows = collect_auditability(scorecards)
     out_dir.mkdir(parents=True, exist_ok=True)
     (out_dir / "leaderboard.json").write_text(
         json.dumps(_summary(scorecards), indent=2, sort_keys=True) + "\n",
         encoding="utf-8",
     )
-    (out_dir / "targets.json").write_text(
-        json.dumps(_target_summary(targets, scorecards), indent=2, sort_keys=True) + "\n",
+    (out_dir / "auditability.json").write_text(
+        json.dumps(_auditability_summary(auditability_rows), indent=2, sort_keys=True) + "\n",
         encoding="utf-8",
     )
-    (out_dir / "index.html").write_text(_html(scorecards, targets, run_prefix="../"), encoding="utf-8")
+    (out_dir / "targets.json").write_text(
+        json.dumps(_target_summary(targets, scorecards, auditability_rows), indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    (out_dir / "index.html").write_text(
+        _html(scorecards, targets, auditability_rows, run_prefix="../"),
+        encoding="utf-8",
+    )
     if out_dir.parent.name == "site":
         (out_dir.parent / "index.html").write_text(
-            _html(scorecards, targets, run_prefix=""),
+            _html(scorecards, targets, auditability_rows, run_prefix=""),
             encoding="utf-8",
         )
+
+
+def collect_auditability(scorecards: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+    for scorecard in scorecards:
+        run_path = scorecard.get("_run_path")
+        if not run_path:
+            continue
+        run_dir = Path(str(run_path))
+        path = run_dir / "auditability_scorecard.json"
+        if path.exists():
+            try:
+                auditability = json.loads(path.read_text(encoding="utf-8"))
+            except json.JSONDecodeError:
+                continue
+        else:
+            target_path = run_dir / "target_manifest.yaml"
+            if not target_path.exists():
+                continue
+            try:
+                with target_path.open("r", encoding="utf-8") as handle:
+                    target_manifest = yaml.safe_load(handle)
+            except yaml.YAMLError:
+                continue
+            if not isinstance(target_manifest, dict):
+                continue
+            auditability = build_auditability_scorecard(
+                target_manifest,
+                run_dir,
+                suite=scorecard.get("suite"),
+            )
+        auditability["_run_dir"] = scorecard.get("_run_dir")
+        rows.append(auditability)
+    return rows
 
 
 def _summary(scorecards: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -100,14 +144,20 @@ def _summary(scorecards: list[dict[str, Any]]) -> list[dict[str, Any]]:
 def _target_summary(
     targets: list[dict[str, Any]],
     scorecards: list[dict[str, Any]],
+    auditability_rows: list[dict[str, Any]] | None = None,
 ) -> list[dict[str, Any]]:
     score_by_target = {
         scorecard.get("target", {}).get("id"): scorecard
         for scorecard in scorecards
     }
+    auditability_by_target = {
+        row.get("target", {}).get("id"): row
+        for row in auditability_rows or []
+    }
     rows = []
     for target in targets:
         scorecard = score_by_target.get(target.get("id"))
+        auditability = auditability_by_target.get(target.get("id"))
         runtime = target.get("runtime") or {}
         required_env = list(runtime.get("required_env", []))
         missing_env = [] if scorecard is not None else [
@@ -126,10 +176,35 @@ def _target_summary(
                 "blockers": blockers,
                 "score": None if scorecard is None else _headline_score(scorecard),
                 "check_score": None if scorecard is None else scorecard.get("overall", {}).get("score"),
+                "auditability_score": None if auditability is None else auditability.get("overall", {}).get("score"),
+                "auditability_points": None if auditability is None else auditability.get("overall", {}).get("points"),
+                "auditability_possible": None if auditability is None else auditability.get("overall", {}).get("possible"),
                 "run": None if scorecard is None else scorecard.get("_run_dir"),
             }
         )
     return rows
+
+
+def _auditability_summary(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    summary = []
+    for row in sorted(rows, key=lambda item: str(item.get("_run_dir") or "")):
+        dimensions = row.get("dimensions") or {}
+        summary.append(
+            {
+                "run": row.get("_run_dir"),
+                "target": row.get("target"),
+                "overall": row.get("overall"),
+                "dimensions": {
+                    name: {
+                        "score": dimensions.get(name, {}).get("score"),
+                        "max_score": dimensions.get(name, {}).get("max_score"),
+                        "origin": dimensions.get(name, {}).get("origin"),
+                    }
+                    for name in DIMENSIONS
+                },
+            }
+        )
+    return summary
 
 
 def _target_blockers(
@@ -157,21 +232,32 @@ def _target_blockers(
     return blockers
 
 
-def _html(scorecards: list[dict[str, Any]], targets: list[dict[str, Any]], run_prefix: str) -> str:
+def _html(
+    scorecards: list[dict[str, Any]],
+    targets: list[dict[str, Any]],
+    auditability_rows: list[dict[str, Any]],
+    run_prefix: str,
+) -> str:
     rows = _summary(scorecards)
     table_rows = "\n".join(
         _table_row(row, index + 1, run_prefix) for index, row in enumerate(rows)
     )
+    auditability_table_rows = "\n".join(
+        _auditability_table_row(row, run_prefix)
+        for row in sorted(auditability_rows, key=lambda item: str(item.get("_run_dir") or ""))
+    )
     cards = "\n".join(_target_card(row) for row in rows)
     chart = _overall_chart(rows)
     status_rows = "\n".join(
-        _status_row(row, run_prefix) for row in _target_summary(targets, scorecards)
+        _status_row(row, run_prefix) for row in _target_summary(targets, scorecards, auditability_rows)
     )
     if not rows:
         table_rows = "<tr><td colspan=\"8\">No scorecards found.</td></tr>"
         cards = "<p>No runs found yet.</p>"
+    if not auditability_table_rows:
+        auditability_table_rows = f"<tr><td colspan=\"{len(DIMENSIONS) + 2}\">No auditability evidence found.</td></tr>"
     if not status_rows:
-        status_rows = "<tr><td colspan=\"7\">No target manifests found.</td></tr>"
+        status_rows = "<tr><td colspan=\"8\">No target manifests found.</td></tr>"
 
     return f"""<!doctype html>
 <html lang="en">
@@ -308,13 +394,18 @@ def _html(scorecards: list[dict[str, Any]], targets: list[dict[str, Any]], run_p
       white-space: nowrap;
       margin: 1px 2px 1px 0;
     }}
+    .muted {{
+      color: var(--muted);
+      font-size: .82rem;
+    }}
   </style>
 </head>
 <body>
   <main>
     <nav>
       <a href="{html.escape(run_prefix)}guide/">Seven Poisons Guide</a>
-      <a href="{html.escape(run_prefix)}leaderboard/">Leaderboard JSON</a>
+      <a href="{html.escape(run_prefix)}leaderboard/leaderboard.json">Safety JSON</a>
+      <a href="{html.escape(run_prefix)}leaderboard/auditability.json">Auditability JSON</a>
       <a href="https://github.com/aetna000/MemoryStackBench">GitHub</a>
     </nav>
     <h1>MemoryStackBench Leaderboard</h1>
@@ -333,6 +424,16 @@ def _html(scorecards: list[dict[str, Any]], targets: list[dict[str, Any]], run_p
       </table>
     </section>
     <section>
+      <h2>Auditability Matrix</h2>
+      <p class="meta">Separate evidence matrix for inspectability, provenance, retrieval transparency, deletion evidence, mutation lineage, and tamper evidence. These points do not affect the safety ranking above.</p>
+      <table>
+        <thead>
+          <tr><th>Run</th><th>Overall</th>{_auditability_headers()}</tr>
+        </thead>
+        <tbody>{auditability_table_rows}</tbody>
+      </table>
+    </section>
+    <section>
       <h2>Category Breakdown</h2>
       <div class="cards">
 {cards}
@@ -342,7 +443,7 @@ def _html(scorecards: list[dict[str, Any]], targets: list[dict[str, Any]], run_p
       <h2>Target Coverage</h2>
       <table>
         <thead>
-          <tr><th>Target</th><th>Framework</th><th>Status</th><th>Runtime</th><th>Score</th><th>Run</th><th>Blockers / Notes</th></tr>
+          <tr><th>Target</th><th>Framework</th><th>Status</th><th>Runtime</th><th>Safety</th><th>Audit</th><th>Run</th><th>Blockers / Notes</th></tr>
         </thead>
         <tbody>{status_rows}</tbody>
       </table>
@@ -370,6 +471,53 @@ def _table_row(row: dict[str, Any], rank: int, run_prefix: str) -> str:
         f"<td>{row.get('failure_count')}</td>"
         "</tr>"
     )
+
+
+def _auditability_headers() -> str:
+    return "".join(f"<th>{html.escape(_short_dimension(name))}</th>" for name in DIMENSIONS)
+
+
+def _auditability_table_row(row: dict[str, Any], run_prefix: str) -> str:
+    run = str(row.get("_run_dir") or "")
+    target = row.get("target") or {}
+    overall = row.get("overall") or {}
+    dimension_cells = "".join(
+        _auditability_cell((row.get("dimensions") or {}).get(name) or {})
+        for name in DIMENSIONS
+    )
+    return (
+        "<tr>"
+        f"<td><a href=\"{html.escape(run_prefix + run)}/\">{html.escape(run)}</a>"
+        f"<div class=\"muted\">{html.escape(str(target.get('framework') or ''))}</div></td>"
+        f"<td class=\"score\">{html.escape(str(overall.get('points')))}"
+        f"/{html.escape(str(overall.get('possible')))} ({_pct(overall.get('score'))})</td>"
+        f"{dimension_cells}"
+        "</tr>"
+    )
+
+
+def _auditability_cell(item: dict[str, Any]) -> str:
+    score = item.get("score")
+    max_score = item.get("max_score")
+    origin = item.get("origin") or "undeclared"
+    return (
+        "<td>"
+        f"<span class=\"score\">{html.escape(str(score))}/{html.escape(str(max_score))}</span>"
+        f"<div class=\"muted\">{html.escape(str(origin))}</div>"
+        "</td>"
+    )
+
+
+def _short_dimension(name: str) -> str:
+    labels = {
+        "inspectability": "Inspect",
+        "provenance": "Provenance",
+        "retrieval_transparency": "Retrieval",
+        "deletion_evidence": "Deletion",
+        "mutation_lineage": "Lineage",
+        "tamper_evidence": "Integrity",
+    }
+    return labels.get(name, name.replace("_", " ").title())
 
 
 def _target_card(row: dict[str, Any]) -> str:
@@ -409,10 +557,20 @@ def _status_row(row: dict[str, Any], run_prefix: str) -> str:
         f"<td>{html.escape(str(row.get('status')))}</td>"
         f"<td>{html.escape(runtime)}</td>"
         f"<td class=\"score\">{_pct(row.get('score'))}</td>"
+        f"<td class=\"score\">{_audit_score_text(row)}</td>"
         f"<td>{run_cell}</td>"
         f"<td>{blockers_cell}</td>"
         "</tr>"
     )
+
+
+def _audit_score_text(row: dict[str, Any]) -> str:
+    points = row.get("auditability_points")
+    possible = row.get("auditability_possible")
+    score = row.get("auditability_score")
+    if points is None or possible is None:
+        return "N/A"
+    return f"{html.escape(str(points))}/{html.escape(str(possible))} ({_pct(score)})"
 
 
 def _overall_chart(rows: list[dict[str, Any]]) -> str:

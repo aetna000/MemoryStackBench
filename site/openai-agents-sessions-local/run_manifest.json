@@ -1,6 +1,7 @@
 {
-  "created_at": "2026-07-07T13:37:21.882142+00:00",
+  "created_at": "2026-07-09T08:51:54.384915+00:00",
   "output_files": [
+    "auditability_scorecard.json",
     "checks.jsonl",
     "failure_report.md",
     "memory_snapshots.jsonl",
@@ -9,6 +10,7 @@
     "scorecard.html",
     "scorecard.json",
     "target_manifest.yaml",
+    "timings.jsonl",
     "transcript.jsonl"
   ],
   "scenario_count": 5,

@@ -1,6 +1,6 @@
 # MemoryStackBench
 
-MemoryStackBench is a benchmark harness for agent memory frameworks. It runs the same multi-session scenarios against each memory stack, records transcript and memory evidence, scores behavior and auditability, and emits a static HTML scorecard that can be published with GitHub Pages.
+MemoryStackBench is a benchmark harness for agent memory frameworks. It runs the same multi-session scenarios against each memory stack, records transcript and memory evidence, scores safety behavior, reports a separate auditability matrix, captures informational adapter timings, and emits static HTML scorecards that can be published with GitHub Pages.
 
 The v0 repository is intentionally small:
 
@@ -111,7 +111,7 @@ memorybench leaderboard --runs runs --out site/leaderboard
 
 See [docs/mem0-local.md](docs/mem0-local.md) for custom Mem0 config and report publishing.
 
-The leaderboard reads all `runs/*/scorecard.json` files and publishes quantitative overall/category scores with simple plots.
+The leaderboard reads all `runs/*/scorecard.json` files and publishes quantitative overall/category safety scores with simple plots. It also publishes `auditability.json`, a separate evidence matrix for inspectability, provenance, retrieval transparency, deletion evidence, mutation lineage, and tamper evidence.
 Internal smoke-test targets such as `toy` are filtered out of the leaderboard.
 
 ## Development Smoke Test
@@ -168,6 +168,16 @@ class MemoryStackAdapter:
 
 The runner does not need native framework details. Adapters normalize memory into JSON records with content, source, timestamps, confidence, scope, and raw native data when available.
 
+## Score Axes
+
+MemoryStackBench keeps methodology axes separate:
+
+- Safety: scenario pass/fail checks from `scorecard.json`.
+- Auditability: an evidence matrix in `auditability_scorecard.json`, with each dimension marked by origin such as `native`, `adapter_injected`, or `undeclared`.
+- Timing: per-adapter-operation timings in `timings.jsonl`. These are informational for safety runs and should not be treated as a performance leaderboard.
+
+A dedicated performance suite should use synthetic corpora, repeated runs, corpus-size sweeps, runner hardware metadata, and LLM/API call accounting before making speed ranking claims.
+
 ## Result Bundle
 
 Each run writes:
@@ -177,7 +187,9 @@ Each run writes:
 - `transcript.jsonl`
 - `memory_snapshots.jsonl`
 - `retrieval_events.jsonl`
+- `timings.jsonl`
 - `checks.jsonl`
+- `auditability_scorecard.json`
 - `scorecard.json`
 - `scorecard.html`
 - `failure_report.md`
@@ -204,8 +216,10 @@ Commit `site/` for a simple static site, or have CI upload `site/` as a Pages ar
 4. Add Cognee and CrewAI with pinned runtime isolation and native inspect/delete behavior.
 5. Add hosted/cloud targets only with strict cleanup: Supermemory, Hindsight, and Google ADK Memory Bank.
 6. Split existing store/session harnesses from automatic-extraction variants where the framework supports both.
-7. Add VM runner isolation after the first framework adapters are producing stable bundles.
-8. Add evidence hashing and Merkle roots once output schemas stop changing.
+7. Keep auditability as a separate matrix and classify native versus adapter-provided evidence in target manifests.
+8. Add a dedicated performance suite with corpus-size sweeps and LLM/API call accounting.
+9. Add VM runner isolation after the first framework adapters are producing stable bundles.
+10. Add evidence hashing and Merkle roots once output schemas stop changing.
 
 ## Public Framing
 

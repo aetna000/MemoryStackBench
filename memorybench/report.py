@@ -5,6 +5,8 @@ import json
 from pathlib import Path
 from typing import Any
 
+from memorybench.auditability import summarize_timing_file
+
 # Friendly name + one-line plain-English explanation for each scorecard category.
 # Falls back to a humanized slug for any category not listed here, so new suites
 # and new categories don't break the report.
@@ -112,20 +114,10 @@ def write_html_scorecard(scorecard: dict[str, Any], path: Path, run_dir: Path | 
     if not scenario_sections:
         scenario_sections = "<p>No scenarios were recorded for this run.</p>"
 
+    auditability_section = _auditability_section(run_dir)
+    timing_section = _timing_section(run_dir)
     data = html.escape(json.dumps(scorecard, indent=2))
-    evidence_links = "\n".join(
-        f'<li><a href="{name}"><code>{name}</code></a> — {desc}</li>'
-        for name, desc in (
-            ("transcript.jsonl", "every user message and agent reply, in order"),
-            ("memory_snapshots.jsonl", "what the memory store looked like after each session"),
-            ("retrieval_events.jsonl", "what the agent searched for and got back from memory"),
-            ("checks.jsonl", "every pass/fail check this scorecard is built from"),
-            ("run_manifest.json", "which target and suite produced this run"),
-            ("target_manifest.yaml", "exact configuration of the memory stack under test"),
-            ("failure_report.md", "plain-text list of failed checks only"),
-            ("scorecard.json", "the machine-readable version of this page"),
-        )
-    )
+    evidence_links = _evidence_links(run_dir)
 
     document = f"""<!doctype html>
 <html lang="en">
@@ -377,6 +369,10 @@ def write_html_scorecard(scorecard: dict[str, Any], path: Path, run_dir: Path | 
       {scenario_sections}
     </section>
 
+    {auditability_section}
+
+    {timing_section}
+
     <section>
       <h2>Evidence Bundle</h2>
       <p class="cat-desc">Raw logs behind every number on this page, in case you want to double-check or dig deeper.</p>
@@ -393,7 +389,11 @@ def write_html_scorecard(scorecard: dict[str, Any], path: Path, run_dir: Path | 
 </body>
 </html>
 """
-    path.write_text(document, encoding="utf-8")
+    path.write_text(_strip_trailing_whitespace(document), encoding="utf-8")
+
+
+def _strip_trailing_whitespace(document: str) -> str:
+    return "\n".join(line.rstrip() for line in document.splitlines()) + "\n"
 
 
 def copy_site(run_dir: Path, site_dir: Path) -> None:
@@ -408,7 +408,9 @@ def copy_site(run_dir: Path, site_dir: Path) -> None:
         "transcript.jsonl",
         "memory_snapshots.jsonl",
         "retrieval_events.jsonl",
+        "timings.jsonl",
         "checks.jsonl",
+        "auditability_scorecard.json",
         "run_manifest.json",
         "target_manifest.yaml",
     ):
@@ -443,6 +445,119 @@ def _category_row(name: str, value: dict[str, Any]) -> str:
         f"<div class=\"bar\"><span style=\"width:{pct}%\"></span></div></td>"
         "</tr>"
     )
+
+
+def _evidence_links(run_dir: Path | None) -> str:
+    specs = (
+        ("transcript.jsonl", "every user message and agent reply, in order"),
+        ("memory_snapshots.jsonl", "what the memory store looked like after each session"),
+        ("retrieval_events.jsonl", "what the agent searched for and got back from memory"),
+        ("timings.jsonl", "per-operation adapter timings captured with perf_counter"),
+        ("checks.jsonl", "every pass/fail check this scorecard is built from"),
+        ("auditability_scorecard.json", "auditability matrix derived from manifests and run evidence"),
+        ("run_manifest.json", "which target and suite produced this run"),
+        ("target_manifest.yaml", "exact configuration of the memory stack under test"),
+        ("failure_report.md", "plain-text list of failed checks only"),
+        ("scorecard.json", "the machine-readable version of this page"),
+    )
+    links = []
+    for name, desc in specs:
+        if run_dir is not None and not (run_dir / name).exists():
+            continue
+        links.append(f'<li><a href="{name}"><code>{name}</code></a> — {desc}</li>')
+    return "\n".join(links)
+
+
+def _auditability_section(run_dir: Path | None) -> str:
+    if run_dir is None:
+        return ""
+    path = run_dir / "auditability_scorecard.json"
+    if not path.exists():
+        return ""
+    try:
+        auditability = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return ""
+
+    overall = auditability.get("overall") or {}
+    rows = "\n".join(
+        _auditability_row(name, item)
+        for name, item in sorted((auditability.get("dimensions") or {}).items())
+    )
+    return f"""
+    <section>
+      <h2>Auditability Matrix</h2>
+      <p class="cat-desc">
+        This is separate from the safety score. It reports what the run evidence can verify and whether
+        the target manifest declares each capability as native, adapter-provided, or undeclared.
+      </p>
+      <table>
+        <thead><tr><th>Dimension</th><th>Evidence</th><th>Origin</th><th>Score</th></tr></thead>
+        <tbody>{rows}</tbody>
+      </table>
+      <p class="cat-desc">Overall audit evidence: {overall.get('points')} / {overall.get('possible')} points.</p>
+    </section>
+    """
+
+
+def _auditability_row(name: str, item: dict[str, Any]) -> str:
+    score = item.get("score")
+    max_score = item.get("max_score")
+    evidence = " ".join(str(value) for value in item.get("evidence", []) or [])
+    return (
+        "<tr>"
+        f"<td><strong>{html.escape(_humanize(name))}</strong><div class=\"cat-desc\">{html.escape(str(item.get('label') or ''))}</div></td>"
+        f"<td class=\"cat-desc\">{html.escape(evidence)}</td>"
+        f"<td>{html.escape(str(item.get('origin') or 'undeclared'))}</td>"
+        f"<td><strong>{html.escape(str(score))} / {html.escape(str(max_score))}</strong></td>"
+        "</tr>"
+    )
+
+
+def _timing_section(run_dir: Path | None) -> str:
+    if run_dir is None:
+        return ""
+    path = run_dir / "timings.jsonl"
+    if not path.exists():
+        return ""
+    summary = summarize_timing_file(path)
+    rows = "\n".join(
+        _timing_row(operation, stats)
+        for operation, stats in sorted((summary.get("operations") or {}).items())
+    )
+    if not rows:
+        rows = "<tr><td colspan=\"5\">No successful operation timings recorded.</td></tr>"
+    return f"""
+    <section>
+      <h2>Operation Timings</h2>
+      <p class="cat-desc">
+        Informational timings from this safety run. These are useful for spotting gross regressions,
+        but the Seven Sins suite is not a performance benchmark.
+      </p>
+      <table>
+        <thead><tr><th>Operation</th><th>Count</th><th>Median</th><th>P95</th><th>Range</th></tr></thead>
+        <tbody>{rows}</tbody>
+      </table>
+    </section>
+    """
+
+
+def _timing_row(operation: str, stats: dict[str, Any]) -> str:
+    return (
+        "<tr>"
+        f"<td><code>{html.escape(operation)}</code></td>"
+        f"<td>{html.escape(str(stats.get('count')))}</td>"
+        f"<td>{_ms(stats.get('median_ms'))}</td>"
+        f"<td>{_ms(stats.get('p95_ms'))}</td>"
+        f"<td>{_ms(stats.get('min_ms'))} - {_ms(stats.get('max_ms'))}</td>"
+        "</tr>"
+    )
+
+
+def _ms(value: Any) -> str:
+    if value is None:
+        return "N/A"
+    return f"{html.escape(str(value))} ms"
 
 
 def _describe_check(item: dict[str, Any]) -> str:

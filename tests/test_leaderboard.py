@@ -31,6 +31,7 @@ def test_write_leaderboard(tmp_path: Path) -> None:
 
     assert (out_dir / "index.html").exists()
     assert (out_dir / "leaderboard.json").exists()
+    assert (out_dir / "auditability.json").exists()
     assert (out_dir / "targets.json").exists()
 
 

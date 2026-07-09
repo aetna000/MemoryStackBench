@@ -25,6 +25,25 @@ capabilities:
   retrieval_log: true
   multi_user: true
   multi_tenant: false
+auditability:
+  inspectability:
+    origin: native
+    notes: SQLite records are listable with normalized metadata.
+  provenance:
+    origin: native
+    notes: Records carry source type, source session, source turn, trust tier, and episode id.
+  retrieval_transparency:
+    origin: native
+    notes: Retrieval events expose returned ids, candidates, ranking scores, and query hashes.
+  deletion_evidence:
+    origin: native
+    notes: Forget operations create deletion receipts and audit events in the native engine.
+  mutation_lineage:
+    origin: native
+    notes: Updates record fact keys and supersession links.
+  tamper_evidence:
+    origin: native
+    notes: Native audit log events are hash-linked; the benchmark bundle currently verifies exported query hashes.
 notes:
   - Uses the native aetnamem embedded SQLite engine with deterministic extraction, recall, supersession, deletion receipts, and retrieval audit events.
   - The adapter imports a sibling ../aetnamem checkout when present, otherwise it can use the installed aetnamem package.

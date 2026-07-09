@@ -4,7 +4,7 @@ https://aetna000.github.io/MemoryStackBench/guide/
 
 ## Current Real Results
 
-The hardened `seven_sins_v0_1` suite now has 5 scenario-level tests and 33 check-level assertions. Each run publishes its evidence bundle with transcripts, checks, memory snapshots, and scorecards. The current checked-in leaderboard contains hardened reruns for all currently publishable local, hosted, Docker, and API-backed targets.
+The hardened `seven_sins_v0_1` suite now has 5 scenario-level tests and 33 check-level assertions. Each run publishes its evidence bundle with transcripts, checks, memory snapshots, scorecards, auditability evidence, and per-operation timings. The current checked-in leaderboard contains hardened reruns for all currently publishable local, hosted, Docker, and API-backed targets.
 
 | Run | What It Tests | Checks | Scenarios | Failures |
 |---|---|---:|---:|---:|

@@ -36,6 +36,19 @@ Additional harness targets:
 - `targets/toy.yaml`: deterministic naive target for harness tests.
 - `targets/langgraph_reference.yaml`: local reference target only, not a publishable LangGraph score.
 
+## Auditability Metadata
+
+Target manifests may declare auditability origins per dimension:
+
+- `inspectability`
+- `provenance`
+- `retrieval_transparency`
+- `deletion_evidence`
+- `mutation_lineage`
+- `tamper_evidence`
+
+Use `origin: native` only when the framework itself exposes the evidence. Use adapter-oriented origins when the benchmark adapter injects, infers, or normalizes evidence that the framework does not expose directly.
+
 ## Build Order
 
 The lowest-risk implementation order is:
