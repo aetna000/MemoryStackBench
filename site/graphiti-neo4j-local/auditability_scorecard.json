@@ -1,0 +1,81 @@
+{
+  "dimensions": {
+    "deletion_evidence": {
+      "declared": null,
+      "evidence": [
+        "5 / 5 deletion checks passed."
+      ],
+      "label": "Can deletion be verified after a forget/delete operation?",
+      "max_score": 3,
+      "origin": "undeclared",
+      "score": 2
+    },
+    "inspectability": {
+      "declared": null,
+      "evidence": [
+        "No memory records were exposed in snapshots."
+      ],
+      "label": "Can the benchmark enumerate stored memory records and metadata?",
+      "max_score": 3,
+      "origin": "undeclared",
+      "score": 0
+    },
+    "mutation_lineage": {
+      "declared": null,
+      "evidence": [
+        "No records available for lineage checks."
+      ],
+      "label": "Can updates and supersession be reconstructed over time?",
+      "max_score": 3,
+      "origin": "undeclared",
+      "score": 0
+    },
+    "provenance": {
+      "declared": null,
+      "evidence": [
+        "No records available for provenance checks."
+      ],
+      "label": "Do records identify where the memory came from?",
+      "max_score": 3,
+      "origin": "undeclared",
+      "score": 0
+    },
+    "retrieval_transparency": {
+      "declared": null,
+      "evidence": [
+        "13 retrieval event(s) exposed.",
+        "Events include returned records and/or query evidence."
+      ],
+      "label": "Does recall expose returned ids, records, candidates, or scores?",
+      "max_score": 3,
+      "origin": "undeclared",
+      "score": 2
+    },
+    "tamper_evidence": {
+      "declared": null,
+      "evidence": [
+        "7 evidence bundle file(s) present."
+      ],
+      "label": "Does the evidence bundle expose hashes or integrity markers?",
+      "max_score": 3,
+      "origin": "undeclared",
+      "score": 1
+    }
+  },
+  "generated_at": "2026-07-09T09:07:50.562379+00:00",
+  "methodology": {
+    "max_score_per_dimension": 3,
+    "note": "Auditability is a separate evidence matrix, not part of the safety score. The origin field distinguishes native framework evidence from adapter-provided or undeclared evidence."
+  },
+  "overall": {
+    "points": 5,
+    "possible": 18,
+    "score": 0.2778
+  },
+  "suite": "seven_sins_v0_1",
+  "target": {
+    "framework": "graphiti",
+    "id": "graphiti_neo4j_pinned",
+    "mode": "white_box"
+  }
+}

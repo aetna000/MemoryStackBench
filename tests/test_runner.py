@@ -1,6 +1,7 @@
 from pathlib import Path
 import json
 
+from memorybench.report import copy_site
 from memorybench.runner import run_benchmark
 
 
@@ -22,3 +23,15 @@ def test_runner_writes_result_bundle(tmp_path: Path) -> None:
     assert first_timing["operation"] == "reset_subject"
     assert "duration_ms" in first_timing
     assert auditability["overall"]["possible"] == 18
+
+
+def test_report_backfills_auditability_for_legacy_run(tmp_path: Path) -> None:
+    out_dir = tmp_path / "run"
+    site_dir = tmp_path / "site" / "toy"
+    run_benchmark("targets/toy.yaml", "suites/seven_sins_v0_1", out_dir)
+    (out_dir / "auditability_scorecard.json").unlink()
+
+    copy_site(out_dir, site_dir)
+
+    assert (site_dir / "auditability_scorecard.json").exists()
+    assert "Auditability Matrix" in (site_dir / "index.html").read_text(encoding="utf-8")

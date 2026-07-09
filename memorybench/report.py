@@ -5,7 +5,9 @@ import json
 from pathlib import Path
 from typing import Any
 
-from memorybench.auditability import summarize_timing_file
+import yaml
+
+from memorybench.auditability import build_auditability_scorecard, summarize_timing_file
 
 # Friendly name + one-line plain-English explanation for each scorecard category.
 # Falls back to a humanized slug for any category not listed here, so new suites
@@ -401,6 +403,7 @@ def copy_site(run_dir: Path, site_dir: Path) -> None:
     scorecard_path = run_dir / "scorecard.json"
     if scorecard_path.exists():
         scorecard = json.loads(scorecard_path.read_text(encoding="utf-8"))
+        _ensure_auditability_scorecard(run_dir, scorecard)
         write_html_scorecard(scorecard, site_dir / "index.html", run_dir=run_dir)
     for name in (
         "scorecard.json",
@@ -419,6 +422,27 @@ def copy_site(run_dir: Path, site_dir: Path) -> None:
             (site_dir / name).write_bytes(source.read_bytes())
     if site_dir.parent.name == "site":
         _write_site_index(site_dir.parent)
+
+
+def _ensure_auditability_scorecard(run_dir: Path, scorecard: dict[str, Any]) -> None:
+    path = run_dir / "auditability_scorecard.json"
+    if path.exists():
+        return
+    manifest_path = run_dir / "target_manifest.yaml"
+    if not manifest_path.exists():
+        return
+    try:
+        target_manifest = yaml.safe_load(manifest_path.read_text(encoding="utf-8"))
+    except (OSError, yaml.YAMLError):
+        return
+    if not isinstance(target_manifest, dict):
+        return
+    auditability = build_auditability_scorecard(
+        target_manifest,
+        run_dir,
+        suite=scorecard.get("suite"),
+    )
+    path.write_text(json.dumps(auditability, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
 
 def _format_score(score: float | None) -> str:
