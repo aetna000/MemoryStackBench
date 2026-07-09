@@ -2,6 +2,19 @@
   {
     "blockers": [],
     "check_score": 1.0,
+    "framework": "aetnamem",
+    "manifest": "aetnamem.yaml",
+    "missing_env": [],
+    "required_env": [],
+    "run": "aetnamem-local",
+    "runtime": "local_python",
+    "score": 1.0,
+    "status": "implemented",
+    "target": "aetnamem_local"
+  },
+  {
+    "blockers": [],
+    "check_score": 1.0,
     "framework": "agno_memory",
     "manifest": "agno_memory.yaml",
     "missing_env": [],
@@ -90,7 +103,9 @@
     "target": "google_adk_memory_bank_pinned"
   },
   {
-    "blockers": [],
+    "blockers": [
+      "Docker runtime missing"
+    ],
     "check_score": 0.7273,
     "framework": "graphiti",
     "manifest": "graphiti.yaml",
@@ -105,7 +120,9 @@
     "target": "graphiti_neo4j_pinned"
   },
   {
-    "blockers": [],
+    "blockers": [
+      "Docker runtime missing"
+    ],
     "check_score": 1.0,
     "framework": "hindsight",
     "manifest": "hindsight.yaml",
@@ -146,7 +163,9 @@
     "target": "langmem_pinned"
   },
   {
-    "blockers": [],
+    "blockers": [
+      "Docker runtime missing"
+    ],
     "check_score": 0.9394,
     "framework": "letta",
     "manifest": "letta.yaml",

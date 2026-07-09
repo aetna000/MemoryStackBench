@@ -21,6 +21,7 @@ EXPECTED_TARGETS = {
     "supermemory.yaml",
     "hindsight.yaml",
     "tencentdb_agent_memory.yaml",
+    "aetnamem.yaml",
 }
 
 

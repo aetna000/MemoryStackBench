@@ -8,7 +8,7 @@ The v0 repository is intentionally small:
 - a common `MemoryStackAdapter` interface
 - a runner that records transcripts, memory snapshots, checks, retrieval logs, and scorecards
 - a deterministic toy adapter so the harness can be tested without external services
-- manifests for the full initial 17-target memory stack registry
+- manifests for the full initial 18-target memory stack registry
 - a static report generator for GitHub Pages
 
 ## Quickstart: Real Local Runs
@@ -16,7 +16,7 @@ The v0 repository is intentionally small:
 ```bash
 python -m venv .venv
 source .venv/bin/activate
-pip install -e ".[dev,mem0,zep,autogen-mem0,langgraph,llamaindex,langmem,agno,cognee,hindsight,openai-agents,graphiti,letta,aws,google-adk]"
+pip install -e ".[dev,aetnamem,mem0,zep,autogen-mem0,langgraph,llamaindex,langmem,agno,cognee,hindsight,openai-agents,graphiti,letta,aws,google-adk]"
 export OPENAI_API_KEY="..."
 
 memorybench run \
@@ -49,6 +49,7 @@ After the hardening review, `seven_sins_v0_1` contains 5 scenario-level tests an
 
 | Run | Target | Checks | Scenarios | Failures |
 |---|---|---:|---:|---:|
+| `aetnamem-local` | aetnamem embedded SQLite auditable memory engine | `33 / 33` (`100%`) | `5 / 5` (`100%`) | `0` |
 | `agno-memory-local` | Agno MemoryManager harness | `33 / 33` (`100%`) | `5 / 5` (`100%`) | `0` |
 | `aws-agentcore-memory-local` | AWS Bedrock AgentCore Memory event-memory harness | `33 / 33` (`100%`) | `5 / 5` (`100%`) | `0` |
 | `cognee-local` | Cognee remember/recall/forget harness | `33 / 33` (`100%`) | `5 / 5` (`100%`) | `0` |
@@ -79,6 +80,7 @@ Important interpretation notes:
 - The CrewAI result is a real CrewAI 1.15.1 run in Linux/Colima using unified `Memory`, LanceDB path storage, `remember()`, shallow `recall()`, `list_records()`, and `forget(record_ids=...)`. It is an `implemented_store_harness` result with explicit benchmark write/delete policy.
 - The Google ADK + Memory Bank result is a real Agent Platform Memory Bank run using a temporary Agent Engine, `memories.create()`, `memories.retrieve()`, `memories.list()`, and `memories.delete()`. The temporary engine was force-deleted after the run and verified as gone.
 - The Hindsight result is a real self-hosted Hindsight 0.8.4 slim Docker run on Colima using temporary banks, `retain()`, `recall()`, native `list_memories()`, and document deletion. It uses OpenAI `gpt-4o-mini`, OpenAI `text-embedding-3-small` embeddings, and RRF reranking.
+- The aetnamem result is a real local run of the embedded SQLite engine using deterministic extraction, quarantine of untrusted content, fact-slot supersession, deletion receipts, and retrieval audit events.
 - The Supermemory result is a real hosted API run using direct memory-entry create/search/list/forget endpoints. It does not measure Supermemory document ingestion, user profiles, connectors, or self-hosted mode.
 - The Mem0 and AutoGen + Mem0Memory reruns still show high-severity failures on webpage poisoning and deleted-email retention.
 - The Letta rerun mainly fails provenance checks: the right preference appears, but the scored record metadata points at later sessions rather than the original user statement.
@@ -146,6 +148,7 @@ The initial benchmark scope covers:
 15. Supermemory
 16. Hindsight
 17. TencentDB Agent Memory
+18. aetnamem
 
 See [docs/target-registry.md](docs/target-registry.md) for manifests, implementation status, and source links.
 

@@ -18,7 +18,7 @@ Why: the benchmark is only credible if the harness itself is reproducible before
 
 ## Target Scope
 
-The first public project scope is the 16-target registry in `docs/target-registry.md`:
+The first public project scope is the 18-target registry in `docs/target-registry.md`:
 
 - Mem0
 - Zep
@@ -36,6 +36,8 @@ The first public project scope is the 16-target registry in `docs/target-registr
 - OpenAI Agents SDK Sessions
 - Supermemory
 - Hindsight
+- TencentDB Agent Memory
+- aetnamem
 
 ## V1: First Real Framework Targets
 

@@ -1,0 +1,30 @@
+id: aetnamem_local
+framework: aetnamem
+mode: white_box
+status: implemented
+description: aetnamem embedded SQLite auditable memory engine.
+source_url: https://github.com/aetna000/aetnamem
+source:
+  type: python_package
+  repo: aetna000/aetnamem
+  package: aetnamem
+  version: 0.1.0
+runtime:
+  type: local_python
+model:
+  provider: none
+  model: deterministic_engine
+  temperature: 0
+package_path: ../aetnamem
+adapter:
+  module: memorybench.adapters.aetnamem
+  class: AetnamemAdapter
+capabilities:
+  inspect_memory: true
+  delete_memory: true
+  retrieval_log: true
+  multi_user: true
+  multi_tenant: false
+notes:
+  - Uses the native aetnamem embedded SQLite engine with deterministic extraction, recall, supersession, deletion receipts, and retrieval audit events.
+  - The adapter imports a sibling ../aetnamem checkout when present, otherwise it can use the installed aetnamem package.

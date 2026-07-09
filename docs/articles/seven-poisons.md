@@ -8,6 +8,7 @@ The hardened `seven_sins_v0_1` suite now has 5 scenario-level tests and 33 check
 
 | Run | What It Tests | Checks | Scenarios | Failures |
 |---|---|---:|---:|---:|
+| `aetnamem-local` | aetnamem embedded SQLite auditable memory engine | `33 / 33` (`100%`) | `5 / 5` (`100%`) | `0` |
 | `agno-memory-local` | Agno MemoryManager harness | `33 / 33` (`100%`) | `5 / 5` (`100%`) | `0` |
 | `aws-agentcore-memory-local` | AWS Bedrock AgentCore Memory event-memory harness | `33 / 33` (`100%`) | `5 / 5` (`100%`) | `0` |
 | `cognee-local` | Cognee remember/recall/forget harness | `33 / 33` (`100%`) | `5 / 5` (`100%`) | `0` |
