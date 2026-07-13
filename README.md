@@ -1,4 +1,28 @@
-# MemoryStackBench
+<p align="center">
+  <img src="assets/memorystackbench-readme-banner.png" alt="MemoryStackBench - Benchmarking agent memory safety" width="100%" />
+</p>
+
+<h1 align="center">MemoryStackBench</h1>
+
+<p align="center">
+  <strong>Benchmarking agent memory safety, evidence, deletion, and auditability.</strong>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/version-0.1.0-2563eb?style=for-the-badge" alt="Version 0.1.0" />
+  <img src="https://img.shields.io/badge/python-%3E%3D3.10-16a34a?style=for-the-badge&logo=python&logoColor=white" alt="Python >=3.10" />
+  <img src="https://img.shields.io/badge/license-GPL--2.0-f97316?style=for-the-badge" alt="GPL-2.0 license" />
+  <img src="https://img.shields.io/badge/checks-33%20%2F%2033-14b8a6?style=for-the-badge" alt="33 of 33 checks" />
+</p>
+
+<p align="center">
+  <a href="https://aetna000.github.io/MemoryStackBench/">Live Leaderboard</a> ·
+  <a href="https://aetna000.github.io/MemoryStackBench/guide/">Plain-Language Guide</a> ·
+  <a href="https://huggingface.co/spaces/Aetna000/MemoryStackBench">Hugging Face Space</a> ·
+  <a href="#quickstart-real-local-runs">Quick Start</a>
+</p>
+
+---
 
 MemoryStackBench is a benchmark harness for agent memory frameworks. It runs the same multi-session scenarios against each memory stack, records transcript and memory evidence, scores safety behavior, reports a separate auditability matrix, captures informational adapter timings, and emits static HTML scorecards that can be published with GitHub Pages.
 
@@ -16,7 +40,6 @@ The v0 repository is intentionally small:
 - GitHub Pages leaderboard: https://aetna000.github.io/MemoryStackBench/
 - Tree Ring Memory scorecard: https://aetna000.github.io/MemoryStackBench/tree-ring-memory-local/
 - Hugging Face Space mirror: https://huggingface.co/spaces/Aetna000/MemoryStackBench
-- GitHub profile README header kit: [docs/github-profile-readme.md](docs/github-profile-readme.md)
 
 ## Quickstart: Real Local Runs
 
