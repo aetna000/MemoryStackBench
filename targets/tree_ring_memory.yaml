@@ -1,4 +1,5 @@
 id: tree_ring_memory_local
+display_name: Tree Ring Memory
 framework: tree-ring-memory
 mode: white_box
 status: implemented_store_harness

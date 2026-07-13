@@ -107,3 +107,18 @@ def test_scorecard_reports_scenario_level_score() -> None:
     assert scorecard["overall"]["total"] == len(checks)
     assert scorecard["scenario_overall"]["total"] == 1
     assert scorecard["scenario_overall"]["passed"] == 0
+
+
+def test_scorecard_preserves_target_display_name() -> None:
+    scorecard = build_scorecard(
+        {
+            "id": "tree_ring_memory_local",
+            "display_name": "Tree Ring Memory",
+            "framework": "tree-ring-memory",
+            "mode": "white_box",
+        },
+        "suite",
+        [],
+    )
+
+    assert scorecard["target"]["display_name"] == "Tree Ring Memory"

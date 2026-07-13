@@ -56,7 +56,7 @@
     "tamper_evidence": {
       "declared": null,
       "evidence": [
-        "6 evidence bundle file(s) present."
+        "7 evidence bundle file(s) present."
       ],
       "label": "Does the evidence bundle expose hashes or integrity markers?",
       "max_score": 3,
@@ -64,7 +64,7 @@
       "score": 1
     }
   },
-  "generated_at": "2026-07-13T04:50:10.933324+00:00",
+  "generated_at": "2026-07-13T05:01:28.330264+00:00",
   "methodology": {
     "max_score_per_dimension": 3,
     "note": "Auditability is a separate evidence matrix, not part of the safety score. The origin field distinguishes native framework evidence from adapter-provided or undeclared evidence."

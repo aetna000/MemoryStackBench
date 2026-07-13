@@ -138,18 +138,57 @@ def test_leaderboard_ranks_and_reports_check_score_as_headline(tmp_path: Path) -
     assert "Checks 24/33 (73%) · Scenarios 0/5 (0%)" in html
 
 
+def test_leaderboard_uses_display_name_when_present(tmp_path: Path) -> None:
+    runs_dir = tmp_path / "runs"
+    targets_dir = tmp_path / "targets"
+    targets_dir.mkdir()
+    _write_scorecard(
+        runs_dir / "tree-ring-memory-local",
+        target_id="tree_ring_memory_local",
+        check_score={"passed": 33, "total": 33, "score": 1.0},
+        scenario_score={"passed": 5, "total": 5, "score": 1.0},
+        extra_target={"display_name": "Tree Ring Memory", "framework": "tree-ring-memory"},
+    )
+    (targets_dir / "tree_ring_memory.yaml").write_text(
+        "\n".join(
+            [
+                "id: tree_ring_memory_local",
+                "display_name: Tree Ring Memory",
+                "framework: tree-ring-memory",
+                "mode: white_box",
+                "status: implemented_store_harness",
+            ]
+        ),
+        encoding="utf-8",
+    )
+
+    out_dir = tmp_path / "site" / "leaderboard"
+    write_leaderboard(runs_dir, out_dir, targets_dir)
+
+    html = (out_dir / "index.html").read_text(encoding="utf-8")
+    targets = json.loads((out_dir / "targets.json").read_text(encoding="utf-8"))
+
+    assert "<h3>Tree Ring Memory</h3>" in html
+    assert "<td>Tree Ring Memory</td>" in html
+    assert targets[0]["display_name"] == "Tree Ring Memory"
+
+
 def _write_scorecard(
     run_dir: Path,
     *,
     target_id: str,
     check_score: dict[str, float],
     scenario_score: dict[str, float],
+    extra_target: dict[str, object] | None = None,
 ) -> None:
+    target = {"id": target_id, "framework": target_id, "mode": "white_box"}
+    if extra_target:
+        target.update(extra_target)
     run_dir.mkdir(parents=True)
     (run_dir / "scorecard.json").write_text(
         json.dumps(
             {
-                "target": {"id": target_id, "framework": target_id, "mode": "white_box"},
+                "target": target,
                 "suite": "seven_sins_v0_1",
                 "overall": check_score,
                 "scenario_overall": scenario_score,

@@ -566,6 +566,7 @@
     },
     "suite": "seven_sins_v0_1",
     "target": {
+      "display_name": "Tree Ring Memory",
       "framework": "tree-ring-memory",
       "id": "tree_ring_memory_local",
       "mode": "white_box"

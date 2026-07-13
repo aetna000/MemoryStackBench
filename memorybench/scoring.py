@@ -302,6 +302,7 @@ def build_scorecard(
     return {
         "target": {
             "id": target_manifest.get("id"),
+            "display_name": target_manifest.get("display_name") or target_manifest.get("name"),
             "framework": target_manifest.get("framework"),
             "mode": target_manifest.get("mode"),
         },

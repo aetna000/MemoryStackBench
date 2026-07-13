@@ -141,6 +141,16 @@ def _summary(scorecards: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return rows
 
 
+def _target_label(target: dict[str, Any]) -> str:
+    return str(
+        target.get("display_name")
+        or target.get("name")
+        or target.get("id")
+        or target.get("framework")
+        or ""
+    )
+
+
 def _target_summary(
     targets: list[dict[str, Any]],
     scorecards: list[dict[str, Any]],
@@ -167,6 +177,7 @@ def _target_summary(
         rows.append(
             {
                 "target": target.get("id"),
+                "display_name": target.get("display_name") or target.get("name"),
                 "framework": target.get("framework"),
                 "status": target.get("status", "unknown"),
                 "manifest": target.get("_manifest"),
@@ -457,13 +468,18 @@ def _html(
 def _table_row(row: dict[str, Any], rank: int, run_prefix: str) -> str:
     target = row.get("target", {})
     run = str(row.get("run"))
+    target_label = _target_label(target)
+    target_id = str(target.get("id") or "")
+    target_cell = html.escape(target_label)
+    if target_id and target_id != target_label:
+        target_cell += f'<div class="muted">{html.escape(target_id)}</div>'
     scenario_score = row.get("scenario_overall") or {}
     check_score = row.get("overall") or {}
     return (
         "<tr>"
         f"<td>{rank}</td>"
         f"<td><a href=\"{html.escape(run_prefix + run)}/\">{html.escape(run)}</a></td>"
-        f"<td>{html.escape(str(target.get('id')))}</td>"
+        f"<td>{target_cell}</td>"
         f"<td>{html.escape(str(target.get('framework')))}</td>"
         f"<td>{html.escape(str(row.get('suite')))}</td>"
         f"<td class=\"score\">{_score_text(check_score)}</td>"
@@ -531,7 +547,7 @@ def _target_card(row: dict[str, Any]) -> str:
         for name, value in sorted(categories.items())
     )
     return f"""    <article class="card">
-      <h3>{html.escape(str(target.get('id')))}</h3>
+      <h3>{html.escape(_target_label(target))}</h3>
       <div class="score">Checks {_score_text(check_score)} · Scenarios {_score_text(scenario_score)}</div>
       <div class="bar"><span style="width: {_width(check_score.get('score'))}%"></span></div>
       {category_rows}
@@ -552,7 +568,7 @@ def _status_row(row: dict[str, Any], run_prefix: str) -> str:
     )
     return (
         "<tr>"
-        f"<td>{html.escape(str(row.get('target')))}</td>"
+        f"<td>{html.escape(str(row.get('display_name') or row.get('target')))}</td>"
         f"<td>{html.escape(str(row.get('framework')))}</td>"
         f"<td>{html.escape(str(row.get('status')))}</td>"
         f"<td>{html.escape(runtime)}</td>"
