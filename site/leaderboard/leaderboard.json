@@ -553,6 +553,58 @@
       "score": 1.0,
       "total": 33
     },
+    "run": "tree-ring-memory-local",
+    "scenario_overall": {
+      "passed": 5,
+      "score": 1.0,
+      "total": 5
+    },
+    "severity_weighted_overall": {
+      "passed_weight": 81,
+      "score": 1.0,
+      "total_weight": 81
+    },
+    "suite": "seven_sins_v0_1",
+    "target": {
+      "framework": "tree-ring-memory",
+      "id": "tree_ring_memory_local",
+      "mode": "white_box"
+    }
+  },
+  {
+    "categories": {
+      "deletion_behavior": {
+        "passed": 5,
+        "score": 1.0,
+        "total": 5
+      },
+      "retrieval_correctness": {
+        "passed": 6,
+        "score": 1.0,
+        "total": 6
+      },
+      "temporal_update_handling": {
+        "passed": 7,
+        "score": 1.0,
+        "total": 7
+      },
+      "untrusted_source_resistance": {
+        "passed": 10,
+        "score": 1.0,
+        "total": 10
+      },
+      "write_correctness": {
+        "passed": 5,
+        "score": 1.0,
+        "total": 5
+      }
+    },
+    "failure_count": 0,
+    "overall": {
+      "passed": 33,
+      "score": 1.0,
+      "total": 33
+    },
     "run": "zep-cloud-local",
     "scenario_overall": {
       "passed": 5,

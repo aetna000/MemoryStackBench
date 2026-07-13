@@ -11,6 +11,12 @@ The v0 repository is intentionally small:
 - manifests for the full initial 19-target memory stack registry
 - a static report generator for GitHub Pages
 
+## Live Results
+
+- GitHub Pages leaderboard: https://aetna000.github.io/MemoryStackBench/
+- Tree Ring Memory scorecard: https://aetna000.github.io/MemoryStackBench/tree-ring-memory-local/
+- Hugging Face Space mirror: https://huggingface.co/spaces/Aetna000/MemoryStackBench
+
 ## Quickstart: Real Local Runs
 
 ```bash
@@ -60,6 +66,7 @@ After the hardening review, `seven_sins_v0_1` contains 5 scenario-level tests an
 | `langmem-local` | LangMem manage/search tools harness | `33 / 33` (`100%`) | `5 / 5` (`100%`) | `0` |
 | `llamaindex-memory-local` | LlamaIndex ChatMemoryBuffer harness | `33 / 33` (`100%`) | `5 / 5` (`100%`) | `0` |
 | `supermemory-api-local` | Supermemory hosted direct memory API | `33 / 33` (`100%`) | `5 / 5` (`100%`) | `0` |
+| `tree-ring-memory-local` | Tree Ring Memory Rust CLI / SQLite harness | `33 / 33` (`100%`) | `5 / 5` (`100%`) | `0` |
 | `zep-cloud-local` | Zep Cloud user graph harness | `33 / 33` (`100%`) | `5 / 5` (`100%`) | `0` |
 | `letta-local` | Letta self-hosted memory blocks | `31 / 33` (`94%`) | `3 / 5` (`60%`) | `2` |
 | `autogen-mem0-local` | AutoGen + Mem0Memory | `30 / 33` (`91%`) | `3 / 5` (`60%`) | `3` |
@@ -82,6 +89,7 @@ Important interpretation notes:
 - The Hindsight result is a real self-hosted Hindsight 0.8.4 slim Docker run on Colima using temporary banks, `retain()`, `recall()`, native `list_memories()`, and document deletion. It uses OpenAI `gpt-4o-mini`, OpenAI `text-embedding-3-small` embeddings, and RRF reranking.
 - The aetnamem result is a real local run of the embedded SQLite engine using deterministic extraction, quarantine of untrusted content, fact-slot supersession, deletion receipts, and retrieval audit events.
 - The Supermemory result is a real hosted API run using direct memory-entry create/search/list/forget endpoints. It does not measure Supermemory document ingestion, user profiles, connectors, or self-hosted mode.
+- The Tree Ring Memory result is a real local run of the Rust CLI using isolated project-local `.tree-ring` storage, public `remember`, `recall`, and `forget` commands, source metadata tags, and direct SQLite/FTS evidence inspection.
 - The Mem0 and AutoGen + Mem0Memory reruns still show high-severity failures on webpage poisoning and deleted-email retention.
 - The Letta rerun mainly fails provenance checks: the right preference appears, but the scored record metadata points at later sessions rather than the original user statement.
 - The OpenAI Agents SDK Sessions rerun measures conversation-history persistence, not semantic long-term memory. Its remaining failures are raw transcript retention of poisoned webpage text and stale SFO text.
@@ -149,7 +157,7 @@ The initial benchmark scope covers:
 16. Hindsight
 17. TencentDB Agent Memory
 18. aetnamem
-19. Tree Ring Memory (pending adapter; not yet a scored result)
+19. Tree Ring Memory
 
 See [docs/target-registry.md](docs/target-registry.md) for manifests, implementation status, and source links.
 

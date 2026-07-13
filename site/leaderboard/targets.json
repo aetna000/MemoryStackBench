@@ -127,9 +127,7 @@
     "auditability_points": 5,
     "auditability_possible": 18,
     "auditability_score": 0.2778,
-    "blockers": [
-      "Docker runtime missing"
-    ],
+    "blockers": [],
     "check_score": 0.7273,
     "framework": "graphiti",
     "manifest": "graphiti.yaml",
@@ -147,9 +145,7 @@
     "auditability_points": 12,
     "auditability_possible": 18,
     "auditability_score": 0.6667,
-    "blockers": [
-      "Docker runtime missing"
-    ],
+    "blockers": [],
     "check_score": 1.0,
     "framework": "hindsight",
     "manifest": "hindsight.yaml",
@@ -199,9 +195,7 @@
     "auditability_points": 11,
     "auditability_possible": 18,
     "auditability_score": 0.6111,
-    "blockers": [
-      "Docker runtime missing"
-    ],
+    "blockers": [],
     "check_score": 0.9394,
     "framework": "letta",
     "manifest": "letta.yaml",
@@ -300,6 +294,22 @@
     "score": 0.7879,
     "status": "implemented",
     "target": "tencentdb_agent_memory_pinned"
+  },
+  {
+    "auditability_points": 12,
+    "auditability_possible": 18,
+    "auditability_score": 0.6667,
+    "blockers": [],
+    "check_score": 1.0,
+    "framework": "tree-ring-memory",
+    "manifest": "tree_ring_memory.yaml",
+    "missing_env": [],
+    "required_env": [],
+    "run": "tree-ring-memory-local",
+    "runtime": "local_rust_cli",
+    "score": 1.0,
+    "status": "implemented_store_harness",
+    "target": "tree_ring_memory_local"
   },
   {
     "auditability_points": 11,

@@ -779,6 +779,51 @@
       "mutation_lineage": {
         "max_score": 3,
         "origin": "undeclared",
+        "score": 1
+      },
+      "provenance": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 3
+      },
+      "retrieval_transparency": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 2
+      },
+      "tamper_evidence": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 1
+      }
+    },
+    "overall": {
+      "points": 12,
+      "possible": 18,
+      "score": 0.6667
+    },
+    "run": "tree-ring-memory-local",
+    "target": {
+      "framework": "tree-ring-memory",
+      "id": "tree_ring_memory_local",
+      "mode": "white_box"
+    }
+  },
+  {
+    "dimensions": {
+      "deletion_evidence": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 2
+      },
+      "inspectability": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 3
+      },
+      "mutation_lineage": {
+        "max_score": 3,
+        "origin": "undeclared",
         "score": 0
       },
       "provenance": {

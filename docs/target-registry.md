@@ -30,7 +30,7 @@ Status meanings:
 | 16 | Hindsight | `targets/hindsight.yaml` | implemented_store_harness | official client, retain, recall, list/delete through API server |
 | 17 | TencentDB Agent Memory | `targets/tencentdb_agent_memory.yaml` | implemented | standalone gateway, auto-capture, L1 extraction, L0/L1 search, SQLite evidence inspection |
 | 18 | aetnamem | `targets/aetnamem.yaml` | implemented | embedded SQLite engine, deterministic extraction, recall, deletion, audit events |
-| 19 | Tree Ring Memory | `targets/tree_ring_memory.yaml` | pending_adapter | Rust CLI over isolated project `.tree-ring` storage, SQLite/FTS evidence inspection, recall, forget, consolidation, audit |
+| 19 | Tree Ring Memory | `targets/tree_ring_memory.yaml` | implemented_store_harness | Rust CLI over isolated project `.tree-ring` storage, SQLite/FTS evidence inspection, recall, forget |
 
 Additional harness targets:
 
@@ -73,7 +73,7 @@ The lowest-risk implementation order is:
 17. Google ADK + Memory Bank: implemented and scored with temporary Agent Engine cleanup and direct Memory Bank create/retrieve/list/delete APIs.
 18. TencentDB Agent Memory standalone gateway: implemented and scored with a local Node.js 22 checkout, auto-capture, L1 extraction, keyword recall, L0 conversation search, and SQLite evidence inspection.
 19. aetnamem embedded SQLite engine: implemented and scored with deterministic extraction, recall, supersession, deletion, and retrieval audit events.
-20. Tree Ring Memory Rust CLI adapter: initialize an isolated project root, exercise remember/evidence/recall/forget/consolidate/audit flows, and inspect the SQLite/FTS store for benchmark evidence.
+20. Tree Ring Memory Rust CLI adapter: implemented and scored with an isolated project root, public CLI remember/recall/forget calls, source metadata tags, and SQLite/FTS evidence inspection.
 21. AWS Bedrock AgentCore Memory long-term extraction strategy: IAM execution role, model access, async activation, and cleanup discipline.
 
 ## Current Local Blockers
