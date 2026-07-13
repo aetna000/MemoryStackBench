@@ -1,6 +1,16 @@
-# GitHub Profile README Header
+# GitHub Profile README Kit
 
-Use this in your `aetna000/aetna000` profile README.
+Use this in your `aetna000/aetna000` profile README. Keep
+`assets/aetna000-github-banner.png` at the same relative path in that profile
+repo.
+
+## Preview
+
+<p align="center">
+  <img src="../assets/aetna000-github-banner.png" alt="aetna000 - Agent memory benchmarks" width="100%" />
+</p>
+
+## Copy This
 
 ```md
 <p align="center">
@@ -11,6 +21,12 @@ Use this in your `aetna000/aetna000` profile README.
 
 <p align="center">
   <strong>Agent memory benchmarks · AI systems · open source experiments</strong>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Focus-Agent%20Memory-2563eb?style=for-the-badge" alt="Focus: Agent Memory" />
+  <img src="https://img.shields.io/badge/Benchmark-MemoryStackBench-16a34a?style=for-the-badge" alt="Benchmark: MemoryStackBench" />
+  <img src="https://img.shields.io/badge/Results-Reproducible-f97316?style=for-the-badge" alt="Reproducible results" />
 </p>
 
 <p align="center">
@@ -26,7 +42,14 @@ Use this in your `aetna000/aetna000` profile README.
 </p>
 
 <p align="center">
-  <a href="https://aetna000.github.io/MemoryStackBench/">MemoryStackBench</a> ·
+  <a href="#highlights">Highlights</a> ·
+  <a href="#projects">Projects</a> ·
+  <a href="#live-results">Live Results</a> ·
+  <a href="#contact">Contact</a>
+</p>
+
+<p align="center">
+  <a href="https://aetna000.github.io/MemoryStackBench/">Live Leaderboard</a> ·
   <a href="https://huggingface.co/spaces/Aetna000/MemoryStackBench">Hugging Face Space</a> ·
   <a href="https://x.com/aetna000">X</a>
 </p>
@@ -42,6 +65,9 @@ Use this in your `aetna000/aetna000` profile README.
 ## Projects
 
 - [MemoryStackBench](https://github.com/aetna000/MemoryStackBench)
+
+## Live Results
+
 - [Live leaderboard](https://aetna000.github.io/MemoryStackBench/)
 - [Hugging Face Space](https://huggingface.co/spaces/Aetna000/MemoryStackBench)
 
@@ -50,5 +76,3 @@ Use this in your `aetna000/aetna000` profile README.
 - X: [@aetna000](https://x.com/aetna000)
 - Hugging Face: [aetna000](https://huggingface.co/aetna000)
 ```
-
-If you use this in the profile repo, copy `assets/aetna000-github-banner.png` into the same `assets/` path there.
