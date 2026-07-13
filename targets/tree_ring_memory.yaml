@@ -1,0 +1,26 @@
+id: tree_ring_memory_pending
+framework: tree-ring-memory
+mode: white_box
+status: pending_adapter
+description: Tree Ring Memory target for local Rust CLI/TUI agent-memory lifecycle, SQLite/FTS recall, forgetting, consolidation, and audit evidence.
+source_url: https://github.com/TerminallyLazy/Tree-Ring-Memory
+source:
+  type: rust_cli
+  repo: TerminallyLazy/Tree-Ring-Memory
+  release: v0.11.0
+runtime:
+  type: local_rust_cli
+  binary: tree-ring
+  memory_root: temporary_project_root/.tree-ring
+adapter:
+  module: memorybench.adapters.tree_ring_memory
+  class: TreeRingMemoryAdapter
+capabilities:
+  inspect_memory: true
+  delete_memory: true
+  retrieval_log: partial
+  multi_user: false
+  multi_tenant: false
+notes:
+  - Pending adapter should initialize an isolated temporary project root, run the Rust CLI with --root or project-local .tree-ring storage, write benchmark memories with remember/evidence, retrieve with recall, delete or redact with forget/maintenance flows, and inspect SQLite/FTS evidence directly for audit checks.
+  - Do not report Tree Ring Memory on the public leaderboard until a concrete adapter run emits the normal MemoryStackBench result bundle.

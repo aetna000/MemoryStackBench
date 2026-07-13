@@ -22,6 +22,7 @@ EXPECTED_TARGETS = {
     "hindsight.yaml",
     "tencentdb_agent_memory.yaml",
     "aetnamem.yaml",
+    "tree_ring_memory.yaml",
 }
 
 

@@ -8,7 +8,7 @@ The v0 repository is intentionally small:
 - a common `MemoryStackAdapter` interface
 - a runner that records transcripts, memory snapshots, checks, retrieval logs, and scorecards
 - a deterministic toy adapter so the harness can be tested without external services
-- manifests for the full initial 18-target memory stack registry
+- manifests for the full initial 19-target memory stack registry
 - a static report generator for GitHub Pages
 
 ## Quickstart: Real Local Runs
@@ -149,6 +149,7 @@ The initial benchmark scope covers:
 16. Hindsight
 17. TencentDB Agent Memory
 18. aetnamem
+19. Tree Ring Memory (pending adapter; not yet a scored result)
 
 See [docs/target-registry.md](docs/target-registry.md) for manifests, implementation status, and source links.
 
