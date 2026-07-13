@@ -16,6 +16,7 @@ The v0 repository is intentionally small:
 - GitHub Pages leaderboard: https://aetna000.github.io/MemoryStackBench/
 - Tree Ring Memory scorecard: https://aetna000.github.io/MemoryStackBench/tree-ring-memory-local/
 - Hugging Face Space mirror: https://huggingface.co/spaces/Aetna000/MemoryStackBench
+- GitHub profile README header kit: [docs/github-profile-readme.md](docs/github-profile-readme.md)
 
 ## Quickstart: Real Local Runs
 
