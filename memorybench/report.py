@@ -354,7 +354,7 @@ def write_html_scorecard(scorecard: dict[str, Any], path: Path, run_dir: Path | 
         a correction, a deletion request, time passing, or an untrusted webpage — and then asks
         the agent about it later. A pass means the agent's answer <em>and</em> its stored memory
         agreed on the right fact. See the
-        <a href="{GUIDE_URL}">plain-language guide</a> for background on what each category means.
+        <a href="{GUIDE_URL}" target="_blank" rel="noopener noreferrer">plain-language guide</a> for background on what each category means.
       </p>
     </header>
 

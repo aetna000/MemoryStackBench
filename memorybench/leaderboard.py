@@ -417,7 +417,7 @@ def _html(
       <a href="{html.escape(run_prefix)}guide/index.html">Seven Poisons Guide</a>
       <a href="{html.escape(run_prefix)}leaderboard/leaderboard.json">Safety JSON</a>
       <a href="{html.escape(run_prefix)}leaderboard/auditability.json">Auditability JSON</a>
-      <a href="https://github.com/aetna000/MemoryStackBench">GitHub</a>
+      <a href="https://github.com/aetna000/MemoryStackBench" target="_blank" rel="noopener noreferrer">GitHub</a>
     </nav>
     <h1>MemoryStackBench Leaderboard</h1>
     <p class="meta">Quantitative memory safety check scores from local and CI benchmark runs.</p>
