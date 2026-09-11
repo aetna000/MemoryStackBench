@@ -268,3 +268,11 @@ The first public report should avoid a vague overall score. Use category scores:
 - auditability
 
 The useful claim is: fixed model, fixed scenarios, changing memory layer.
+
+## Credits
+
+Created and maintained by [Javad Taghia](https://github.com/aetna000) · [GitHub](https://github.com/aetna000) · [X](https://x.com/javadtaghia)
+
+## Citation
+
+If you use MemoryStackBench in your work, please cite it using the metadata in [CITATION.cff](CITATION.cff).

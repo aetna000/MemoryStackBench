@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use MemoryStackBench in your work, please cite it using the metadata below."
+title: "MemoryStackBench"
+type: software
+version: 0.1.0
+authors:
+  - family-names: "Taghia"
+    given-names: "Javad"
+    alias: "aetna000"
+url: "https://aetna000.github.io/MemoryStackBench/"
+repository-code: "https://github.com/aetna000/MemoryStackBench"
+license: "GPL-2.0-only"
+keywords:
+  - "agent memory"
+  - "benchmark"
+  - "memory safety"
+  - "auditability"
