@@ -3,6 +3,7 @@
 .env.*
 !.env.example
 .config/
+.claude/
 .venv/
 __pycache__/
 *.py[cod]
