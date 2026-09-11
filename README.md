@@ -11,7 +11,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/version-0.1.0-2563eb?style=for-the-badge" alt="Version 0.1.0" />
   <img src="https://img.shields.io/badge/python-%3E%3D3.10-16a34a?style=for-the-badge&logo=python&logoColor=white" alt="Python >=3.10" />
-  <img src="https://img.shields.io/badge/license-GPL--2.0-f97316?style=for-the-badge" alt="GPL-2.0 license" />
+  <img src="https://img.shields.io/badge/license-Apache--2.0-f97316?style=for-the-badge" alt="Apache-2.0 license" />
   <img src="https://img.shields.io/badge/checks-33%20%2F%2033-14b8a6?style=for-the-badge" alt="33 of 33 checks" />
 </p>
 

@@ -9,7 +9,7 @@ authors:
     alias: "aetna000"
 url: "https://aetna000.github.io/MemoryStackBench/"
 repository-code: "https://github.com/aetna000/MemoryStackBench"
-license: "GPL-2.0-only"
+license: "Apache-2.0"
 keywords:
   - "agent memory"
   - "benchmark"
