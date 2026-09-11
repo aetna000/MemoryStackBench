@@ -736,7 +736,7 @@ def _write_site_index(site_root: Path) -> None:
         item for item in site_root.iterdir() if item.is_dir() and (item / "index.html").exists()
     )
     links = "\n".join(
-        f'<li><a href="{html.escape(item.name)}/">{html.escape(item.name)}</a></li>'
+        f'<li><a href="{html.escape(item.name)}/index.html">{html.escape(item.name)}</a></li>'
         for item in result_dirs
     )
     if not links:

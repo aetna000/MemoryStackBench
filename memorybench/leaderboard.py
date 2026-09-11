@@ -414,7 +414,7 @@ def _html(
 <body>
   <main>
     <nav>
-      <a href="{html.escape(run_prefix)}guide/">Seven Poisons Guide</a>
+      <a href="{html.escape(run_prefix)}guide/index.html">Seven Poisons Guide</a>
       <a href="{html.escape(run_prefix)}leaderboard/leaderboard.json">Safety JSON</a>
       <a href="{html.escape(run_prefix)}leaderboard/auditability.json">Auditability JSON</a>
       <a href="https://github.com/aetna000/MemoryStackBench">GitHub</a>
@@ -478,7 +478,7 @@ def _table_row(row: dict[str, Any], rank: int, run_prefix: str) -> str:
     return (
         "<tr>"
         f"<td>{rank}</td>"
-        f"<td><a href=\"{html.escape(run_prefix + run)}/\">{html.escape(run)}</a></td>"
+        f"<td><a href=\"{html.escape(run_prefix + run)}/index.html\">{html.escape(run)}</a></td>"
         f"<td>{target_cell}</td>"
         f"<td>{html.escape(str(target.get('framework')))}</td>"
         f"<td>{html.escape(str(row.get('suite')))}</td>"
@@ -503,7 +503,7 @@ def _auditability_table_row(row: dict[str, Any], run_prefix: str) -> str:
     )
     return (
         "<tr>"
-        f"<td><a href=\"{html.escape(run_prefix + run)}/\">{html.escape(run)}</a>"
+        f"<td><a href=\"{html.escape(run_prefix + run)}/index.html\">{html.escape(run)}</a>"
         f"<div class=\"muted\">{html.escape(str(target.get('framework') or ''))}</div></td>"
         f"<td class=\"score\">{html.escape(str(overall.get('points')))}"
         f"/{html.escape(str(overall.get('possible')))} ({_pct(overall.get('score'))})</td>"
@@ -559,7 +559,7 @@ def _status_row(row: dict[str, Any], run_prefix: str) -> str:
     run_cell = ""
     if run:
         escaped = html.escape(str(run))
-        run_cell = f'<a href="{html.escape(run_prefix + str(run))}/">{escaped}</a>'
+        run_cell = f'<a href="{html.escape(run_prefix + str(run))}/index.html">{escaped}</a>'
 
     blockers = list(row.get("blockers") or [])
     runtime = str(row.get("runtime") or "")
