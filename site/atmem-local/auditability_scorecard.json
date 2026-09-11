@@ -86,7 +86,7 @@
       "score": 2
     }
   },
-  "generated_at": "2026-07-09T08:32:32.812306+00:00",
+  "generated_at": "2026-09-11T14:30:48.387082+00:00",
   "methodology": {
     "max_score_per_dimension": 3,
     "note": "Auditability is a separate evidence matrix, not part of the safety score. The origin field distinguishes native framework evidence from adapter-provided or undeclared evidence."
@@ -98,8 +98,8 @@
   },
   "suite": "seven_sins_v0_1",
   "target": {
-    "framework": "aetnamem",
-    "id": "aetnamem_local",
+    "framework": "atmem",
+    "id": "atmem_local",
     "mode": "white_box"
   }
 }

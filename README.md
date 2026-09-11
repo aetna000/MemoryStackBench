@@ -18,7 +18,7 @@
 <p align="center">
   <a href="https://aetna000.github.io/MemoryStackBench/">Live Leaderboard</a> ·
   <a href="https://aetna000.github.io/MemoryStackBench/guide/">Plain-Language Guide</a> ·
-  <a href="https://huggingface.co/spaces/Aetna000/MemoryStackBench">Hugging Face Space</a> ·
+  <a href="https://huggingface.co/spaces/javadtaghia/MemoryStackBench">Hugging Face Space</a> ·
   <a href="#quickstart-real-local-runs">Quick Start</a>
 </p>
 
@@ -39,14 +39,14 @@ The v0 repository is intentionally small:
 
 - GitHub Pages leaderboard: https://aetna000.github.io/MemoryStackBench/
 - Tree Ring Memory scorecard: https://aetna000.github.io/MemoryStackBench/tree-ring-memory-local/
-- Hugging Face Space mirror: https://huggingface.co/spaces/Aetna000/MemoryStackBench
+- Hugging Face Space mirror: https://huggingface.co/spaces/javadtaghia/MemoryStackBench
 
 ## Quickstart: Real Local Runs
 
 ```bash
 python -m venv .venv
 source .venv/bin/activate
-pip install -e ".[dev,aetnamem,mem0,zep,autogen-mem0,langgraph,llamaindex,langmem,agno,cognee,hindsight,openai-agents,graphiti,letta,aws,google-adk]"
+pip install -e ".[dev,atmem,mem0,zep,autogen-mem0,langgraph,llamaindex,langmem,agno,cognee,hindsight,openai-agents,graphiti,letta,aws,google-adk]"
 export OPENAI_API_KEY="..."
 
 memorybench run \
@@ -79,7 +79,7 @@ After the hardening review, `seven_sins_v0_1` contains 5 scenario-level tests an
 
 | Run | Target | Checks | Scenarios | Failures |
 |---|---|---:|---:|---:|
-| `aetnamem-local` | aetnamem embedded SQLite auditable memory engine | `33 / 33` (`100%`) | `5 / 5` (`100%`) | `0` |
+| `atmem-local` | AtMem embedded SQLite auditable memory engine | `33 / 33` (`100%`) | `5 / 5` (`100%`) | `0` |
 | `agno-memory-local` | Agno MemoryManager harness | `33 / 33` (`100%`) | `5 / 5` (`100%`) | `0` |
 | `aws-agentcore-memory-local` | AWS Bedrock AgentCore Memory event-memory harness | `33 / 33` (`100%`) | `5 / 5` (`100%`) | `0` |
 | `cognee-local` | Cognee remember/recall/forget harness | `33 / 33` (`100%`) | `5 / 5` (`100%`) | `0` |
@@ -111,7 +111,7 @@ Important interpretation notes:
 - The CrewAI result is a real CrewAI 1.15.1 run in Linux/Colima using unified `Memory`, LanceDB path storage, `remember()`, shallow `recall()`, `list_records()`, and `forget(record_ids=...)`. It is an `implemented_store_harness` result with explicit benchmark write/delete policy.
 - The Google ADK + Memory Bank result is a real Agent Platform Memory Bank run using a temporary Agent Engine, `memories.create()`, `memories.retrieve()`, `memories.list()`, and `memories.delete()`. The temporary engine was force-deleted after the run and verified as gone.
 - The Hindsight result is a real self-hosted Hindsight 0.8.4 slim Docker run on Colima using temporary banks, `retain()`, `recall()`, native `list_memories()`, and document deletion. It uses OpenAI `gpt-4o-mini`, OpenAI `text-embedding-3-small` embeddings, and RRF reranking.
-- The aetnamem result is a real local run of the embedded SQLite engine using deterministic extraction, quarantine of untrusted content, fact-slot supersession, deletion receipts, and retrieval audit events.
+- The AtMem result is a real local run of the embedded SQLite engine using deterministic extraction, quarantine of untrusted content, fact-slot supersession, deletion receipts, and retrieval audit events.
 - The Supermemory result is a real hosted API run using direct memory-entry create/search/list/forget endpoints. It does not measure Supermemory document ingestion, user profiles, connectors, or self-hosted mode.
 - The Tree Ring Memory result is a real local run of the Rust CLI using isolated project-local `.tree-ring` storage, public `remember`, `recall`, and `forget` commands, source metadata tags, and direct SQLite/FTS evidence inspection.
 - The Mem0 and AutoGen + Mem0Memory reruns still show high-severity failures on webpage poisoning and deleted-email retention.
@@ -180,7 +180,7 @@ The initial benchmark scope covers:
 15. Supermemory
 16. Hindsight
 17. TencentDB Agent Memory
-18. aetnamem
+18. AtMem
 19. Tree Ring Memory
 
 See [docs/target-registry.md](docs/target-registry.md) for manifests, implementation status, and source links.

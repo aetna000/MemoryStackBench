@@ -37,7 +37,7 @@ The first public project scope is the 18-target registry in `docs/target-registr
 - Supermemory
 - Hindsight
 - TencentDB Agent Memory
-- aetnamem
+- atmem
 
 ## V1: First Real Framework Targets
 

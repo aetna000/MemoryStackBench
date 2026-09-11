@@ -1,24 +1,24 @@
-id: aetnamem_local
-framework: aetnamem
+id: atmem_local
+display_name: AtMem
+framework: atmem
 mode: white_box
 status: implemented
-description: aetnamem embedded SQLite auditable memory engine.
-source_url: https://github.com/aetna000/aetnamem
+description: AtMem embedded SQLite auditable memory engine.
+source_url: https://github.com/aetna000/atmem
 source:
   type: python_package
-  repo: aetna000/aetnamem
-  package: aetnamem
-  version: 0.1.0
+  repo: aetna000/atmem
+  package: atmem
+  version: 2.2.6
 runtime:
   type: local_python
 model:
   provider: none
   model: deterministic_engine
   temperature: 0
-package_path: ../aetnamem
 adapter:
-  module: memorybench.adapters.aetnamem
-  class: AetnamemAdapter
+  module: memorybench.adapters.atmem
+  class: AtMemAdapter
 capabilities:
   inspect_memory: true
   delete_memory: true
@@ -45,5 +45,5 @@ auditability:
     origin: native
     notes: Native audit log events are hash-linked; the benchmark bundle currently verifies exported query hashes.
 notes:
-  - Uses the native aetnamem embedded SQLite engine with deterministic extraction, recall, supersession, deletion receipts, and retrieval audit events.
-  - The adapter imports a sibling ../aetnamem checkout when present, otherwise it can use the installed aetnamem package.
+  - Uses the native AtMem embedded SQLite engine with deterministic extraction, recall, supersession, deletion receipts, and retrieval audit events.
+  - Uses the published atmem package from PyPI.

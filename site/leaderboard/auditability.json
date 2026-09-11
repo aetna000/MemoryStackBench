@@ -3,51 +3,6 @@
     "dimensions": {
       "deletion_evidence": {
         "max_score": 3,
-        "origin": "native",
-        "score": 3
-      },
-      "inspectability": {
-        "max_score": 3,
-        "origin": "native",
-        "score": 3
-      },
-      "mutation_lineage": {
-        "max_score": 3,
-        "origin": "native",
-        "score": 2
-      },
-      "provenance": {
-        "max_score": 3,
-        "origin": "native",
-        "score": 3
-      },
-      "retrieval_transparency": {
-        "max_score": 3,
-        "origin": "native",
-        "score": 3
-      },
-      "tamper_evidence": {
-        "max_score": 3,
-        "origin": "native",
-        "score": 2
-      }
-    },
-    "overall": {
-      "points": 16,
-      "possible": 18,
-      "score": 0.8889
-    },
-    "run": "aetnamem-local",
-    "target": {
-      "framework": "aetnamem",
-      "id": "aetnamem_local",
-      "mode": "white_box"
-    }
-  },
-  {
-    "dimensions": {
-      "deletion_evidence": {
-        "max_score": 3,
         "origin": "undeclared",
         "score": 2
       },
@@ -86,6 +41,51 @@
     "target": {
       "framework": "agno_memory",
       "id": "agno_memory_pinned",
+      "mode": "white_box"
+    }
+  },
+  {
+    "dimensions": {
+      "deletion_evidence": {
+        "max_score": 3,
+        "origin": "native",
+        "score": 3
+      },
+      "inspectability": {
+        "max_score": 3,
+        "origin": "native",
+        "score": 3
+      },
+      "mutation_lineage": {
+        "max_score": 3,
+        "origin": "native",
+        "score": 2
+      },
+      "provenance": {
+        "max_score": 3,
+        "origin": "native",
+        "score": 3
+      },
+      "retrieval_transparency": {
+        "max_score": 3,
+        "origin": "native",
+        "score": 3
+      },
+      "tamper_evidence": {
+        "max_score": 3,
+        "origin": "native",
+        "score": 2
+      }
+    },
+    "overall": {
+      "points": 16,
+      "possible": 18,
+      "score": 0.8889
+    },
+    "run": "atmem-local",
+    "target": {
+      "framework": "atmem",
+      "id": "atmem_local",
       "mode": "white_box"
     }
   },
@@ -758,6 +758,96 @@
       "score": 0.5556
     },
     "run": "tencentdb-agent-memory-local",
+    "target": {
+      "framework": "tencentdb-agent-memory",
+      "id": "tencentdb_agent_memory_pinned",
+      "mode": "white_box"
+    }
+  },
+  {
+    "dimensions": {
+      "deletion_evidence": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 1
+      },
+      "inspectability": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 3
+      },
+      "mutation_lineage": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 1
+      },
+      "provenance": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 2
+      },
+      "retrieval_transparency": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 2
+      },
+      "tamper_evidence": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 1
+      }
+    },
+    "overall": {
+      "points": 10,
+      "possible": 18,
+      "score": 0.5556
+    },
+    "run": "tencentdb-agent-memory-two-eval",
+    "target": {
+      "framework": "tencentdb-agent-memory",
+      "id": "tencentdb_agent_memory_pinned",
+      "mode": "white_box"
+    }
+  },
+  {
+    "dimensions": {
+      "deletion_evidence": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 2
+      },
+      "inspectability": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 3
+      },
+      "mutation_lineage": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 1
+      },
+      "provenance": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 2
+      },
+      "retrieval_transparency": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 2
+      },
+      "tamper_evidence": {
+        "max_score": 3,
+        "origin": "undeclared",
+        "score": 1
+      }
+    },
+    "overall": {
+      "points": 11,
+      "possible": 18,
+      "score": 0.6111
+    },
+    "run": "tencentdb-agent-memory-two-fixed-eval",
     "target": {
       "framework": "tencentdb-agent-memory",
       "id": "tencentdb_agent_memory_pinned",

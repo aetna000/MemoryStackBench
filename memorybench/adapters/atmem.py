@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from pathlib import Path
 import shutil
-import sys
 import tempfile
 from typing import Any
 
@@ -10,8 +9,8 @@ from memorybench.adapters.base import MemoryStackAdapter
 from memorybench.adapters.mem0 import answer_from_records
 
 
-class AetnamemAdapter(MemoryStackAdapter):
-    """aetnamem embedded SQLite adapter."""
+class AtMemAdapter(MemoryStackAdapter):
+    """AtMem embedded SQLite adapter."""
 
     capabilities = {
         "inspect_memory": True,
@@ -23,16 +22,14 @@ class AetnamemAdapter(MemoryStackAdapter):
 
     def __init__(self, config: dict[str, Any] | None = None) -> None:
         super().__init__(config)
-        self._load_local_package()
-
-        from aetnamem import Memory
+        from atmem import Memory
 
         self._root_dir = Path(
             self.config.get("data_dir")
-            or tempfile.mkdtemp(prefix="memorystackbench-aetnamem-")
+            or tempfile.mkdtemp(prefix="memorystackbench-atmem-")
         )
         self._root_dir.mkdir(parents=True, exist_ok=True)
-        self._db_path = self._root_dir / "aetnamem.sqlite"
+        self._db_path = self._root_dir / "atmem.sqlite"
         self._memory = Memory(self._db_path)
         self._turn_counts: dict[tuple[str, str], int] = {}
 
@@ -43,7 +40,7 @@ class AetnamemAdapter(MemoryStackAdapter):
                 del self._turn_counts[key]
 
     def send(self, subject_id: str, session_id: str, message: str) -> str:
-        from aetnamem.extract import classify_source, is_forget_request
+        from atmem.extract import classify_source, is_forget_request
 
         turn_id = self._next_turn_id(subject_id, session_id)
         if is_forget_request(message):
@@ -103,12 +100,3 @@ class AetnamemAdapter(MemoryStackAdapter):
         key = (subject_id, session_id)
         self._turn_counts[key] = self._turn_counts.get(key, 0) + 1
         return self._turn_counts[key]
-
-    def _load_local_package(self) -> None:
-        package_path = self.config.get("package_path")
-        if package_path:
-            path = Path(package_path).expanduser().resolve()
-        else:
-            path = Path(__file__).resolve().parents[3] / "aetnamem"
-        if path.exists():
-            sys.path.insert(0, str(path))

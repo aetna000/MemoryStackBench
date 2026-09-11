@@ -1,22 +1,5 @@
 [
   {
-    "auditability_points": 16,
-    "auditability_possible": 18,
-    "auditability_score": 0.8889,
-    "blockers": [],
-    "check_score": 1.0,
-    "display_name": null,
-    "framework": "aetnamem",
-    "manifest": "aetnamem.yaml",
-    "missing_env": [],
-    "required_env": [],
-    "run": "aetnamem-local",
-    "runtime": "local_python",
-    "score": 1.0,
-    "status": "implemented",
-    "target": "aetnamem_local"
-  },
-  {
     "auditability_points": 12,
     "auditability_possible": 18,
     "auditability_score": 0.6667,
@@ -32,6 +15,23 @@
     "score": 1.0,
     "status": "implemented_store_harness",
     "target": "agno_memory_pinned"
+  },
+  {
+    "auditability_points": 16,
+    "auditability_possible": 18,
+    "auditability_score": 0.8889,
+    "blockers": [],
+    "check_score": 1.0,
+    "display_name": "AtMem",
+    "framework": "atmem",
+    "manifest": "atmem.yaml",
+    "missing_env": [],
+    "required_env": [],
+    "run": "atmem-local",
+    "runtime": "local_python",
+    "score": 1.0,
+    "status": "implemented",
+    "target": "atmem_local"
   },
   {
     "auditability_points": 13,
@@ -294,11 +294,11 @@
     "target": "supermemory_api_pinned"
   },
   {
-    "auditability_points": 10,
+    "auditability_points": 11,
     "auditability_possible": 18,
-    "auditability_score": 0.5556,
+    "auditability_score": 0.6111,
     "blockers": [],
-    "check_score": 0.7879,
+    "check_score": 1.0,
     "display_name": null,
     "framework": "tencentdb-agent-memory",
     "manifest": "tencentdb_agent_memory.yaml",
@@ -306,9 +306,9 @@
     "required_env": [
       "OPENAI_API_KEY"
     ],
-    "run": "tencentdb-agent-memory-local",
+    "run": "tencentdb-agent-memory-two-fixed-eval",
     "runtime": "local_node_gateway",
-    "score": 0.7879,
+    "score": 1.0,
     "status": "implemented",
     "target": "tencentdb_agent_memory_pinned"
   },

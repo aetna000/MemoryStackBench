@@ -14,8 +14,8 @@ dependencies = [
 dev = [
   "pytest>=8.0.0",
 ]
-aetnamem = [
-  "aetnamem==0.1.0",
+atmem = [
+  "atmem==2.2.6",
 ]
 mem0 = [
   "mem0ai>=2.0.1",

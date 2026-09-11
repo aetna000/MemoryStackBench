@@ -33,7 +33,7 @@
       "score": 1.0,
       "total": 33
     },
-    "run": "aetnamem-local",
+    "run": "agno-memory-local",
     "scenario_overall": {
       "passed": 5,
       "score": 1.0,
@@ -46,8 +46,8 @@
     },
     "suite": "seven_sins_v0_1",
     "target": {
-      "framework": "aetnamem",
-      "id": "aetnamem_local",
+      "framework": "agno_memory",
+      "id": "agno_memory_pinned",
       "mode": "white_box"
     }
   },
@@ -85,7 +85,7 @@
       "score": 1.0,
       "total": 33
     },
-    "run": "agno-memory-local",
+    "run": "atmem-local",
     "scenario_overall": {
       "passed": 5,
       "score": 1.0,
@@ -98,8 +98,9 @@
     },
     "suite": "seven_sins_v0_1",
     "target": {
-      "framework": "agno_memory",
-      "id": "agno_memory_pinned",
+      "display_name": "AtMem",
+      "framework": "atmem",
+      "id": "atmem_local",
       "mode": "white_box"
     }
   },
@@ -553,6 +554,58 @@
       "score": 1.0,
       "total": 33
     },
+    "run": "tencentdb-agent-memory-two-fixed-eval",
+    "scenario_overall": {
+      "passed": 5,
+      "score": 1.0,
+      "total": 5
+    },
+    "severity_weighted_overall": {
+      "passed_weight": 81,
+      "score": 1.0,
+      "total_weight": 81
+    },
+    "suite": "seven_sins_v0_1",
+    "target": {
+      "framework": "tencentdb-agent-memory",
+      "id": "tencentdb_agent_memory_pinned",
+      "mode": "white_box"
+    }
+  },
+  {
+    "categories": {
+      "deletion_behavior": {
+        "passed": 5,
+        "score": 1.0,
+        "total": 5
+      },
+      "retrieval_correctness": {
+        "passed": 6,
+        "score": 1.0,
+        "total": 6
+      },
+      "temporal_update_handling": {
+        "passed": 7,
+        "score": 1.0,
+        "total": 7
+      },
+      "untrusted_source_resistance": {
+        "passed": 10,
+        "score": 1.0,
+        "total": 10
+      },
+      "write_correctness": {
+        "passed": 5,
+        "score": 1.0,
+        "total": 5
+      }
+    },
+    "failure_count": 0,
+    "overall": {
+      "passed": 33,
+      "score": 1.0,
+      "total": 33
+    },
     "run": "tree-ring-memory-local",
     "scenario_overall": {
       "passed": 5,
@@ -919,6 +972,58 @@
       "total": 33
     },
     "run": "tencentdb-agent-memory-local",
+    "scenario_overall": {
+      "passed": 2,
+      "score": 0.4,
+      "total": 5
+    },
+    "severity_weighted_overall": {
+      "passed_weight": 61,
+      "score": 0.7531,
+      "total_weight": 81
+    },
+    "suite": "seven_sins_v0_1",
+    "target": {
+      "framework": "tencentdb-agent-memory",
+      "id": "tencentdb_agent_memory_pinned",
+      "mode": "white_box"
+    }
+  },
+  {
+    "categories": {
+      "deletion_behavior": {
+        "passed": 2,
+        "score": 0.4,
+        "total": 5
+      },
+      "retrieval_correctness": {
+        "passed": 6,
+        "score": 1.0,
+        "total": 6
+      },
+      "temporal_update_handling": {
+        "passed": 6,
+        "score": 0.8571,
+        "total": 7
+      },
+      "untrusted_source_resistance": {
+        "passed": 7,
+        "score": 0.7,
+        "total": 10
+      },
+      "write_correctness": {
+        "passed": 5,
+        "score": 1.0,
+        "total": 5
+      }
+    },
+    "failure_count": 7,
+    "overall": {
+      "passed": 26,
+      "score": 0.7879,
+      "total": 33
+    },
+    "run": "tencentdb-agent-memory-two-eval",
     "scenario_overall": {
       "passed": 2,
       "score": 0.4,

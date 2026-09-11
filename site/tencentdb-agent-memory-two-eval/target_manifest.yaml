@@ -1,0 +1,41 @@
+id: tencentdb_agent_memory_pinned
+framework: tencentdb-agent-memory
+mode: white_box
+status: implemented
+description: TencentDB Agent Memory target using the local standalone HTTP gateway, auto-capture, L1 extraction, recall, and SQLite evidence inspection.
+source_url: https://github.com/TencentCloud/TencentDB-Agent-Memory
+source:
+  type: node_package_and_local_gateway
+  repo: TencentCloud/TencentDB-Agent-Memory
+  package: "@tencentdb-agent-memory/memory-tencentdb"
+  version: 0.3.6
+runtime:
+  type: local_node_gateway
+  package_env: TENCENTDB_AGENT_MEMORY_DIR
+  required_env:
+    - OPENAI_API_KEY
+  llm:
+    base_url: https://api.openai.com/v1
+    model: gpt-4o-mini
+    max_tokens: 2048
+  memory:
+    recall_strategy: keyword
+    every_n_conversations: 1
+    l1_idle_timeout_seconds: 1
+model:
+  provider: openai_compatible
+  model: gpt-4o-mini
+  temperature: 0
+adapter:
+  module: memorybench.adapters.tencentdb_agent_memory
+  class: TencentDbAgentMemoryAdapter
+capabilities:
+  inspect_memory: true
+  delete_memory: false
+  retrieval_log: true
+  multi_user: true
+  multi_tenant: false
+notes:
+  - The adapter starts a fresh standalone TencentDB Agent Memory gateway process and data directory per benchmark subject to avoid cross-scenario contamination.
+  - It uses the public /recall, /capture, /search/memories, /search/conversations, and /session/end HTTP routes. The public gateway does not expose direct record deletion, so deletion behavior is tested through the user's natural-language forget request and the resulting memory state.
+  - Set TENCENTDB_AGENT_MEMORY_DIR to a checkout or installed package directory containing src/gateway/server.ts. The local run used the upstream package with Node.js 22.

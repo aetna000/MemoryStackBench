@@ -71,8 +71,8 @@
   },
   "suite": "seven_sins_v0_1",
   "target": {
-    "framework": "aetnamem",
-    "id": "aetnamem_local",
+    "framework": "tencentdb-agent-memory",
+    "id": "tencentdb_agent_memory_pinned",
     "mode": "white_box"
   }
 }
